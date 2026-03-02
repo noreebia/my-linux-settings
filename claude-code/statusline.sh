@@ -9,7 +9,7 @@
 #   CLAUDE_STATUS_PLAN         - pro, max5 (default), max20
 #   CLAUDE_STATUS_INFO_MODE    - none (default), emoji, or text
 
-command -v jq &>/dev/null || { echo "jq missing"; exit 0; }
+command -v jq &>/dev/null || { echo "Please install jq dependency for correct statusline display"; exit 0; }
 
 input=$(cat)
 
