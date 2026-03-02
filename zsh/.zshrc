@@ -131,3 +131,7 @@ setsdhome() {
     echo "Symlink updated: /ePapyrus/sd -> $1"
 }
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=64000
+
+cdcode() {
+  cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
+}

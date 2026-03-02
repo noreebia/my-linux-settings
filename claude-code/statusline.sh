@@ -255,8 +255,8 @@ build_output() {
   local token_str msg_str time_str
   local token_pct=$((total_tokens * 100 / TOKEN_LIMIT))
   local msg_pct=$((msg_count * 100 / MSG_LIMIT))
-  token_str="token usage: ${token_pct}% ($(format_count "$total_tokens" "$TOKEN_LIMIT"))"
-  msg_str="message usage: ${msg_pct}% (${msg_count}/${MSG_LIMIT})"
+  token_str="${token_pct}% token usage ($(format_count "$total_tokens" "$TOKEN_LIMIT"))"
+  msg_str="${msg_pct}% message usage (${msg_count}/${MSG_LIMIT})"
   local hours=$((reset_secs / 3600))
   local mins=$(( (reset_secs % 3600) / 60 ))
   time_str="${hours}h${mins}m before reset"
