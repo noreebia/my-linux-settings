@@ -17,6 +17,7 @@ for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
     fi
 done
 
+# register aliases and quality-of-life functions
 grep -q 'alias upd=' ~/.zshrc || echo 'alias upd="sudo apt update && sudo apt upgrade -y"' >> ~/.zshrc
 grep -q 'alias cleanup=' ~/.zshrc || echo 'alias cleanup="sudo apt autoremove -y && sudo apt autoclean && sudo apt clean"' >> ~/.zshrc
 grep -q 'alias cue=' ~/.zshrc || echo 'alias cue="cleanup && upd && exit"' >> ~/.zshrc
