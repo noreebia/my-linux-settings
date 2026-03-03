@@ -30,8 +30,8 @@ alias gpld=git-prune-local-dry
 ALIASES
 grep -q 'alias ll=' ~/.zshrc || echo 'alias ll="ls -al"' >> ~/.zshrc
 
-grep -q 'cdcode()' ~/.zshrc || cat >> ~/.zshrc << 'EOF'
-cdcode() {
+grep -q 'cdc()' ~/.zshrc || cat >> ~/.zshrc << 'EOF'
+cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
 }
 EOF
