@@ -23,10 +23,11 @@ Open a pull request from the current branch to a target branch using `gh pr crea
 ## Process
 
 1. Run `git branch --show-current` to get the current branch name. If on the target branch or on `main`/`master`, stop and warn the user.
-2. Run `git diff <target-branch>...HEAD` to get the full code diff. This is the **primary source** for writing the PR description — use the actual code changes instead of relying on commit messages as commit messages might not be accurate.
+2. Run `git diff <target-branch>...HEAD` to get the full code diff. This is the **primary source** for writing the PR description.
 3. Run `git diff <target-branch>...HEAD --stat` for a file-level overview of what changed.
 4. Read key changed files if needed for additional context.
-5. Draft a PR title and body **written entirely in the specified language**:
+5. Run `git log <target-branch>..HEAD --oneline` to see commit messages. Use these as a **supplementary source** — they may provide useful intent or context but should not be trusted over what the actual code diff shows, as commit messages might not be accurate.
+6. Draft a PR title and body **written entirely in the specified language**:
    - Title: concise summary, under 70 characters.
    - Body: use this format:
      ```
@@ -36,10 +37,10 @@ Open a pull request from the current branch to a target branch using `gh pr crea
      ## Changes
      <bulleted list of notable changes per file or area>
      ```
-6. Push the current branch to the remote if it hasn't been pushed yet (`git push -u origin HEAD`).
-7. Create the PR using `gh pr create --base <target-branch> --title "<title>" --body "<body>"`.
+7. Push the current branch to the remote if it hasn't been pushed yet (`git push -u origin HEAD`).
+8. Create the PR using `gh pr create --base <target-branch> --title "<title>" --body "<body>"`.
    Use a HEREDOC for the body to preserve formatting.
-8. Output the PR URL to the user.
+9. Output the PR URL to the user.
 
 ## Important
 
