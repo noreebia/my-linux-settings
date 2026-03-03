@@ -10,6 +10,7 @@ alias git-prune-local="git fetch -p && git branch -vv | awk '/: gone] / {print \
 alias git-prune-local-dry="git branch -vv | awk '/: gone] / {print \$1}'"
 alias gpl="git-prune-local"
 alias gpld="git-prune-local-dry"\
+alias gpfl="git push --force-with-lease"
 
 alias szsh="source ~/.zshrc"
 
