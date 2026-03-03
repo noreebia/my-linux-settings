@@ -109,7 +109,6 @@ alias cue="cleanup && upd && exit"
 alias uc="upd && cleanup"
 alias uce="upd && cleanup && exit"
 alias git=hub
-alias cleanup-branches='git fetch -p && for branch in $(git for-each-ref --format "%(refname) %(upstream:track)" refs/heads | awk '\''$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'\''); do git branch -D $branch; done'
 alias ll="ls -al"
 
 export NVM_DIR="$HOME/.nvm"
@@ -132,6 +131,11 @@ setsdhome() {
 }
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=64000
 
-cdcode() {
+alias git-prune-local="git fetch -p && git branch -vv | awk '/: gone] / {print \$1}' | xargs -r git branch -D"
+alias git-prune-local-dry="git branch -vv | awk '/: gone] / {print \$1}'"
+alias gpl=git-prune-local
+alias gpld=git-prune-local-dry
+cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
 }
+alias szsh="source ~/.zshrc"
