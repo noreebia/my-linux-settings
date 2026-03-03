@@ -26,10 +26,12 @@ grep -q 'alias uce=' ~/.zshrc || echo 'alias uce="upd && cleanup && exit"' >> ~/
 grep -q 'alias git-prune-local=' ~/.zshrc || cat >> ~/.zshrc << 'ALIASES'
 alias git-prune-local="git fetch -p && git branch -vv | awk '/: gone] / {print \$1}' | xargs -r git branch -D"
 alias git-prune-local-dry="git branch -vv | awk '/: gone] / {print \$1}'"
-alias gpl=git-prune-local
-alias gpld=git-prune-local-dry
+alias gpl="git-prune-local"
+alias gpld="git-prune-local-dry"
+alias gpfl="git push --force-with-lease"
 ALIASES
 grep -q 'alias ll=' ~/.zshrc || echo 'alias ll="ls -al"' >> ~/.zshrc
+grep -q 'alias szsh=' ~/.zshrc || echo 'alias szsh="source ~/.zshrc"' >> ~/.zshrc
 
 grep -q 'cdc()' ~/.zshrc || cat >> ~/.zshrc << 'EOF'
 cdc() {
