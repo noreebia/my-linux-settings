@@ -46,4 +46,4 @@ Open a pull request from the current branch to a target branch using `gh pr crea
 - Always confirm with the user before pushing or creating the PR.
 - If `gh` is not installed or not authenticated, stop and tell the user.
 - Do not amend or create any commits — this skill only opens a PR for existing commits.
-- Only write the PR title and body in the specified language. All other interaction with the user should remain in English.
+- Use the specified language for only writing the PR title and body. All other interactions with the user should remain in English.
