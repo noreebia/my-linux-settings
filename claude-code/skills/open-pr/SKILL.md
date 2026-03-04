@@ -37,10 +37,9 @@ Open a pull request from the current branch to a target branch using `gh pr crea
      ## Changes
      <bulleted list of notable changes per file or area>
      ```
-7. Push the current branch to the remote if it hasn't been pushed yet (`git push -u origin HEAD`).
-8. Create the PR using `gh pr create --base <target-branch> --title "<title>" --body "<body>"`.
+7. Create the PR using `gh pr create --base <target-branch> --title "<title>" --body "<body>"`.
    Use a HEREDOC for the body to preserve formatting.
-9. Output the PR URL to the user.
+8. Output the PR URL to the user.
 
 ## Important
 
