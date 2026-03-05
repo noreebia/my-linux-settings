@@ -1,5 +1,5 @@
 ---
-name: open-pr
+name: create-pr
 description: Open a pull request from the current branch to a target branch using the gh CLI.
 user-invocable: true
 arguments:
