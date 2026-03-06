@@ -28,14 +28,4 @@ else
     echo "  WARNING: ~/.zshrc not found, skipping"
 fi
 
-# zsh/.oh-my-zsh/custom: replace entirely from ~/.oh-my-zsh/custom
-echo "Updating zsh/.oh-my-zsh/custom..."
-if [ -d "$HOME/.oh-my-zsh/custom" ]; then
-    rm -rf "$REPO_DIR/zsh/.oh-my-zsh/custom"
-    cp -r "$HOME/.oh-my-zsh/custom" "$REPO_DIR/zsh/.oh-my-zsh/custom"
-    echo "  Copied ~/.oh-my-zsh/custom -> zsh/.oh-my-zsh/custom"
-else
-    echo "  WARNING: ~/.oh-my-zsh/custom not found, skipping"
-fi
-
 echo "Done!"
