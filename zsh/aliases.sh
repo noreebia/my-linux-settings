@@ -13,6 +13,7 @@ alias gpld="git-prune-local-dry"\
 alias gpfl="git push --force-with-lease"
 
 alias szsh="source ~/.zshrc"
+alias vizsh="vi ~/.zshrc"
 
 cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
