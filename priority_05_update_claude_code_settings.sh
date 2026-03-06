@@ -4,7 +4,6 @@ set -e
 # copy the files in claude-code of this current repo to ~/.claude
 command -v jq >/dev/null 2>&1 || sudo apt install jq -y
 cp -r ./claude-code/* ~/.claude/
-rm -rf ~/.claude/statusline*.sh
 
 # Rename a CLAUDE_*.md file to CLAUDE.md, then clean up any remaining ones
 first_detected_file=""
