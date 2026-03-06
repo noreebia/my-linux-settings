@@ -2,13 +2,7 @@
 name: create-pr
 description: Open a pull request from the current branch to a target branch using the gh CLI.
 user-invocable: true
-arguments:
-  - name: target-branch
-    description: The branch to open the PR against. Defaults to 'develop'.
-    default: develop
-  - name: language
-    description: The language to write the PR title and description in. Defaults to 'English'.
-    default: English
+argument-hint: "[target-branch] [language]"
 ---
 
 # Open Pull Request

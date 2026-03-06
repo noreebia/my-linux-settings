@@ -1,16 +1,17 @@
 ---
 name: analyze-codebase
-description: Analyze an unfamiliar codebase and generate documentation in /docs that helps a new developer understand the system. Scales output to match the complexity of the project.
+description: Analyze an unfamiliar codebase and generate documentation in /docs/system-analysis that helps a new developer understand the system. Scales output to match the complexity of the project.
 user-invocable: true
-arguments:
-  - name: focus
-    description: Optional area to focus the analysis on (e.g., "backend", "auth", "data pipeline"). If omitted, analyzes the entire codebase.
-    default: ""
+argument-hint: "[focus]"
 ---
 
 # Analyze Codebase
 
-Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `/docs` folder at the repository root. The depth and breadth of the output must match the actual complexity of the project — no more, no less.
+Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `/docs/system-analysis` folder at the repository root. The depth and breadth of the output must match the actual complexity of the project — no more, no less.
+
+## Arguments
+
+- **focus** (1st argument, optional): A specific area to focus the analysis on (e.g., "backend", "auth", "data pipeline"). If omitted, analyzes the entire codebase.
 
 ## Process
 
@@ -25,6 +26,7 @@ Gather a high-level picture before writing anything:
 - Check for CI/CD configuration (`.github/workflows`, `.gitlab-ci.yml`, `Jenkinsfile`, etc.).
 - Look for database migrations, ORM models, or schema files.
 - Look for API route definitions, OpenAPI/Swagger specs, or GraphQL schemas.
+- Look for authentication and authorization mechanisms — auth middleware, JWT/session handling, OAuth integrations, RBAC/ABAC policies, permission checks, guards, or security-related config.
 - Skim key entry points (e.g., `main.*`, `index.*`, `app.*`, `server.*`).
 - If a **focus** argument was provided, prioritize exploring that area but still capture enough surrounding context to make the docs useful.
 
@@ -39,6 +41,7 @@ Based on reconnaissance, decide which documentation sections are warranted. Use 
 | Database (`database.md`) | There are migrations, ORM models, schema definitions, or any persistent data store. |
 | API Reference (`api.md`) | The project exposes HTTP/gRPC/GraphQL/WebSocket endpoints. |
 | Key Modules (`modules.md`) | There are distinct modules, packages, or bounded contexts worth explaining individually. |
+| Security (`security.md`) | There is authentication, authorization, role/permission management, or other security mechanisms. |
 | Configuration & Environment (`configuration.md`) | There are env vars, config files, feature flags, or secrets management worth documenting. |
 | Development Guide (`development.md`) | There are build steps, test commands, linting, local dev setup, or Docker usage that a new dev needs. |
 | Infrastructure & Deployment (`infrastructure.md`) | There is CI/CD, IaC, container orchestration, or cloud-specific configuration. |
@@ -47,7 +50,7 @@ For very simple projects (e.g., a single-file script or small utility), collapse
 
 ### 3. Write Documentation
 
-For each section you decided to include, create a markdown file inside `/docs` at the repo root.
+For each section you decided to include, create a markdown file inside `/docs/system-analysis` at the repo root.
 
 #### General writing rules
 
@@ -57,7 +60,7 @@ For each section you decided to include, create a markdown file inside `/docs` a
 - Keep each file focused. Avoid repeating information across files.
 - Do not pad with generic advice ("always write tests", "follow best practices"). Every sentence should be specific to this project.
 - If the project has patterns or conventions (naming, error handling, code organization), call them out briefly so the new developer follows them.
-- Include a `docs/README.md` that serves as a table of contents linking to the other docs. If there is only `overview.md`, skip this — it's unnecessary.
+- Include a `docs/system-analysis/README.md` that serves as a table of contents linking to the other docs. If there is only `overview.md`, skip this — it's unnecessary.
 
 #### Section-specific guidance
 
@@ -70,6 +73,8 @@ For each section you decided to include, create a markdown file inside `/docs` a
 **API Reference** — List endpoints/operations grouped logically. For each: method, path, brief purpose, and notable request/response details. Do not exhaustively document every field — focus on what a new dev needs to navigate and understand the API surface.
 
 **Key Modules** — For each significant module: what it does, key files/classes, and how it fits into the larger system.
+
+**Security** — How does the system handle authentication (who are you?) and authorization (what can you do?)? Describe the auth flow (e.g., JWT-based, session-based, OAuth2), where middleware/guards are applied, how roles and permissions are defined and enforced, and any security-related configuration. Reference the actual files that implement these mechanisms.
 
 **Configuration & Environment** — List important env vars, config files, and their purposes. Note which are required vs optional, and any defaults.
 
@@ -85,6 +90,6 @@ For each section you decided to include, create a markdown file inside `/docs` a
 
 ## Important
 
-- Create the `/docs` folder at the repository root. If a `/docs` folder already exists, inform the user and ask whether to overwrite, merge, or use a different directory.
+- Create the `/docs/system-analysis` folder at the repository root. If it already exists, inform the user and ask whether to overwrite, merge, or use a different directory.
 - Do not modify any source code. This skill is read-only except for the `/docs` output.
 - If the codebase is a monorepo, focus on the top-level structure and summarize each sub-project. Do not try to deeply document every sub-project unless the focus argument targets one.
