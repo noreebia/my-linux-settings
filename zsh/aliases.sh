@@ -16,6 +16,9 @@ alias szsh="source ~/.zshrc"
 alias vizsh="vi ~/.zshrc"
 alias t="tmux"
 
+alias chmodsh="chmod +x *.sh"
+alias chmodx="chmod +x"
+
 cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
 }
