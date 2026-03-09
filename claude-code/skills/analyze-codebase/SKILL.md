@@ -87,7 +87,8 @@ For each section you decided to include, create or update markdown files inside 
 - Keep each file focused. Avoid repeating information across files.
 - Do not pad with generic advice ("always write tests", "follow best practices"). Every sentence should be specific to this project.
 - If the project has patterns or conventions (naming, error handling, code organization), call them out briefly so the new developer follows them.
-- Include a `$DOCS_BASE/system-analysis/README.md` that serves as a table of contents linking to the other docs. If there is only one `.md` output file, skip this — it's unnecessary.
+- When generating multiple files in a directory, prefix filenames with a two-digit number to establish an optimal reading order — start with the broadest context and progressively drill into specifics (e.g., `01-overview.md`, `02-architecture.md`, `03-database.md`). The numbering should reflect a logical learning path: a new developer reading the files in order should build understanding incrementally without needing to jump around.
+- Include a `$DOCS_BASE/system-analysis/README.md` that serves as a table of contents linking to the other docs in reading order. If there is only one `.md` output file, skip this — it's unnecessary.
 
 #### Section-specific guidance
 
