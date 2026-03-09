@@ -23,3 +23,28 @@ cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
 }
 
+git_sync_all() {
+    # iterate over all items in the current directory
+    for dir in */; do
+        # Clean up the directory name for display
+        local dir_name="${dir%/}"
+
+        # Check if the directory contains a .git folder
+        if [[ -d "${dir}.git" ]]; then
+            echo "--- Syncing: $dir_name ---"
+            (
+                # Move into directory; if it fails, skip to next
+                cd "$dir" || { echo "Error: Could not enter $dir_name"; return 1 }
+                
+                # Execute your git (hub) sync alias
+                # The '||' catch ensures the loop continues on error
+                git sync || echo "Error: 'git sync' failed in $dir_name"
+            )
+        else
+            echo "Skipping: $dir_name (Not a git repo)"
+        fi
+    done
+    echo "--- Finished processing all directories ---"
+}
+
+alias git-sync-all='git_sync_all'
