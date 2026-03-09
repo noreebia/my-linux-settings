@@ -31,7 +31,9 @@ Explore the codebase thoroughly before writing anything. Read config files, entr
 
 #### When a focus argument is provided
 
-Decide the output format based on the complexity of the focused topic:
+First, compare the existing documentation (if any) against what you learned in reconnaissance. If the existing docs already thoroughly cover the focused topic and are accurate, inform the user that the documentation is already sufficient and stop — do not augment for the sake of augmenting.
+
+If the docs are missing, incomplete, or outdated, decide the output format based on the complexity of the focused topic:
 
 **Small scope** (the topic can be covered in a single well-structured document):
 - If an existing `.md` file covers this topic → **augment it in place** with your new findings. Preserve existing content that is still accurate; update or expand sections as needed.
