@@ -4,7 +4,7 @@
 
 # File Output
 
-- `$DOCS_BASE` = `agent/claude` (relative to the repository root).
+- `$DOCS_BASE` = `agents/claude` (relative to the repository root).
 - When instructed to generate markdown files, write them under `$DOCS_BASE/` unless instructed otherwise. Create directories as needed.
 - Automatically organize files into a category subdirectory that fits the content. Choose a short, lowercase, kebab-case folder name. Examples:
   - Refactor or implementation plans → `$DOCS_BASE/plans/`
