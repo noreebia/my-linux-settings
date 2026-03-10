@@ -11,7 +11,11 @@ if [ ! -d "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_PLUGIN_DIR/zsh-syntax-highlighting"
 fi
 
-for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+if [ ! -d "$ZSH_PLUGIN_DIR/you-should-use" ]; then
+    git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$ZSH_PLUGIN_DIR/you-should-use"
+fi
+
+for plugin in zsh-autosuggestions zsh-syntax-highlighting you-should-use; do
     if ! grep -q "^plugins=.*$plugin" ~/.zshrc; then
         sed -i "s/^plugins=(\(.*\))/plugins=(\1 $plugin)/" ~/.zshrc
     fi
