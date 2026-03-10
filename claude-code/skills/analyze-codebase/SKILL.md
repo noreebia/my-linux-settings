@@ -7,7 +7,7 @@ argument-hint: "[focus]"
 
 # Analyze Codebase
 
-Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$DOCS_BASE/system-analysis` folder at the repository root. The goal is simple: a brand new developer who has just cloned this repo should be able to read your output and understand how the system works, how it's organized, and how to work in it.
+Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$DOCS_BASE/system-analysis` folder at the repository root. The goal is simple: a brand new developer who has just cloned this repo should be able to read your output and get a good understanding of the system and how to work in it.
 
 ## Arguments
 
