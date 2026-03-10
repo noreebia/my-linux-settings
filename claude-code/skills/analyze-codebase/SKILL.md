@@ -7,7 +7,7 @@ argument-hint: "[focus]"
 
 # Analyze Codebase
 
-Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$DOCS_BASE/system-analysis` folder at the repository root. The goal is simple: a brand new developer who has just cloned this repo should be able to read your output and get a good understanding of the system and how to work in it.
+Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$DOCS_BASE/system-analysis` folder at the repository root. The goal is simple: a brand new developer who has started to work on this project should be able to read your output and gain a good understanding of the system and how to work in it.
 
 ## Arguments
 
@@ -25,7 +25,7 @@ If a **focus** argument was provided, first check whether related documentation 
 
 ### 2. Reconnaissance
 
-Explore the codebase thoroughly before writing anything. Read config files, entry points, directory structures, READMEs, and anything else that helps you build a mental model of the system. If a **focus** argument was provided, prioritize that area but still capture enough surrounding context.
+Explore the codebase thoroughly before writing anything. Read config files, entry points, directory structures, READMEs, and anything else that helps you understand the system. If a **focus** argument was provided, prioritize that area but still capture enough surrounding context.
 
 ### 3. Determine Scope & Output Format
 
@@ -40,11 +40,9 @@ If the docs are missing, incomplete, or outdated, decide the output format based
 - If no existing doc covers this topic → **create a single file** at `$DOCS_BASE/system-analysis/<focus>.md`.
 
 **Large scope** (the topic spans multiple sub-topics):
-- If an existing `.md` file covers this topic but the scope has grown beyond what fits in one file → **promote it to a directory**: create `$DOCS_BASE/system-analysis/<focus>/`, move/split the existing content into appropriately named files within it, add new content, and create a `README.md` inside that directory as a table of contents.
+- If an existing `.md` file covers this topic but the scope has grown beyond what fits in one file → **promote it to a directory**: create `$DOCS_BASE/system-analysis/<focus>/`, move/split the existing content into appropriately named files within it and add content as necessary.
 - If an existing directory covers this topic → **augment the existing directory**: update existing files and add new files as needed.
-- If no existing doc covers this topic → **create a directory** at `$DOCS_BASE/system-analysis/<focus>/` with appropriately named files and a `README.md` table of contents.
-
-When augmenting existing docs, do not delete information that is still correct. Add, update, and reorganize — but preserve prior work.
+- If no existing doc covers this topic → **create a directory** at `$DOCS_BASE/system-analysis/<focus>/` with appropriately named files.
 
 #### When no focus argument is provided (full codebase analysis)
 
@@ -52,7 +50,7 @@ Based on what you learned in reconnaissance, decide what documentation this part
 
 ### 4. Write Documentation
 
-Write for a developer who has never seen this codebase. Use diagrams (Mermaid) only if they genuinely provide value.
+Write for a developer who has never seen this codebase. Use diagrams (Mermaid) when they genuinely provide value.
 
 When generating multiple files, prefix filenames with a two-digit number to establish a reading order that builds understanding incrementally (e.g., `01-overview.md`, `02-architecture.md`). 
 
