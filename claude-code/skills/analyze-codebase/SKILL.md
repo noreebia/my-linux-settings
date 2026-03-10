@@ -57,8 +57,6 @@ When generating multiple files, prefix filenames with a two-digit number to esta
 ### 5. Final Review
 
 - Verify file paths and names referenced in the docs actually exist.
-- Ensure the docs are proportional to the project's complexity.
-- If you augmented existing docs, verify the result reads coherently.
 
 ## Important
 
