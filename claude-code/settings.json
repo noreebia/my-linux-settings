@@ -8,7 +8,8 @@
       "Edit",
       "Write",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "Agent"
     ],
     "deny": [
       "Bash(sudo *)",

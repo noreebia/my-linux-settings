@@ -2,6 +2,7 @@
 name: analyze-codebase
 description: Analyze an unfamiliar codebase and generate documentation in $DOCS_BASE/system-analysis that helps a new developer understand the system. Scales output to match the complexity of the project.
 user-invocable: true
+disable-model-invocation: true
 argument-hint: "[focus]"
 ---
 

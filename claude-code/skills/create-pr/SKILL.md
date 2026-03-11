@@ -2,6 +2,7 @@
 name: create-pr
 description: Open a pull request from the current branch to a target branch using the gh CLI.
 user-invocable: true
+disable-model-invocation: true
 argument-hint: "[target-branch] [language]"
 ---
 
