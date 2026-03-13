@@ -4,7 +4,7 @@
 
 # Variable Declarations
 
-If any prompts or skills reference the variables below, substitute them with their defined values.
+If any instructions reference the variables below, substitute them with their defined values.
 
 - `$DOCS_BASE` = the `agents/claude` directory, relative to the repository root. If no git repo can be detected, relative to the directory where the `claude` command was entered.
 
