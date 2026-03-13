@@ -4,10 +4,9 @@
 
 # Variable Declarations
 
-If any of the prompts or skills reference the below variables, they should be substituted appropriately
+If any prompts or skills reference the variables below, substitute them with their defined values.
 
-- Key: $DOCS_BASE
-- Value: `agents/claude` directory relative to the repository root. If no git repo cannot be detected, relative to the directory where 'claude' command was entered
+- `$DOCS_BASE` = the `agents/claude` directory, relative to the repository root. If no git repo can be detected, relative to the directory where the `claude` command was entered.
 
 # Markdown File Generation
 
@@ -16,6 +15,6 @@ If any of the prompts or skills reference the below variables, they should be su
   - `$DOCS_BASE/plans/`
   - `$DOCS_BASE/system-analysis/`
   - `$DOCS_BASE/guides/`
-- These are merely examples. Choose the most fitting category depending on the context. If a category directory already exists, add to it rather than creating a near-duplicate.
+- These are merely examples. Choose the most fitting category for the content. If a category directory already exists, add to it rather than creating a near-duplicate.
 - Name individual files descriptively (e.g., `auth-refactor.md`, not `plan.md`).
 
