@@ -16,3 +16,5 @@ for claude_md_variant in ~/.claude/CLAUDE_*.md; do
         rm -f -- "$claude_md_variant"
     fi
 done
+
+echo "Claude Code settings updated successfully."

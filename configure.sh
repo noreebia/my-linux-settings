@@ -7,3 +7,5 @@ cd "$SCRIPT_DIR"
 ./priority_05_update_claude_code_settings.sh
 ./priority_10_install_mise.sh
 
+echo "All configuration scripts completed successfully."
+
