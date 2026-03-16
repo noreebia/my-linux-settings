@@ -9,7 +9,8 @@
       "Write",
       "WebFetch",
       "WebSearch",
-      "Agent"
+      "Agent",
+      "mcp__wrike__*"
     ],
     "deny": [
       "Bash(sudo *)",
