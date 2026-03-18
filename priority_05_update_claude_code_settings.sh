@@ -1,20 +1,11 @@
 #!/bin/bash
 set -e
 
-# copy the files in claude-code of this current repo to ~/.claude
+# copy the claude-code settings from llm-agents to ~/.claude
 command -v jq >/dev/null 2>&1 || sudo apt install jq -y
-cp -r ./claude-code/* ~/.claude/
+cp -r ./llm-agents/claude-code/* ~/.claude/
 
-# Rename a CLAUDE_*.md file to CLAUDE.md, then clean up any remaining ones
-first_detected_file=""
-for claude_md_variant in ~/.claude/CLAUDE_*.md; do
-    [ -f "$claude_md_variant" ] || continue
-    if [ -z "$first_detected_file" ]; then
-        first_detected_file="$claude_md_variant"
-        mv -- "$claude_md_variant" ~/.claude/CLAUDE.md
-    else
-        rm -f -- "$claude_md_variant"
-    fi
-done
+# Copy AGENTS.md as CLAUDE.md
+cp ./llm-agents/AGENTS_GLOBAL.md ~/.claude/CLAUDE.md
 
 echo "Claude Code settings updated successfully."

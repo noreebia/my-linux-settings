@@ -6,7 +6,7 @@
 
 If any instructions reference the variables below, substitute them with their defined values.
 
-- `$AGENT_DIR` = the `agents/claude` directory, relative to the repository root. If no git repo can be detected, relative to the directory where the `claude` command was entered.
+- `$AGENT_DIR` = the `agents/<agent-name>` directory, relative to the repository root. If no git repo can be detected, relative to the directory where the agent command was entered. Each agent must replace `<agent-name>` with its own product/brand name (e.g., `agents/claude`, `agents/codex`, `agents/gemini`).
 
 # Markdown File Generation
 
