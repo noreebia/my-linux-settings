@@ -74,4 +74,6 @@ git_sync_all() {
 EOF
 grep -q 'alias git-sync-all=' ~/.zshrc || echo 'alias git-sync-all="git_sync_all"' >> ~/.zshrc
 
+cp -r ./zsh/.oh-my-zsh/* ~/.oh-my-zsh/
+
 echo ".zshrc configuration has been completed. Run 'source ~/.zshrc' or start a new terminal to apply changes."
