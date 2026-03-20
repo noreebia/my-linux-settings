@@ -27,13 +27,11 @@ grep -q 'alias cleanup=' ~/.zshrc || echo 'alias cleanup="sudo apt autoremove -y
 grep -q 'alias cue=' ~/.zshrc || echo 'alias cue="cleanup && upd && exit"' >> ~/.zshrc
 grep -q 'alias uc=' ~/.zshrc || echo 'alias uc="upd && cleanup"' >> ~/.zshrc
 grep -q 'alias uce=' ~/.zshrc || echo 'alias uce="upd && cleanup && exit"' >> ~/.zshrc
-grep -q 'alias git-prune-local=' ~/.zshrc || cat >> ~/.zshrc << 'ALIASES'
-alias git-prune-local="git fetch -p && git branch -vv | awk '/: gone] / {print \$1}' | xargs -r git branch -D"
-alias git-prune-local-dry="git branch -vv | awk '/: gone] / {print \$1}'"
-alias gpl="git-prune-local"
-alias gpld="git-prune-local-dry"
-alias gpfl="git push --force-with-lease"
-ALIASES
+grep -q 'alias git-prune-local=' ~/.zshrc || echo 'alias git-prune-local="git fetch -p && git branch -vv | awk '"'"'/: gone] / {print \$1}'"'"' | xargs -r git branch -D"' >> ~/.zshrc
+grep -q 'alias git-prune-local-dry=' ~/.zshrc || echo 'alias git-prune-local-dry="git branch -vv | awk '"'"'/: gone] / {print \$1}'"'"'"' >> ~/.zshrc
+grep -q 'alias gpl=' ~/.zshrc || echo 'alias gpl="git-prune-local"' >> ~/.zshrc
+grep -q 'alias gpld=' ~/.zshrc || echo 'alias gpld="git-prune-local-dry"' >> ~/.zshrc
+grep -q 'alias gpfl=' ~/.zshrc || echo 'alias gpfl="git push --force-with-lease"' >> ~/.zshrc
 grep -q 'alias ll=' ~/.zshrc || echo 'alias ll="ls -al"' >> ~/.zshrc
 grep -q 'alias szsh=' ~/.zshrc || echo 'alias szsh="source ~/.zshrc"' >> ~/.zshrc
 grep -q 'alias vizsh=' ~/.zshrc || echo 'alias vizsh="vi ~/.zshrc"' >> ~/.zshrc
@@ -72,7 +70,7 @@ git_sync_all() {
     echo "--- Finished processing all directories ---"
 }
 EOF
-grep -q 'alias git-sync-all=' ~/.zshrc || echo 'alias git-sync-all="git_sync_all"' >> ~/.zshrc
+grep -q 'alias git-sync-all=' ~/.zshrc || echo "alias git-sync-all='git_sync_all'" >> ~/.zshrc
 
 cp -r ./zsh/.oh-my-zsh/* ~/.oh-my-zsh/
 
