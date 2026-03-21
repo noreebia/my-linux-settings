@@ -8,7 +8,7 @@ argument-hint: "[focus]"
 
 # Analyze Codebase
 
-Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$AGENT_DIR/system-analysis` folder at the repository root. The goal is simple: a brand new developer who has started to work on this project should be able to read your output and gain a good understanding of the system and how to work in it.
+Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$AGENT_DIR/system-analysis` folder at the repository root.
 
 ## Arguments
 
