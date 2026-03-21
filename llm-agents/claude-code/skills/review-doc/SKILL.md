@@ -86,6 +86,13 @@ Structure your feedback clearly:
 ## Minor Notes
 <Small things that are worth mentioning but wouldn't change the document's validity — wording, missing details, style.>
 <Skip this section entirely if there's nothing minor worth saying.>
+
+## [Closing section — pick the label that fits the document]
+- **"Recommendation"** for plans and proposals
+- **"Verdict"** for analyses and evaluations
+- **"Bottom Line"** for situation assessments and general docs
+
+<1–3 sentences synthesizing the key takeaway. It's fine if this echoes the Summary — the reader has now worked through all the detail, so the same message lands differently as a closer. Be direct and concrete.>
 ```
 
 ---
