@@ -51,7 +51,7 @@ Based on what you learned in reconnaissance, decide what documentation this part
 
 ### 4. Write Documentation
 
-Write for a developer who has never seen this codebase. Use Mermaid diagrams for architecture overviews, data/request flows, and multi-step sequences where a visual adds clarity that prose cannot easily provide.
+Write documentation for a developer who is just encountering this codebase. Use Mermaid diagrams for architecture overviews, data/request flows, and multi-step sequences where a visual adds clarity that prose cannot easily provide.
 
 When generating multiple files, prefix filenames with a two-digit number to establish a reading order that builds understanding incrementally (e.g., `01-overview.md`, `02-architecture.md`). 
 
