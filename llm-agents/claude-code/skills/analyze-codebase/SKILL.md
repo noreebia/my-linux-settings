@@ -21,12 +21,12 @@ Perform an analysis of the current codebase and produce developer-friendly docum
 If a **focus** argument was provided, first check whether related documentation already exists under `$AGENT_DIR/system-analysis/`:
 
 - Search for files and directories matching the focus topic: look for `$AGENT_DIR/system-analysis/<focus>.md`, `$AGENT_DIR/system-analysis/<focus>/`, and any files whose names or contents are clearly related to the focus argument (use fuzzy matching — e.g., focus "auth" should match `authentication.md`, `auth/`, `security.md` sections about auth, etc.).
-- If existing documentation is found, read it thoroughly so you can build on it rather than replace it.
+- If existing documentation is found, read it so you can build on it rather than replace it.
 - Record what you found (or didn't find) — this informs step 3.
 
 ### 2. Reconnaissance
 
-Explore the codebase  before writing anything. Read config files, entry points, directory structures, READMEs, and anything else that helps you understand the system. If a **focus** argument was provided, prioritize that area but still capture enough surrounding context.
+Explore the codebase  before writing anything. Read config files, entry points, directory structures, READMEs, and anything else that helps you understand the system. If a **focus** argument was provided, prioritize that area and the surrounding context.
 
 ### 3. Determine Scope & Output Format
 
