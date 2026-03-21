@@ -8,7 +8,7 @@ argument-hint: "[focus]"
 
 # Analyze Codebase
 
-Perform a thorough analysis of the current codebase and produce developer-friendly documentation in a `$AGENT_DIR/system-analysis` folder at the repository root.
+Perform an analysis of the current codebase and produce developer-friendly documentation in a `$AGENT_DIR/system-analysis` folder at the repository root.
 
 ## Arguments
 
@@ -26,7 +26,7 @@ If a **focus** argument was provided, first check whether related documentation 
 
 ### 2. Reconnaissance
 
-Explore the codebase thoroughly before writing anything. Read config files, entry points, directory structures, READMEs, and anything else that helps you understand the system. If a **focus** argument was provided, prioritize that area but still capture enough surrounding context.
+Explore the codebase  before writing anything. Read config files, entry points, directory structures, READMEs, and anything else that helps you understand the system. If a **focus** argument was provided, prioritize that area but still capture enough surrounding context.
 
 ### 3. Determine Scope & Output Format
 
@@ -54,10 +54,6 @@ Based on what you learned in reconnaissance, decide what documentation this part
 Write for a developer who has never seen this codebase. Use Mermaid diagrams for architecture overviews, data/request flows, and multi-step sequences where a visual adds clarity that prose cannot easily provide.
 
 When generating multiple files, prefix filenames with a two-digit number to establish a reading order that builds understanding incrementally (e.g., `01-overview.md`, `02-architecture.md`). 
-
-### 5. Final Review
-
-- Verify file paths and names referenced in the docs actually exist.
 
 ## Important
 

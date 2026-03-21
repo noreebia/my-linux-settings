@@ -6,6 +6,8 @@ disable-model-invocation: true
 argument-hint: "<file-path> [generate-file] [context]"
 ---
 
+# Review Feedback
+
 ## Arguments
 
 - `file-path` (required): Path to the feedback document
@@ -17,3 +19,4 @@ argument-hint: "<file-path> [generate-file] [context]"
 Process feedback on a document — most likely a review produced by another LLM agent — and let me know what you think. Are there valid points in the feedback that you agree with? Are there some parts that you have a different perspective on? 
 
 If the `generate-file` argument was set, write your response to a markdown document instead of outputting it inline. Name the file with a `-response` suffix (e.g., if the feedback file is `plan-review.md`, name the response file `plan-review-response.md`).
+

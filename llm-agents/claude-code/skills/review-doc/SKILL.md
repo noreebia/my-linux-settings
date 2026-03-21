@@ -6,6 +6,8 @@ disable-model-invocation: true
 argument-hint: "<file-path> [generate-file] [context]"
 ---
 
+# Review Document
+
 Review a document — most likely produced by another LLM agent — and generate feedback.
 
 ## Arguments
@@ -18,7 +20,7 @@ Review a document — most likely produced by another LLM agent — and generate
 
 ### 1. Read the Document
 
-Read the target document(s) thoroughly. If a directory was provided, read all files within it.
+Read the target document(s). If a directory was provided, read all files within it.
 
 ### 2. Understand the Subject Matter
 
@@ -26,12 +28,16 @@ The document likely makes claims about a codebase, system, process, or situation
 
 - If the document analyzes a codebase or technical system: read the actual source code, configs, and any other artifacts the document references. Do not take the document's descriptions at face value — verify them for yourself.
 - If the document references external resources (URLs, tickets, APIs): attempt to access and read them for additional context.
-- If the document proposes an implementation plan: read the parts of the codebase that would be affected to understand the real starting point.
+- If the document proposes an implementation plan: read the parts of the codebase that would be affected.
 
 ### 3. Evaluate
-Assess the document. Are there any inaccuracies, or glaring problems? Are there any blind spots? Are there any alternate approaches that you want to suggest? If additional context was provided, factor it into your evaluation.
+Assess the document. Are there any glaring problems or inaccuracies? Are there any blind spots? Are there any overlooked factors or aspects? Are there any alternate approaches that you want to suggest? 
+
+If additional context was provided, factor it into your evaluation. 
+
+Be sensible and pragmatic over perfectionistic. Decide when things are a worth calling out, versus when they are just differences in perspectives.
 
 ### 4. Give Feedback
-Provide your feedback in a clear, constructive manner. If there are issues, explain why they are issues and provide suggestions for fixes or improvements. If there are things that you agree with and parts that are well done, acknowledge those as well.
+Provide your feedback. If there are issues, explain why they are issues and provide suggestions for fixes or improvements. If there are things that you agree with and parts that are well done, acknowledge those as well.
 
 If the `generate-file` argument was set, write the full review to a markdown file instead of outputting it inline.
