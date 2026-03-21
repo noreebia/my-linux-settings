@@ -35,9 +35,9 @@ Assess the document. Are there any glaring problems or inaccuracies? Are there a
 
 If additional context was provided, factor it into your evaluation. 
 
-Be sensible and pragmatic over perfectionistic. Decide when things are a worth calling out, versus when they are just differences in perspectives.
+Choose to be sensible and pragmatic over perfectionistic. Decide when things are a worth calling out, versus when they are just differences in perspectives.
 
 ### 4. Give Feedback
-Provide your feedback. If there are issues, explain why they are issues and provide suggestions for fixes or improvements. If there are things that you agree with and parts that are well done, acknowledge those as well.
+Provide your evaluation of the document, including any issues you found and suggestions for improvement. Also acknowledge any parts that you think are well done or that you agree with.
 
 If the `generate-file` argument was set, write the full review to a markdown file instead of outputting it inline.

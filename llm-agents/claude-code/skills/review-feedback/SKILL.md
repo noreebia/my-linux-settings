@@ -1,6 +1,6 @@
 ---
 name: review-feedback
-description: Review and process feedback from another agent (e.g., a review of a document you produced) and determine how to respond to it.
+description: Review feedback from another agent (e.g., a review of a document you produced) and determine how to respond to it.
 user-invocable: true
 disable-model-invocation: true
 argument-hint: "<file-path> [generate-file] [context]"
