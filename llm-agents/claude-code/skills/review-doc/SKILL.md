@@ -11,7 +11,7 @@ Review a document — most likely produced by another LLM agent — and give fee
 ## Arguments
 
 - `file-path` (required): Path to the document or directory to review.
-- `generate-file` (optional): If provided, write the review feedback to a file instead of outputting it inline. Any truthy value (e.g., `true`, `yes`, `file`) enables this. When enabled, write the review to a markdown file alongside the reviewed document, named with a `-review` suffix (e.g., `plan.md` → `plan-review.md`).
+- `generate-file` (optional): If provided, write the review feedback to a file instead of outputting it inline. Any truthy value (e.g., `true`, `yes`, `file`) enables this.
 - `context` (optional): Additional context to guide the review — e.g., specific concerns, areas to focus on, constraints, or background information the reviewer should know.
 
 ## Process
