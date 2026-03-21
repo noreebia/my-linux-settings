@@ -22,7 +22,7 @@ Open a pull request from the current branch to a target branch using `gh pr crea
 2. Run `git diff <target-branch>...HEAD` to get the full code diff. This is the **primary source** for writing the PR description.
 3. Run `git diff <target-branch>...HEAD --stat` for a file-level overview of what changed.
 4. Read key changed files if needed for additional context.
-5. Run `git log <target-branch>..HEAD --oneline` to see commit messages. Use these as a **supplementary source** — they may provide useful intent or context but should not be trusted over what the actual code diff shows, as commit messages might not be accurate.
+5. Run `git log <target-branch>..HEAD --oneline` to see commit messages. Use these as a **supplementary source** — they may provide useful intent or context but should not be trusted over what the actual code diff shows, as commit messages might be messy or might not be accurate.
 6. If a **ticket-url** was provided, attempt to access and read the ticket content using any available tool (MCP server, web fetch, etc.). If successful, extract the relevant context (requirements, description) to use in the **Context** section. If the ticket cannot be accessed, use the URL itself as the context content.
 7. Draft a PR title and body **written entirely in the specified language**:
    - Title: concise summary, under 70 characters.

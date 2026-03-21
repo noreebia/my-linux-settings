@@ -5,4 +5,4 @@ user-invocable: true
 disable-model-invocation: true
 ---
 
-Convert your last response to a document
+Convert your last response to a document.
