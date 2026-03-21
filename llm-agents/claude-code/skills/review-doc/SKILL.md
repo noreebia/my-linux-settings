@@ -6,7 +6,7 @@ disable-model-invocation: true
 argument-hint: "<file-path> [generate-file] [context]"
 ---
 
-Review a document — most likely produced by another LLM agent — and give feedback.
+Review a document — most likely produced by another LLM agent — and generate feedback.
 
 ## Arguments
 
@@ -31,7 +31,7 @@ The document likely makes claims about a codebase, system, process, or situation
 ### 3. Evaluate
 Assess the document. Is it accurate? Are there any glaring issues or problems? Are there any blind spots? Are there any alternate approaches or optimizations that you want to suggest? If additional context was provided, factor it into your evaluation.
 
-# Give Feedback
+### 4. Give Feedback
 Provide your feedback in a clear, constructive manner. If there are issues, explain why they are issues and provide suggestions for improvement. If there are things that you agree with and parts that are well done, acknowledge those as well.
 
 If the `generate-file` argument was set, write the full review to a markdown file instead of outputting it inline.
