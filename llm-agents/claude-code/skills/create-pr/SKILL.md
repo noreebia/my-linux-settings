@@ -1,50 +1,136 @@
 ---
 name: create-pr
-description: Open a pull request from the current branch to a target branch using the gh CLI.
-user-invocable: true
-disable-model-invocation: true
-argument-hint: "[target-branch] [language] [ticket-url]"
+description: >
+  Open a pull request from the current branch to a target branch using the gh CLI. Use this skill
+  whenever the user wants to open, create, or submit a PR or pull request — including phrases like
+  "open a PR", "create a pull request", "submit this for review", "push a PR to develop", or
+  "make a PR". Also trigger proactively when the user says they're done with a feature or fix and
+  asks what to do next — they probably want a PR.
 ---
 
-# Open Pull Request
+# Create Pull Request
 
-Open a pull request from the current branch to a target branch using `gh pr create`.
+Open a well-written pull request from the current branch using `gh pr create`. The goal is a PR description a reviewer can act on immediately — clear context, a scannable change list, and no filler.
+
+---
 
 ## Arguments
 
-- **target-branch** (1st argument): The base branch for the PR. Default: `develop`.
-- **language** (2nd argument): The language for the PR title and body. Default: `English`.
-- **ticket-url** (3rd argument, optional): A URL to a ticket (Wrike, Jira, etc.) related to this PR. If provided, the agent will attempt to access and analyze the ticket content to generate a **Context** section in the PR body. If the agent cannot access the ticket (no MCP server, authentication issues, etc.), it will include the URL itself as the context in a best-effort manner.
+- **target-branch** *(1st, optional)*: Base branch for the PR. Default: `develop`.
+- **language** *(2nd, optional)*: Language for the PR title and body. Default: `English`.
+- **ticket-url** *(3rd, optional)*: URL to a related ticket (Jira, Wrike, Linear, etc.). If provided, the skill will attempt to fetch and summarize the ticket for the **Context** section.
+
+---
 
 ## Process
 
-1. Run `git branch --show-current` to get the current branch name. If on the target branch or on `main`/`master`, stop and warn the user.
-2. Run `git diff <target-branch>...HEAD` to get the full code diff. This is the **primary source** for writing the PR description.
-3. Run `git diff <target-branch>...HEAD --stat` for a file-level overview of what changed.
-4. Read key changed files if needed for additional context.
-5. Run `git log <target-branch>..HEAD --oneline` to see commit messages. Use these as a **supplementary source** — they may provide useful intent or context but should not be trusted over what the actual code diff shows, as commit messages might be messy or might not be accurate.
-6. If a **ticket-url** was provided, attempt to access and read the ticket content using any available tool (MCP server, web fetch, etc.). If successful, extract the relevant context (requirements, description) to use in the **Context** section. If the ticket cannot be accessed, use the URL itself as the context content.
-7. Draft a PR title and body **written entirely in the specified language**:
-   - Title: concise summary, under 70 characters.
-   - Body: use this format:
-     ```
-     ## Description
-     <A concise overview of the changes introduced.>
+### 1. Validate the environment
 
-     ## Context
-     <only include this section if a ticket-url was provided>
-     <if the ticket was accessible: a summary of the ticket's context, requirements, or acceptance criteria relevant to this PR>
-     <if the ticket was not accessible: just the ticket URL>
+```bash
+# Check gh is available and authenticated
+gh auth status
 
-     ## Changes Made
-     <bulleted list of notable changes, referencing files or features as needed>
-     ```
-8. Create the PR using `gh pr create --base <target-branch> --title "<title>" --body "<body>"`.
-   Use a HEREDOC for the body to preserve formatting.
-9. Output the PR URL to the user.
+# Get current branch
+git branch --show-current
+```
 
-## Important
+If `gh` is not installed or not authenticated → stop and tell the user how to fix it (`gh auth login`).
 
-- Always confirm with the user before pushing or creating the PR.
-- If `gh` is not installed or not authenticated, stop and tell the user.
-- Do not amend or create any commits — this skill only opens a PR for existing commits.
+If the current branch **is** the target branch, `main`, or `master` → stop and warn the user. A PR from `main` to `develop` is almost never intentional.
+
+---
+
+### 2. Gather context
+
+Run these in order — each one adds a different layer of understanding:
+
+```bash
+# The full diff — this is the primary source of truth
+git diff <target-branch>...HEAD
+
+# File-level summary — good for the Changes Made section
+git diff <target-branch>...HEAD --stat
+
+# Commit messages — useful for intent, but treat as hints not facts
+git log <target-branch>..HEAD --oneline
+```
+
+Read key changed files when the diff alone doesn't make the intent clear — e.g., when a file is renamed, a schema changes, or a new config is added.
+
+**Source priority:** The code diff is ground truth. Commit messages are supplementary. If they conflict, trust the diff.
+
+---
+
+### 3. Fetch the ticket (if provided)
+
+Attempt to access the ticket URL using any available tool (MCP server, web fetch, etc.).
+
+- **If successful**: Extract the requirements, description, or acceptance criteria relevant to this PR. Summarize them in your own words for the Context section.
+- **If inaccessible**: Use the raw URL as the context — don't skip the section.
+
+---
+
+### 4. Draft the title and body
+
+**Title rules:**
+- Under 70 characters
+- Imperative mood: "Add user export endpoint" not "Added" or "Adding"
+- Specific enough that a reviewer knows what changed without reading the body
+- Written in the specified language
+
+**Body format:**
+
+```markdown
+## Description
+<2–4 sentences. What changed and why. Not a list — prose. Lead with the user-facing or system-level impact, then the approach taken. Skip anything obvious from the title.>
+
+## Context
+<Only include if a ticket-url was provided.>
+<If ticket was accessible: a tight summary of the requirements or acceptance criteria this PR addresses.>
+<If ticket was inaccessible: the raw URL.>
+
+## Changes Made
+<Bulleted list. Each bullet = one logical change. Name the file or component when it adds clarity.>
+<Bad: "Updated user service" — Good: "Added `exportToCsv()` to `UserService` — streams rows to avoid memory issues on large datasets">
+<Aim for 4–10 bullets. If you need more, consider whether this PR is too large.>
+```
+
+**What to avoid:**
+- Vague descriptions ("various fixes", "refactoring", "updates")
+- Restating the title verbatim in the description
+- Listing every file changed — the diff does that; group by logical change instead
+- Filler phrases ("In this PR, we...", "As per the ticket...")
+
+---
+
+### 5. Confirm with the user
+
+Show the draft title and body and ask for approval before creating the PR. Don't proceed automatically.
+
+---
+
+### 6. Create the PR
+
+Use a HEREDOC to preserve formatting and avoid quoting issues with special characters in the body:
+
+```bash
+gh pr create --base <target-branch> --title "<title>" --body "$(cat <<'PRBODY'
+<body content here>
+PRBODY
+)"
+```
+
+**Common pitfall:** If the body contains backticks or `$` signs, the HEREDOC delimiter must be quoted (`'PRBODY'`) to prevent shell expansion. Always use the quoted form.
+
+---
+
+### 7. Output the result
+
+Print the PR URL returned by `gh pr create`. Done.
+
+---
+
+## Constraints
+
+- **Do not create or amend commits.** This skill only opens a PR for commits that already exist.
+- **Do not push branches.** If the branch isn't pushed yet, tell the user to run `git push -u origin <branch>` first.
