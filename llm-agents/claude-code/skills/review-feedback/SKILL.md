@@ -92,4 +92,4 @@ Omit any category heading (Accepted, Rejected, etc.) if there are no points in t
 ### 5. Output or save
 
 - **Inline** (default): Output the response directly in the conversation.
-- **File** (if `generate-file` was set): Write to `<feedback-file-basename>-response.md` in the same directory as the feedback file. Tell the user where it was saved.
+- **File** (if `generate-file` was set): Write to `<feedback-file-basename>-response.md`. Tell the user where it was saved.

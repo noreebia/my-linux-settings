@@ -100,4 +100,4 @@ Structure your feedback clearly:
 ### 5. Output or save
 
 - **Inline** (default): Output the review directly in the conversation.
-- **File** (if `generate-file` was set): Write the review to `<source-file-basename>-review.md` in the same directory as the source document. Tell the user where it was saved.
+- **File** (if `generate-file` was set): Write the review to `<source-file-basename>-review.md`. Tell the user where it was saved.
