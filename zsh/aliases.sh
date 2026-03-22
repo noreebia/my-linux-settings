@@ -9,7 +9,7 @@ alias ll="ls -al"
 alias git-prune-local="git fetch -p && git branch -vv | awk '/: gone] / {print \$1}' | xargs -r git branch -D"
 alias git-prune-local-dry="git branch -vv | awk '/: gone] / {print \$1}'"
 alias gpl="git-prune-local"
-alias gpld="git-prune-local-dry"\
+alias gpld="git-prune-local-dry"
 alias gpfl="git push --force-with-lease"
 
 alias szsh="source ~/.zshrc"
@@ -20,7 +20,7 @@ alias chmodsh="chmod +x *.sh"
 alias chmodx="chmod +x"
 
 alias switch-push="gh auth switch && git push"
-alias switch-push-return="gh auth switch && git push && gh auth switch
+alias switch-push-return="gh auth switch && git push && gh auth switch"
 
 cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"

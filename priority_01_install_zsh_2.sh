@@ -38,8 +38,8 @@ grep -q 'alias vizsh=' ~/.zshrc || echo 'alias vizsh="vi ~/.zshrc"' >> ~/.zshrc
 grep -q 'alias t=' ~/.zshrc || echo 'alias t="tmux"' >> ~/.zshrc
 grep -q 'alias chmodsh=' ~/.zshrc || echo 'alias chmodsh="chmod +x *.sh"' >> ~/.zshrc
 grep -q 'alias chmodx=' ~/.zshrc || echo 'alias chmodx="chmod +x"' >> ~/.zshrc
-grep -q 'alias gasgp=' ~/.zshrc || echo 'alias gasgp="gh auth switch && git push"' >> ~/.zshrc
-grep -q 'alias gasgpgas=' ~/.zshrc || echo 'alias gasgpgas="gh auth switch && git push && gh auth switch"' >> ~/.zshrc
+grep -q 'alias switch-push=' ~/.zshrc || echo 'alias switch-push="gh auth switch && git push"' >> ~/.zshrc
+grep -q 'alias switch-push-return=' ~/.zshrc || echo 'alias switch-push-return="gh auth switch && git push && gh auth switch"' >> ~/.zshrc
 
 grep -q 'cdc()' ~/.zshrc || cat >> ~/.zshrc << 'EOF'
 cdc() {
