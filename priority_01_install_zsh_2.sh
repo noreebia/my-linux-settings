@@ -39,7 +39,7 @@ grep -q 'alias t=' ~/.zshrc || echo 'alias t="tmux"' >> ~/.zshrc
 grep -q 'alias chmodsh=' ~/.zshrc || echo 'alias chmodsh="chmod +x *.sh"' >> ~/.zshrc
 grep -q 'alias chmodx=' ~/.zshrc || echo 'alias chmodx="chmod +x"' >> ~/.zshrc
 grep -q 'alias gh-switch-push=' ~/.zshrc || echo 'alias gh-switch-push="gh auth switch && git push"' >> ~/.zshrc
-grep -q 'alias gh-switch-push-return=' ~/.zshrc || echo 'alias gh-switch-push-return="gh auth switch && git push && gh auth switch"' >> ~/.zshrc
+grep -q 'alias gh-switch-push-switch=' ~/.zshrc || echo 'alias gh-switch-push-switch="gh auth switch && git push && gh auth switch"' >> ~/.zshrc
 
 grep -q 'cdc()' ~/.zshrc || cat >> ~/.zshrc << 'EOF'
 cdc() {
