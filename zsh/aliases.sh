@@ -51,3 +51,22 @@ git_sync_all() {
 }
 
 alias git-sync-all='git_sync_all'
+
+# Initialize, commit, and publish a repo to GitHub
+# Usage: gh-publish [public|private]
+gh-publish() {
+  # Guard: Check if a .git directory already exists to avoid nesting
+  if [ -d ".git" ]; then
+    echo "⚠️ Error: This directory is already a Git repository."
+    return 1
+  fi
+
+  # Default to private if no argument is provided
+  local visibility=${1:-private}
+  
+  git init && \
+  git add . && \
+  git commit -m "Initial commit" && \
+  git branch -M main && \
+  gh repo create --source=. --"$visibility" --push
+}
