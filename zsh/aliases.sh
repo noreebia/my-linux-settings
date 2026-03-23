@@ -19,8 +19,8 @@ alias t="tmux"
 alias chmodsh="chmod +x *.sh"
 alias chmodx="chmod +x"
 
-alias switch-push="gh auth switch && git push"
-alias switch-push-return="gh auth switch && git push && gh auth switch"
+alias gh-switch-push="gh auth switch && git push"
+alias gh-switch-push-return="gh auth switch && git push && gh auth switch"
 
 cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
