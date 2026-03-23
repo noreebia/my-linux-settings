@@ -71,4 +71,5 @@ ccp() {
     echo "Successfully copied '$src' to '$dst' with Chrome-style naming."
 }
 
-alias ccp-agents="ccp ./agents ~/code_linux/agents"
+alias ccp-agents-work="ccp ./agents ~/code_linux/agents"
+alias ccp-agents-home="ccp ./agents ~/Code/epapyrus/agents"
