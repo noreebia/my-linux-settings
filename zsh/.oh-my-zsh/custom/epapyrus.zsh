@@ -31,4 +31,4 @@ sdhomeset() {
 alias sdhomecd="cd /ePapyrus/sd"
 alias sdhomels="ls -al /ePapyrus/sd"
 alias rmsdh2="/bin/rm -rf /ePapyrus/sd/resources/h2/*"
-alias ccp-agents="cp -r ./agents ~/code_linux/agents"
+alias ccp-agents="cp -r ./agents/* ~/code_linux/agents/"
