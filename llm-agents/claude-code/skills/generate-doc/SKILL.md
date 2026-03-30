@@ -50,7 +50,7 @@ Don't just dump the raw response. Treat this as a light editorial pass:
   ```
   *Generated: 2024-01-15 14:30 | Author: <agent-name> | Source: system analysis conversation*
   ```
-  The author name identifies which agent produced the document (e.g., `claude`, `codex`, `gemini`).
+  The author name identifies which agent produced the document (e.g., `Claude`, `Codex`, `Gemini`).
 - **Preserve all structure** — headings, lists, code blocks, tables, diagrams
 - **Clean up conversational artifacts** — remove phrases like "Sure!", "Great question", "As I mentioned", or any text that only made sense as a chat reply
 - **Don't summarize or compress** — the document should be the full content, not a shortened version of it
