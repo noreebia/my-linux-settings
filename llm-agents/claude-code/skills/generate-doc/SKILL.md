@@ -46,9 +46,9 @@ If it's unclear what should go into the document, ask the user before proceeding
 Don't just dump the raw response. Treat this as a light editorial pass:
 
 - **Add a title** (`# Title`) if the response didn't have one
-- **Add a brief header block** with the date, author, and origin context — e.g.:
+- **Add a brief header block** with the datetime, author, and origin context — e.g.:
   ```
-  *Generated: 2024-01-15 | Author: <agent-name> | Source: system analysis conversation*
+  *Generated: 2024-01-15 14:30 | Author: <agent-name> | Source: system analysis conversation*
   ```
   The author name identifies which agent produced the document (e.g., `claude`, `codex`, `gemini`).
 - **Preserve all structure** — headings, lists, code blocks, tables, diagrams

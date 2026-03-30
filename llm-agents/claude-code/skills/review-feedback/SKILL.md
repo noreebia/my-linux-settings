@@ -64,7 +64,7 @@ Use the provided context to inform these judgments. If you have information the 
 ```markdown
 # Feedback Response: <Document Title>
 
-*Responded: <date> | Author: <agent-name>*
+*Responded: <datetime — e.g., 2024-01-15 14:30> | Author: <agent-name>*
 
 ## Overall Take
 <2–3 sentences: your honest reaction to the feedback as a whole. Was it well-targeted? Did it surface real issues? Were there significant misunderstandings?>

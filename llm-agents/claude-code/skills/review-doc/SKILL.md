@@ -73,7 +73,7 @@ Structure your feedback clearly:
 ```markdown
 # Review: <Document Title>
 
-*Reviewed: <date> | Author: <agent-name>*
+*Reviewed: <datetime — e.g., 2024-01-15 14:30> | Author: <agent-name>*
 
 ## Summary
 <2–3 sentences: overall assessment. Is this document trustworthy and ready to act on, or does it need significant revision?>
