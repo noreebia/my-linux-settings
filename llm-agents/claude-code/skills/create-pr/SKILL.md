@@ -24,94 +24,37 @@ Open a well-written pull request from the current branch using `gh pr create`. T
 
 ## Process
 
-### 1. Validate the environment
+### 1. Validate and gather context
 
-```bash
-# Check gh is available and authenticated
-gh auth status
+Check that `gh` is authenticated and the current branch isn't the target branch (or `main`/`master` — a PR from those is almost never intentional).
 
-# Get current branch
-git branch --show-current
-```
+Gather the diff, diff stat, and commit log against the target branch. The code diff is ground truth — commit messages are supplementary. If they conflict, trust the diff. Read key changed files when the diff alone doesn't make intent clear.
 
-If `gh` is not installed or not authenticated → stop and tell the user how to fix it (`gh auth login`).
+If a **ticket-url** was provided, fetch it and extract relevant requirements for the Context section. Attempt to access the ticket URL using any available tool (MCP server, web fetch, etc.). If inaccessible, use the raw URL.
 
-If the current branch **is** the target branch, `main`, or `master` → stop and warn the user. A PR from `main` to `develop` is almost never intentional.
+### 2. Draft the title and body
 
----
-
-### 2. Gather context
-
-Run these in order — each one adds a different layer of understanding:
-
-```bash
-# The full diff — this is the primary source of truth
-git diff <target-branch>...HEAD
-
-# File-level summary — good for the Changes Made section
-git diff <target-branch>...HEAD --stat
-
-# Commit messages — useful for intent, but treat as hints not facts
-git log <target-branch>..HEAD --oneline
-```
-
-Read key changed files when the diff alone doesn't make the intent clear — e.g., when a file is renamed, a schema changes, or a new config is added.
-
-**Source priority:** The code diff is ground truth. Commit messages are supplementary. If they conflict, trust the diff.
-
----
-
-### 3. Fetch the ticket (if provided)
-
-Attempt to access the ticket URL using any available tool (MCP server, web fetch, etc.).
-
-- **If successful**: Extract the requirements, description, or acceptance criteria relevant to this PR. Summarize them in your own words for the Context section.
-- **If inaccessible**: Use the raw URL as the context — don't skip the section.
-
----
-
-### 4. Draft the title and body
-
-**Title rules:**
-- Under 70 characters
-- Imperative mood: "Add user export endpoint" not "Added" or "Adding"
-- Specific enough that a reviewer knows what changed without reading the body
-- Written in the specified language
+**Title:** Under 70 characters, imperative mood ("Add user export endpoint" not "Added"), specific enough to stand alone. Written in the specified language.
 
 **Body format:**
 
 ```markdown
 ## Description
-<2–4 sentences. What changed and why. Not a list — prose. Lead with the user-facing or system-level impact, then the approach taken. Skip anything obvious from the title.>
+<2–4 sentences of prose. Lead with the user-facing or system-level impact, then the approach. Skip anything obvious from the title.>
 
 ## Context
-<Only include if a ticket-url was provided.>
-<If ticket was accessible: a tight summary of the requirements or acceptance criteria this PR addresses.>
-<If ticket was inaccessible: the raw URL.>
+<Only if ticket-url was provided. Tight summary of the requirements, or the raw URL if inaccessible.>
 
 ## Changes Made
-<Bulleted list. Each bullet = one logical change. Name the file or component when it adds clarity.>
+<Bulleted list, 4–10 items. Each bullet = one logical change. Name the file or component when it adds clarity.>
 <Bad: "Updated user service" — Good: "Added `exportToCsv()` to `UserService` — streams rows to avoid memory issues on large datasets">
-<Aim for 4–10 bullets. If you need more, consider whether this PR is too large.>
 ```
 
-**What to avoid:**
-- Vague descriptions ("various fixes", "refactoring", "updates")
-- Restating the title verbatim in the description
-- Listing every file changed — the diff does that; group by logical change instead
-- Filler phrases ("In this PR, we...", "As per the ticket...")
+Avoid vague descriptions ("various fixes"), restating the title in the description, listing every file changed, and filler phrases.
 
----
+### 3. Confirm and create
 
-### 5. Confirm with the user
-
-Show the draft title and body and ask for approval before creating the PR. Don't proceed automatically.
-
----
-
-### 6. Create the PR
-
-Use a HEREDOC to preserve formatting and avoid quoting issues with special characters in the body:
+Show the draft to the user and wait for approval. Then create the PR using a HEREDOC to preserve formatting:
 
 ```bash
 gh pr create --base <target-branch> --title "<title>" --body "$(cat <<'PRBODY'
@@ -120,17 +63,11 @@ PRBODY
 )"
 ```
 
-**Common pitfall:** If the body contains backticks or `$` signs, the HEREDOC delimiter must be quoted (`'PRBODY'`) to prevent shell expansion. Always use the quoted form.
-
----
-
-### 7. Output the result
-
-Print the PR URL returned by `gh pr create`. Done.
+Print the PR URL. Done.
 
 ---
 
 ## Constraints
 
-- **Do not create or amend commits.** This skill only opens a PR for commits that already exist.
+- **Do not create or amend commits.** This skill only opens a PR for existing commits.
 - **Do not push branches.** If the branch isn't pushed yet, tell the user to run `git push -u origin <branch>` first.
