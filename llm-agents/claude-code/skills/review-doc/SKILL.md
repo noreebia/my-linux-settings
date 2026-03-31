@@ -73,6 +73,8 @@ Structure your feedback clearly:
 ```markdown
 # Review: <Document Title>
 
+*Reviewed: <datetime — e.g., 2024-01-15 14:30> | Author: <agent-name>*
+
 ## Summary
 <2–3 sentences: overall assessment. Is this document trustworthy and ready to act on, or does it need significant revision?>
 
@@ -101,3 +103,5 @@ Structure your feedback clearly:
 
 - **Inline** (default): Output the review directly in the conversation.
 - **File** (if `generate-file` was set): Write the review to `<source-file-basename>-review.md`. Tell the user where it was saved.
+
+**Author name**: The `<agent-name>` in the header identifies which agent produced the review (e.g., `Claude`, `Codex`, `Gemini`).

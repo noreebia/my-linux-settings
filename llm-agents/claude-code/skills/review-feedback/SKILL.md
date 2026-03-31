@@ -64,6 +64,8 @@ Use the provided context to inform these judgments. If you have information the 
 ```markdown
 # Feedback Response: <Document Title>
 
+*Responded: <datetime — e.g., 2024-01-15 14:30> | Author: <agent-name>*
+
 ## Overall Take
 <2–3 sentences: your honest reaction to the feedback as a whole. Was it well-targeted? Did it surface real issues? Were there significant misunderstandings?>
 
@@ -93,3 +95,5 @@ Omit any category heading (Accepted, Rejected, etc.) if there are no points in t
 
 - **Inline** (default): Output the response directly in the conversation.
 - **File** (if `generate-file` was set): Write to `<feedback-file-basename>-response.md`. Tell the user where it was saved.
+
+**Author name**: The `<agent-name>` in the header identifies which agent produced the response (e.g., `Claude`, `Codex`, `Gemini`).

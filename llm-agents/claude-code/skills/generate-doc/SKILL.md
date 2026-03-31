@@ -46,10 +46,11 @@ If it's unclear what should go into the document, ask the user before proceeding
 Don't just dump the raw response. Treat this as a light editorial pass:
 
 - **Add a title** (`# Title`) if the response didn't have one
-- **Add a brief header block** with the date and origin context — e.g.:
+- **Add a brief header block** with the datetime, author, and origin context — e.g.:
   ```
-  *Generated: 2024-01-15 | Source: system analysis conversation*
+  *Generated: 2024-01-15 14:30 | Author: <agent-name> | Source: system analysis conversation*
   ```
+  The author name identifies which agent produced the document (e.g., `Claude`, `Codex`, `Gemini`).
 - **Preserve all structure** — headings, lists, code blocks, tables, diagrams
 - **Clean up conversational artifacts** — remove phrases like "Sure!", "Great question", "As I mentioned", or any text that only made sense as a chat reply
 - **Don't summarize or compress** — the document should be the full content, not a shortened version of it
