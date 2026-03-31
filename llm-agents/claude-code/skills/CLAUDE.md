@@ -1,6 +1,6 @@
-# LLM Agent Skill Creation Preference (`llm-agents/claude-code/skills/`)
+# Skill Writing Guidelines
 
-The following guidelines apply when creating or modifying SKILL.md files in `llm-agents/claude-code/skills/`.
+The following guidelines apply when creating or modifying SKILL.md files in this directory.
 
 Claude is already smart. Skills should only contain context Claude doesn't already have — project-specific conventions, non-obvious operational details, and the *why* behind constraints. Everything else is wasted tokens competing with conversation history.
 
