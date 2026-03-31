@@ -93,7 +93,7 @@ Omit any category heading (Accepted, Rejected, etc.) if there are no points in t
 
 ### 5. Output or save
 
-- **Inline** (default): Output the response directly in the conversation.
-- **File** (if `generate-file` was set): Write to `<feedback-file-basename>-response.md`. Tell the user where it was saved.
+- **Inline** (default): Output the response directly in the conversation. Omit the header line (`*Responded: ... | Author: ...*`) — it adds noise in a terminal and the user already knows who wrote it.
+- **File** (if `generate-file` was set): Include the header line. Write to `<feedback-file-basename>-response.md`. Tell the user where it was saved.
 
 **Author name**: The `<agent-name>` in the header identifies which agent produced the response (e.g., `Claude`, `Codex`, `Gemini`).

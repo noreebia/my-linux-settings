@@ -151,7 +151,7 @@ Omit any section that has no items (e.g., if there are no deviations, skip that 
 
 ### 6. Output or save
 
-- **Inline** (default): Output the review directly in the conversation.
-- **File** (if `generate-file` was set): Write to `<plan-file-basename>-impl-review.md` in the same directory as the plan. If the plan was a directory, save the review inside that directory. Tell the user where it was saved.
+- **Inline** (default): Output the review directly in the conversation. Omit the header line (`*Reviewed: ... | Author: ...*`) — it adds noise in a terminal and the user already knows who wrote it.
+- **File** (if `generate-file` was set): Include the header line. Write to `<plan-file-basename>-impl-review.md` in the same directory as the plan. If the plan was a directory, save the review inside that directory. Tell the user where it was saved.
 
 **Author name**: The `<agent-name>` in the header identifies which agent produced the review (e.g., `Claude`, `Codex`, `Gemini`).

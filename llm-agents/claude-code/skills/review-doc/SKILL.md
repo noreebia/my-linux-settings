@@ -101,7 +101,7 @@ Structure your feedback clearly:
 
 ### 5. Output or save
 
-- **Inline** (default): Output the review directly in the conversation.
-- **File** (if `generate-file` was set): Write the review to `<source-file-basename>-review.md`. Tell the user where it was saved.
+- **Inline** (default): Output the review directly in the conversation. Omit the header line (`*Reviewed: ... | Author: ...*`) — it adds noise in a terminal and the user already knows who wrote it.
+- **File** (if `generate-file` was set): Include the header line. Write the review to `<source-file-basename>-review.md`. Tell the user where it was saved.
 
 **Author name**: The `<agent-name>` in the header identifies which agent produced the review (e.g., `Claude`, `Codex`, `Gemini`).
