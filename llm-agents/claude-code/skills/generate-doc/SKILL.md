@@ -33,6 +33,6 @@ Do a light editorial pass — don't just dump the raw response:
 - Preserve all structure (headings, lists, code blocks, tables, diagrams)
 - Don't summarize or compress — keep the full content
 
-Tell the user where the file was saved. If it's ready to pass to another skill (e.g., `review-doc`), mention that.
+Tell the user where the file was saved.
 
 **Author name**: The `<agent-name>` identifies which agent produced the document (e.g., `Claude`, `Codex`, `Gemini`).

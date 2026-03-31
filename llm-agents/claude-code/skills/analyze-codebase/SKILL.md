@@ -33,7 +33,7 @@ Check `$AGENT_LOCAL_DIR/system-analysis/` for existing documentation. If a **foc
 
 ### 2. Explore the codebase
 
-Work fast — the goal is orientation, not exhaustive reading. Start with the big picture (project type, dependencies, structure, entry points), then go deeper where it matters. If a focus was provided, go deep on that area after getting oriented — trace its imports, find where it plugs into the rest of the system.
+Start with the big picture (project type, dependencies, structure, entry points), then go deeper where it matters. If a focus was provided, go deep on that area after getting oriented — trace its imports, find where it plugs into the rest of the system.
 
 ### 3. Plan and write the output
 
