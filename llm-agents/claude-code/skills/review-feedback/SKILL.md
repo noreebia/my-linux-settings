@@ -39,7 +39,7 @@ Structure the response however best fits the feedback — a 3-point review needs
 
 - An overall take on the feedback's quality and accuracy
 - A point-by-point response with your verdict and reasoning for each
-- Concrete next steps for the original document
+- Analysis of the situation - potential next steps for the original document, or the situation more broadly, in light of the feedback
 
 ### 3. Output or save
 
