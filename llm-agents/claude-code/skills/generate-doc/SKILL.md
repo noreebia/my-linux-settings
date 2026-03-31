@@ -28,11 +28,9 @@ Save to `$AGENT_LOCAL_DIR/` unless the user specifies otherwise or there's a mor
 Do a light editorial pass — don't just dump the raw response:
 
 - Add a title if the response didn't have one
-- Add a header: `*Generated: <datetime> | Author: <agent-name> | Source: <brief context>*`
+- Add a header: `*Generated: <datetime> | Author: $AGENT_NAME | Source: <brief context>*`
 - Clean up conversational artifacts ("Sure!", "Great question", "As I mentioned")
 - Preserve all structure (headings, lists, code blocks, tables, diagrams)
 - Don't summarize or compress — keep the full content
 
 Tell the user where the file was saved.
-
-**Author name**: The `<agent-name>` identifies which agent produced the document (e.g., `Claude`, `Codex`, `Gemini`).

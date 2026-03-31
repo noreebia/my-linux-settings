@@ -8,6 +8,7 @@ If any instructions reference the variables below, substitute them with their de
 
 - `$AGENT_DIR` = the `agents/` directory, relative to the repository root. If no git repo can be detected, relative to the directory where the agent command was entered.
 - `$AGENT_LOCAL_DIR` = the `agents/<agent-name>` directory within `$AGENT_DIR`. Each agent must replace `<agent-name>` with its own product/brand name (e.g., `agents/claude`, `agents/codex`, `agents/gemini`).
+- `$AGENT_NAME` = the agent's product/brand name (e.g., `Claude`, `Codex`, `Gemini`). Use this wherever an agent needs to identify itself — metadata headers, author fields, etc.
 
 # Markdown File Generation
 

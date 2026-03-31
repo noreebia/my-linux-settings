@@ -62,4 +62,4 @@ Structure the review to cover: a plan summary, the completeness breakdown, quali
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
 - **File** (if `generate-file` was set): Include the metadata header. If the plan came from a file, write to `<plan-file-basename>-impl-review.md` alongside it. Otherwise, write to `$AGENT_DIR/code-reviews/` with a descriptive name. Tell the user where it was saved.
 
-**Author name**: The `<agent-name>` in the metadata header identifies which agent produced the review (e.g., `Claude`, `Codex`, `Gemini`).
+Use `$AGENT_NAME` for the author field in metadata headers.

@@ -62,4 +62,4 @@ Adapt depth to the size of the changes. A 10-line fix doesn't need the same trea
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
 - **File** (if `generate-file` was set): Include the metadata header. Write to `$AGENT_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.
 
-**Author name**: The `<agent-name>` in the metadata header identifies which agent produced the review (e.g., `Claude`, `Codex`, `Gemini`).
+Use `$AGENT_NAME` for the author field in metadata headers.

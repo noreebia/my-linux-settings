@@ -46,4 +46,4 @@ Structure the response however best fits the feedback — a 3-point review needs
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Responded: ... | Author: ...*`).
 - **File** (if `generate-file` was set): Include the metadata header. Write to `<feedback-file-basename>-response.md`. Tell the user where it was saved.
 
-**Author name**: The `<agent-name>` in the metadata header identifies which agent produced the response (e.g., `Claude`, `Codex`, `Gemini`).
+Use `$AGENT_NAME` for the author field in metadata headers.
