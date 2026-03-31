@@ -50,8 +50,6 @@ If a **ticket-url** was provided, fetch it and extract relevant requirements for
 <Bad: "Updated user service" — Good: "Added `exportToCsv()` to `UserService` — streams rows to avoid memory issues on large datasets">
 ```
 
-Avoid vague descriptions ("various fixes"), restating the title in the description, listing every file changed, and filler phrases.
-
 ### 3. Confirm and create
 
 Show the draft to the user and wait for approval. Then create the PR using a HEREDOC to preserve formatting:

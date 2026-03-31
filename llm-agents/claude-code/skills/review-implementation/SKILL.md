@@ -18,16 +18,13 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ## Arguments
 
-- **generate-file** *(1st, optional)*: Any truthy value (`true`, `yes`, `file`) writes the review to a markdown file instead of outputting inline. Saved alongside the plan with a `-impl-review` suffix (e.g., `auth-plan.md` → `auth-plan-impl-review.md`).
+- **generate-file** *(1st, optional)*: Any truthy value (`true`, `yes`, `file`) writes the review to a markdown file instead of outputting inline.
 - **scope** *(2nd, required)*: Which code changes to review. Accepts:
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3` for the last 3 commits)
   - `branch` — all commits on the current branch since it diverged from the base branch
-- **plan** *(3rd, required)*: Where to find the plan. Accepts:
-  - A **file path** — read that file as the plan
-  - A **directory path** — read all documents in the directory as plan context
-  - A **directory + keyword** (space-separated, e.g., `docs/ migration`) — search for files whose name contains the keyword. If nothing matches, tell the user and stop.
+- **plan** *(3rd, optional)*: A hint for locating the plan. This can be anything — a file path, a directory, a keyword to search for, a description of what to look for, or omitted entirely if the plan is already in the conversation context. Use your best judgment to find or identify the plan from whatever the user provides.
 
 ---
 
@@ -35,7 +32,7 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ### 1. Load the plan and gather the diff
 
-Resolve the `plan` argument and load the plan context. Summarize the plan's key objectives so the user can confirm you've understood it.
+Find the plan. If a `plan` argument was given, use it as a hint — it might be a file path, directory, search keyword, or description. If no argument was given, check the conversation context — the plan may have been discussed or generated earlier in this session. If you still can't identify the plan, ask the user. Once loaded, summarize the plan's key objectives so the user can confirm you've understood it.
 
 Collect the diff using the `scope` argument:
 
@@ -63,6 +60,6 @@ Structure the review to cover: a plan summary, the completeness breakdown, quali
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
-- **File** (if `generate-file` was set): Include the metadata header. Write to `<plan-file-basename>-impl-review.md` in the same directory as the plan. If the plan was a directory, save inside it. Tell the user where it was saved.
+- **File** (if `generate-file` was set): Include the metadata header. If the plan came from a file, write to `<plan-file-basename>-impl-review.md` alongside it. Otherwise, write to `$AGENT_DIR/code-reviews/` with a descriptive name. Tell the user where it was saved.
 
 **Author name**: The `<agent-name>` in the metadata header identifies which agent produced the review (e.g., `Claude`, `Codex`, `Gemini`).
