@@ -37,7 +37,7 @@ If it's unclear what should go into the document, ask the user before proceeding
 | Meeting notes / summary | `meeting-notes-<date>.md` |
 | Research or investigation | `<topic>-research.md` |
 
-**Location:** Save to `$AGENT_DIR/` unless the user specifies otherwise or there is a more natural place in the project (e.g., `docs/`).
+**Location:** Save to `$AGENT_LOCAL_DIR/` unless the user specifies otherwise or there is a more natural place in the project (e.g., `docs/`).
 
 ---
 

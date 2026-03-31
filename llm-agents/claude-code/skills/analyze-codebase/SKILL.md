@@ -1,7 +1,7 @@
 ---
 name: analyze-codebase
 description: >
-  Analyze an unfamiliar codebase and generate developer documentation in $AGENT_DIR/system-analysis.
+  Analyze an unfamiliar codebase and generate developer documentation in $AGENT_LOCAL_DIR/system-analysis.
   Use this skill whenever a developer needs to understand an existing project — triggered by phrases like
   "analyze this codebase", "document this project", "help me understand this repo", "onboard me to this
   code", "what does this system do", "explain the architecture", or any time someone is new to a project
@@ -15,7 +15,7 @@ description: >
 
 Explore a codebase and produce documentation that gives a new developer genuine understanding — not just a file tree tour, but a mental model of how the system works, why it's structured that way, and how to navigate it confidently.
 
-Output lives in `$AGENT_DIR/system-analysis/` at the repository root.
+Output lives in `$AGENT_LOCAL_DIR/system-analysis/` at the repository root.
 
 ---
 
@@ -27,10 +27,10 @@ Output lives in `$AGENT_DIR/system-analysis/` at the repository root.
 
 ## Step 1 — Check What Already Exists
 
-Before exploring the code, check `$AGENT_DIR/system-analysis/` for existing docs:
+Before exploring the code, check `$AGENT_LOCAL_DIR/system-analysis/` for existing docs:
 
 ```bash
-find $AGENT_DIR/system-analysis -type f 2>/dev/null | sort
+find $AGENT_LOCAL_DIR/system-analysis -type f 2>/dev/null | sort
 ```
 
 If a **focus** was provided, look for any file or directory whose name fuzzy-matches it (`auth` → `authentication.md`, `auth/`, sections in `security.md`, etc.). Read any matches.
@@ -83,10 +83,10 @@ cat Makefile docker-compose.yml .github/workflows/*.yml 2>/dev/null | head -80
 
 | Situation | Output |
 |---|---|
-| Full analysis, simple project | `$AGENT_DIR/system-analysis/overview.md` |
-| Full analysis, complex project | `$AGENT_DIR/system-analysis/` with numbered files |
-| Focus, small topic | `$AGENT_DIR/system-analysis/<focus>.md` |
-| Focus, large topic | `$AGENT_DIR/system-analysis/<focus>/` with files inside |
+| Full analysis, simple project | `$AGENT_LOCAL_DIR/system-analysis/overview.md` |
+| Full analysis, complex project | `$AGENT_LOCAL_DIR/system-analysis/` with numbered files |
+| Focus, small topic | `$AGENT_LOCAL_DIR/system-analysis/<focus>.md` |
+| Focus, large topic | `$AGENT_LOCAL_DIR/system-analysis/<focus>/` with files inside |
 | Existing file for this topic | Augment it in place — update stale content, add new sections |
 | Existing directory for this topic | Add/update files within it |
 
@@ -142,6 +142,6 @@ Keep diagrams focused — a diagram with 15 nodes teaches nothing. If it's getti
 
 ## Constraints
 
-- **Read-only**: Do not modify any source files. Only write to `$AGENT_DIR/system-analysis/`.
-- **Create the output folder** if it doesn't exist: `mkdir -p $AGENT_DIR/system-analysis`
+- **Read-only**: Do not modify any source files. Only write to `$AGENT_LOCAL_DIR/system-analysis/`.
+- **Create the output folder** if it doesn't exist: `mkdir -p $AGENT_LOCAL_DIR/system-analysis`
 - **Don't pad**: If the project is small, one well-written file is better than five thin ones.
