@@ -13,9 +13,9 @@ description: >
 
 # Analyze Codebase
 
-Explore a codebase and produce documentation that gives a new developer genuine understanding — not just a file tree tour, but a mental model of how the system works, why it's structured that way, and how to navigate it confidently.
+Explore a codebase and produce documentation that gives a new developer a genuine mental model — not just a file tree tour, but how the system works, why it's structured that way, and how to navigate it.
 
-Output lives in `$AGENT_LOCAL_DIR/system-analysis/` at the repository root.
+Output lives in `$AGENT_LOCAL_DIR/system-analysis/`.
 
 ---
 
@@ -25,123 +25,38 @@ Output lives in `$AGENT_LOCAL_DIR/system-analysis/` at the repository root.
 
 ---
 
-## Step 1 — Check What Already Exists
+## Process
 
-Before exploring the code, check `$AGENT_LOCAL_DIR/system-analysis/` for existing docs:
+### 1. Check existing docs
 
-```bash
-find $AGENT_LOCAL_DIR/system-analysis -type f 2>/dev/null | sort
-```
+Check `$AGENT_LOCAL_DIR/system-analysis/` for existing documentation. If a **focus** was provided, look for files or sections that already cover it. If existing docs are already thorough and accurate, tell the user and stop — don't regenerate for its own sake.
 
-If a **focus** was provided, look for any file or directory whose name fuzzy-matches it (`auth` → `authentication.md`, `auth/`, sections in `security.md`, etc.). Read any matches.
+### 2. Explore the codebase
 
-**Decision**: If existing docs already cover the topic thoroughly and accurately → tell the user, and stop. Don't update for its own sake.
+Work fast — the goal is orientation, not exhaustive reading. Start with the big picture (project type, dependencies, structure, entry points), then go deeper where it matters. If a focus was provided, go deep on that area after getting oriented — trace its imports, find where it plugs into the rest of the system.
 
----
+### 3. Plan and write the output
 
-## Step 2 — Reconnaissance
-
-Explore before writing anything. Work fast — the goal is orientation, not exhaustive reading.
-
-**Start with the big picture:**
-```bash
-# Project type & dependencies
-cat package.json go.mod requirements.txt Cargo.toml pom.xml build.gradle 2>/dev/null | head -60
-
-# Structure (2 levels, skip noise)
-find . -maxdepth 2 -not -path '*/node_modules/*' -not -path '*/.git/*' -not -path '*/dist/*' -not -path '*/__pycache__/*' | sort
-
-# Existing READMEs
-find . -maxdepth 3 -name "README*" | head -10
-```
-
-**Understand how it runs:**
-```bash
-# Entry points & scripts
-cat Makefile docker-compose.yml .github/workflows/*.yml 2>/dev/null | head -80
-```
-
-**Understand what it does:**
-- Read `main.*`, `index.*`, `app.*`, `server.*`, or whatever the entry point is
-- Read `src/` or top-level source directories — skim for module/package names and their purpose
-- Read key config files (`*.config.*`, `*.env.example`, `settings.*`)
-
-**If a focus was provided:** After the big picture, go deep on that area — read its files, trace its imports, find where it plugs into the rest of the system.
-
-**Collect answers to these questions as you go:**
-1. What does this system do? (one sentence)
-2. What are its major components, and what does each one own?
-3. How does a request / event / job flow through the system?
-4. What are the external dependencies (DBs, APIs, queues, auth providers)?
-5. What are the non-obvious things a new dev needs to know?
-
----
-
-## Step 3 — Plan the Output
-
-**Simple rule:** One topic = one file. Multiple related topics = one directory.
+**Output structure:**
 
 | Situation | Output |
 |---|---|
-| Full analysis, simple project | `$AGENT_LOCAL_DIR/system-analysis/overview.md` |
-| Full analysis, complex project | `$AGENT_LOCAL_DIR/system-analysis/` with numbered files |
-| Focus, small topic | `$AGENT_LOCAL_DIR/system-analysis/<focus>.md` |
-| Focus, large topic | `$AGENT_LOCAL_DIR/system-analysis/<focus>/` with files inside |
-| Existing file for this topic | Augment it in place — update stale content, add new sections |
-| Existing directory for this topic | Add/update files within it |
+| Full analysis, simple project | `system-analysis/overview.md` |
+| Full analysis, complex project | `system-analysis/` with numbered files (e.g., `01-overview.md`, `02-architecture.md`) |
+| Focus, small topic | `system-analysis/<focus>.md` |
+| Focus, large topic | `system-analysis/<focus>/` with files inside |
+| Existing docs for this topic | Augment in place — update stale content, add new sections |
 
-When generating multiple files, prefix with two-digit numbers for reading order:
-```
-system-analysis/
-  01-overview.md
-  02-architecture.md
-  03-data-model.md
-  04-auth.md
-```
+Write for a developer on day one. They're smart but don't know the project's history, conventions, or gotchas. Give them the mental model to be productive: what the system does, how to run it, how it's structured (responsibilities, not file trees), how data/requests flow through it, external dependencies, and non-obvious things that will trip up a newcomer.
 
----
+For focused analysis, also cover how the component fits into the broader system and what common dev tasks look like in that area.
 
-## Step 4 — Write the Documentation
-
-Write for a developer on day one. They're smart, but they don't know the project's history, conventions, or gotchas. Give them the mental model they need to be productive, not just a description of what exists.
-
-### What every overview document should answer
-
-- **What is this?** One-paragraph plain-English description of what the system does and who uses it.
-- **How do I run it?** Quickstart — the minimum commands to get it running locally.
-- **How is it structured?** A map of the top-level directories/packages and what each one owns. This is not a file tree — explain responsibilities.
-- **How does it work?** The key data/request flow through the system. A Mermaid diagram works well here.
-- **What are the external dependencies?** Databases, third-party APIs, auth providers, message queues — what they are and why they're used.
-- **What should I know that isn't obvious?** Conventions, quirks, historical decisions, things that will confuse a newcomer if they don't know.
-
-### What focused documentation should answer
-
-Same as above, scoped to the focus area, plus:
-- How does this component fit into the broader system? (entry/exit points, what calls it, what it calls)
-- What are the key abstractions / data structures here?
-- What are the common tasks a developer would do in this area, and where do they happen?
-
-### Diagrams
-
-Use Mermaid when a visual genuinely adds clarity prose can't easily provide:
-- Architecture overview (services, their relationships, external dependencies)
-- Request/event flow through multiple components
-- Data model relationships
-- State machines
-
-Keep diagrams focused — a diagram with 15 nodes teaches nothing. If it's getting large, split it.
-
-### Tone and style
-
-- Write in present tense ("the auth service validates tokens") not past ("the auth service was designed to...")
-- Explain *why* alongside *what* — if you can infer the reason for a design decision, say it
-- Call out gotchas explicitly with a **Note:** or **⚠️** prefix
-- Be concrete — prefer `"the UserService class in src/services/user.ts"` over `"the user service"`
+Use Mermaid diagrams when they genuinely clarify something prose can't — architecture, request flows, data models. Keep them focused; a diagram with 15 nodes teaches nothing.
 
 ---
 
 ## Constraints
 
-- **Read-only**: Do not modify any source files. Only write to `$AGENT_LOCAL_DIR/system-analysis/`.
+- **Read-only**: Do not modify source files. Only write to `$AGENT_LOCAL_DIR/system-analysis/`.
 - **Create the output folder** if it doesn't exist: `mkdir -p $AGENT_LOCAL_DIR/system-analysis`
 - **Don't pad**: If the project is small, one well-written file is better than five thin ones.
