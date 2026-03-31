@@ -20,6 +20,8 @@ find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -path "$SOURCE_DI
   fi
 done
 
+rm -f "$TARGET_DIR"/skills/CLAUDE.md
+
 # Deep-merge settings.json: source keys overwrite existing, but existing-only keys are preserved
 if [ -f "$SETTINGS_TARGET" ]; then
   jq -s '.[0] * .[1]' "$SETTINGS_TARGET" "$SETTINGS_SOURCE" > "$SETTINGS_TARGET.tmp"
