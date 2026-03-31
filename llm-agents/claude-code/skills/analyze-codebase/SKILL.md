@@ -47,7 +47,7 @@ Start with the big picture (project type, dependencies, structure, entry points)
 | Focus, large topic | `system-analysis/<focus>/` with files inside |
 | Existing docs for this topic | Augment in place — update stale content, add new sections |
 
-Write for a developer on day one. They're smart but don't know the project's history, conventions, or gotchas. Give them the mental model to be productive: what the system does, how to run it, how it's structured (responsibilities, not file trees), how data/requests flow through it, external dependencies, and non-obvious things that will trip up a newcomer.
+Write for a developer on day one. Give them the mental model to be productive: what the system does, how to run it, how it's structured (responsibilities, not file trees), how data/requests flow through it, external dependencies, etc .
 
 For focused analysis, also cover how the component fits into the broader system and what common dev tasks look like in that area.
 
