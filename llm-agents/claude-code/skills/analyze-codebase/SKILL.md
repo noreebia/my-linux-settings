@@ -60,3 +60,4 @@ Use Mermaid diagrams when they genuinely clarify something prose can't — archi
 - **Read-only**: Do not modify source files. Only write to `$AGENT_LOCAL_DIR/system-analysis/`.
 - **Create the output folder** if it doesn't exist: `mkdir -p $AGENT_LOCAL_DIR/system-analysis`
 - **Don't pad**: If the project is small, one well-written file is better than five thin ones.
+- **Metadata header**: Include a header in each generated file: `*Analyzed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Repository: <repo name or path> | Focus: <focus area if provided>*`.

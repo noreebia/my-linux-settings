@@ -45,6 +45,4 @@ Adapt the structure and depth to the document. A short plan needs a different tr
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
-- **File** (if `generate-file` was set): Include the metadata header. Write to `<source-file-basename>-review.md`. Tell the user where it was saved.
-
-Use `$AGENT_NAME` for the author field in metadata headers.
+- **File** (if `generate-file` was set): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Target: <path to reviewed document>*`. Write to `$AGENT_LOCAL_DIR/reviews/<source-file-basename>-review.md`. Tell the user where it was saved.

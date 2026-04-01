@@ -20,3 +20,16 @@ If any instructions reference the variables below, substitute them with their de
 - These are merely examples. Choose the most fitting category for the content. If a category directory already exists, add to it rather than creating a near-duplicate.
 - Name individual files descriptively (e.g., `auth-refactor.md`, not `plan.md`).
 
+# Metadata Headers for Generated Files
+
+When generating a file that includes a metadata header, place it as an italic line right after the document title:
+
+```
+*<Action>: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | <context fields...>*
+```
+
+- **Action** — past-tense verb matching what the skill did (e.g., `Generated`, `Reviewed`, `Responded`, `Analyzed`)
+- **Date/time** — `YYYY-MM-DD HH:MM` in local time
+- **Author** — always `$AGENT_NAME`
+- **Context fields** — skill-specific key-value pairs (see each skill). Use ` | ` as separator. Only include fields that have a meaningful value — omit any that would be empty or redundant with the title.
+
