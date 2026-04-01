@@ -10,11 +10,9 @@
       "WebFetch",
       "WebSearch",
       "Agent",
-      "mcp__wrike__*"
+      "mcp__*"
     ],
     "deny": [
-      "Bash(sudo *)",
-      "Bash(sudo:*)",
       "Bash(rm -rf *)",
       "Bash(rm -rf /)"
     ]
