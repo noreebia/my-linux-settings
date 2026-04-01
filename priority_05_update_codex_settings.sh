@@ -6,6 +6,6 @@ mkdir -p ~/.codex
 cp ./llm-agents/AGENTS_GLOBAL.md ~/.codex/AGENTS.md
 
 mkdir -p ~/.agents
-cp -r ./llm-agents/claude-code/skills ~/.codex/skills
+rsync -a --exclude='CLAUDE.md' ./llm-agents/claude-code/skills/ ~/.codex/skills/
 
 echo "Codex settings updated successfully."

@@ -9,7 +9,7 @@ SETTINGS_SOURCE="$SOURCE_DIR/settings.json"
 SETTINGS_TARGET="$TARGET_DIR/settings.json"
 
 # Copy non-settings files (skills, statuslines, etc.)
-find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -path "$SOURCE_DIR" | while read -r src; do
+find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -name "CLAUDE.md" -not -path "$SOURCE_DIR" | while read -r src; do
   rel="${src#$SOURCE_DIR/}"
   dest="$TARGET_DIR/$rel"
   if [ -d "$src" ]; then
@@ -19,8 +19,6 @@ find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -path "$SOURCE_DI
     cp "$src" "$dest"
   fi
 done
-
-rm -f "$TARGET_DIR"/skills/CLAUDE.md
 
 # Deep-merge settings.json: source keys overwrite existing, but existing-only keys are preserved
 if [ -f "$SETTINGS_TARGET" ]; then
