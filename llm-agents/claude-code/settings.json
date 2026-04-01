@@ -12,7 +12,7 @@
       "Agent",
       "mcp__*"
     ],
-    "deny": [
+    "ask": [
       "Bash(rm -rf *)",
       "Bash(rm -rf /)"
     ]
