@@ -18,7 +18,7 @@ If any instructions reference the variables below, substitute them with their de
   - `$AGENT_LOCAL_DIR/system-analysis/`
   - `$AGENT_LOCAL_DIR/guides/`
 - These are merely examples. Choose the most fitting category for the content. If a category directory already exists, add to it rather than creating a near-duplicate.
-- Name individual files descriptively (e.g., `auth-refactor.md`, not `plan.md`).
+- Prefix every generated filename with a `YYYYMMDDHHMM-` timestamp (local time) for chronological ordering (e.g., `202604021430-auth-refactor.md`, not `auth-refactor.md`).
 
 # Metadata Headers for Generated Files
 
