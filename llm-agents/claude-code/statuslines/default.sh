@@ -138,7 +138,7 @@ calculate_usage() {
   # then process everything (filter, dedup, session blocks) in a single jq -s pass.
   local result
   result=$(find "$project_dir" -name "*.jsonl" -type f -mtime -4 -exec cat {} + 2>/dev/null \
-    | jq -c '.' 2>/dev/null \
+    | jq -R -c 'try fromjson' 2>/dev/null \
     | jq -s --argjson sh "$SESSION_HOURS" '
       now as $now |
       ($now - 96 * 3600) as $cutoff |
