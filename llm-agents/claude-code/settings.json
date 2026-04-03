@@ -21,6 +21,6 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statuslines/default.sh"
+    "command": "~/.claude/statuslines/default-v2.sh"
   }
 }
