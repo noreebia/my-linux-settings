@@ -161,7 +161,7 @@ calculate_usage() {
   local result
   result=$(find "$project_path" -maxdepth 1 -name "*.jsonl" -type f -mtime -4 2>/dev/null \
     | while IFS= read -r f; do cat "$f"; done 2>/dev/null \
-    | jq -c 'select(.type == "assistant" and .message.usage != null)' 2>/dev/null \
+    | jq -R -c 'try (fromjson | select(.type == "assistant" and .message.usage != null))' 2>/dev/null \
     | jq -s --argjson sh "$SESSION_HOURS" --arg token_mode "$TOKEN_MODE" '
       now as $now |
       ($now - ($sh * 3600)) as $window_start |
