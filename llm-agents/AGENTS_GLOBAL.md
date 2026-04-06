@@ -18,7 +18,7 @@ If any instructions reference the variables below, substitute them with their de
   - `$AGENT_LOCAL_DIR/system-analysis/`
   - `$AGENT_LOCAL_DIR/guides/`
 - These are merely examples. Choose the most fitting category for the content. If a category directory already exists, add to it rather than creating a near-duplicate.
-- Name files descriptively with a `YYYYMMDDHHMM-` timestamp prefix (local time) for chronological ordering (e.g., `202604021430-auth-refactor.md`, not `plan.md` or `auth-refactor.md`).
+- Name files descriptively with a `YYYYMMDDHHMM-` timestamp prefix (local time) for chronological ordering (e.g., `202604021430-auth-refactor.md`, not `plan.md` or `auth-refactor.md`). Before writing the timestamp, run a shell command (e.g., `date '+%Y%m%d%H%M'`) or use an equivalent tool to obtain the actual current local time.
 
 # Metadata Headers for Generated Files
 
@@ -29,7 +29,7 @@ When generating a file that includes a metadata header, place it as an italic li
 ```
 
 - **Action** — past-tense verb matching what the skill did (e.g., `Generated`, `Reviewed`, `Responded`, `Analyzed`)
-- **Date/time** — `YYYY-MM-DD HH:MM` in local time
+- **Date/time** — `YYYY-MM-DD HH:MM` in local time. Before writing the timestamp, run a shell command (e.g., `date '+%Y-%m-%d %H:%M'`) or use an equivalent tool to obtain the actual current local time.
 - **Author** — always `$AGENT_NAME`
 - **Context fields** — skill-specific key-value pairs (see each skill). Use ` | ` as separator. Only include fields that have a meaningful value — omit any that would be empty or redundant with the title.
 
