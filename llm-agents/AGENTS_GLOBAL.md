@@ -14,7 +14,9 @@ If any instructions reference the variables below, substitute them with their de
 
 If any instructions reference the functions below, resolve them by executing the described procedure and substitute the result.
 
-- `$CURRENT_TIME("<format>")` = the current local time formatted per `<format>`. This function has no default value — it MUST be resolved by executing a shell command (e.g., `date '+<format>'`) or equivalent tool each time it is called.
+- `$CURRENT_TIME("<format>")` = the current local time formatted per `<format>`. Must be resolved by executing a shell command (e.g., `date '+<format>'`) or equivalent tool each time it is called. Examples:
+  - `$CURRENT_TIME("YYYYMMDDHHMM")` → `date '+%Y%m%d%H%M'` → `202604061430`
+  - `$CURRENT_TIME("YYYY-MM-DD HH:MM")` → `date '+%Y-%m-%d %H:%M'` → `2026-04-06 14:30`
 
 # Markdown File Generation
 
