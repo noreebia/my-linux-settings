@@ -12,7 +12,7 @@
       "WebFetch",
       "WebSearch",
       "Agent",
-      "mcp__*"
+      "mcp__*__*"
     ],
     "ask": [
       "Bash(rm -rf *)",
