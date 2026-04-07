@@ -8,6 +8,7 @@ description: >
   "is this safe to ship", "will this affect existing code", or any time the user wants to
   understand whether changes preserve existing behavior. Also trigger when the user finishes
   a feature and wants to verify it won't break existing code paths or dependent modules.
+argument-hint: "<scope>"
 ---
 
 # Assess Backwards Compatibility
@@ -18,12 +19,19 @@ Analyze code changes and assess whether they preserve existing behavior. The goa
 
 ## Arguments
 
-- **scope** *(required)*: Which code changes to assess. Accepts:
+- **scope** *(positional, required)*: Which code changes to assess. Accepts:
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3`)
   - `branch` — all commits on the current branch since it diverged from the base branch
   - *`<branch-name>`* — any other value is treated as a target branch to diff against
+
+## Examples
+
+    $assess-backwards-compatibility commit
+    $assess-backwards-compatibility branch
+    $assess-backwards-compatibility commit-3
+    $assess-backwards-compatibility develop
 
 ---
 

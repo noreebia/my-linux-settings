@@ -7,6 +7,7 @@ description: >
   this plan", "check this analysis", "what's wrong with this", "poke holes in this", or any time a
   previously generated document needs a critical second pass. Also trigger when the user wants to
   validate whether a plan or analysis holds up before acting on it.
+argument-hint: "<file-path> [--file] [--context=<text>]"
 ---
 
 # Review Document
@@ -17,9 +18,16 @@ Verify a document's claims against reality and produce honest, actionable feedba
 
 ## Arguments
 
-- **file-path** *(required)*: Path to the document or directory to review. If a directory, read all files within it.
-- **generate-file** *(optional)*: Any truthy value (`true`, `yes`, `file`) writes the review to a markdown file instead of outputting inline. Saved alongside the source with a `-review` suffix (e.g., `plan.md` → `plan-review.md`).
-- **context** *(optional)*: Additional context — specific concerns, constraints, or areas to focus on.
+- **file-path** *(positional, required)*: Path to the document or directory to review. If a directory, read all files within it.
+- **`--file`** *(optional flag)*: Write the review to a markdown file instead of outputting inline.
+- **`--context=<text>`** *(optional)*: Additional context — specific concerns, constraints, or areas to focus on.
+
+## Examples
+
+    $review-doc agents/claude/plans/auth-migration.md
+    $review-doc agents/claude/system-analysis/ --file
+    $review-doc docs/api-spec.md --context=focus on security assumptions
+    $review-doc agents/claude/plans/auth-migration.md --file --context=check feasibility of step 3
 
 ---
 
@@ -45,4 +53,4 @@ Adapt the structure and depth to the document. A short plan needs a different tr
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
-- **File** (if `generate-file` was set): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Target: <path to reviewed document>*`. Write to `$AGENT_LOCAL_DIR/reviews/<source-file-basename>-review.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Target: <path to reviewed document>*`. Write to `$AGENT_LOCAL_DIR/reviews/<source-file-basename>-review.md`. Tell the user where it was saved.

@@ -8,6 +8,7 @@ description: >
   "compare my changes to the plan", or any time the user has both code changes and a plan document
   and wants to know if they align. Also trigger when the user finishes implementing a plan and wants
   a quality check before committing or opening a PR.
+argument-hint: "<scope> [--file] [--plan=<hint>]"
 ---
 
 # Review Implementation
@@ -18,13 +19,20 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ## Arguments
 
-- **generate-file** *(1st, optional)*: Any truthy value (`true`, `yes`, `file`) writes the review to a markdown file instead of outputting inline.
-- **scope** *(2nd, required)*: Which code changes to review. Accepts:
+- **scope** *(positional, required)*: Which code changes to review. Accepts:
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3` for the last 3 commits)
   - `branch` — all commits on the current branch since it diverged from the base branch
-- **plan** *(3rd, optional)*: A hint for locating the plan. This can be anything — a file path, a directory, a keyword to search for, a description of what to look for, or omitted entirely if the plan is already in the conversation context. Use your best judgment to find or identify the plan from whatever the user provides.
+- **`--file`** *(optional flag)*: Write the review to a markdown file instead of outputting inline.
+- **`--plan=<hint>`** *(optional)*: A hint for locating the plan. This can be anything — a file path, a directory, a keyword to search for, a description of what to look for, or omitted entirely if the plan is already in the conversation context. Use your best judgment to find or identify the plan from whatever the user provides.
+
+## Examples
+
+    $review-implementation commit
+    $review-implementation branch --file
+    $review-implementation commit-3 --plan=auth-migration
+    $review-implementation unstaged --file --plan=agents/claude/plans/my-plan.md
 
 ---
 
@@ -32,7 +40,7 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ### 1. Load the plan and gather the diff
 
-Find the plan. If a `plan` argument was given, use it as a hint — it might be a file path, directory, search keyword, or description. If no argument was given, check the conversation context — the plan may have been discussed or generated earlier in this session. If you still can't identify the plan, ask the user. Once loaded, summarize the plan's key objectives so the user can confirm you've understood it.
+Find the plan. If `--plan` was given, use its value as a hint — it might be a file path, directory, search keyword, or description. If not given, check the conversation context — the plan may have been discussed or generated earlier in this session. If you still can't identify the plan, ask the user. Once loaded, summarize the plan's key objectives so the user can confirm you've understood it.
 
 Collect the diff using the `scope` argument:
 
@@ -60,4 +68,4 @@ Structure the review to cover: a plan summary, the completeness breakdown, quali
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
-- **File** (if `generate-file` was set): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Plan: <path to plan or "conversation context"> | Scope: <git scope used>*`. Write to `$AGENT_LOCAL_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Plan: <path to plan or "conversation context"> | Scope: <git scope used>*`. Write to `$AGENT_LOCAL_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.

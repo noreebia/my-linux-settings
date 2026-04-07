@@ -8,6 +8,7 @@ description: >
   or any time the user wants feedback on code changes before committing, pushing, or opening a PR.
   Also trigger proactively when the user finishes a block of work and says things like
   "I think this is ready" or "take a look at this".
+argument-hint: "[scope] [--file]"
 ---
 
 # Code Review
@@ -18,13 +19,21 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 
 ## Arguments
 
-- **generate-file** *(1st, optional)*: Any truthy value (`true`, `yes`, `file`) writes the review to `$AGENT_DIR/code-reviews/` with a descriptive name based on the branch/scope and date. Tell the user where it was saved.
-- **scope** *(2nd, optional)*: Which code changes to review. Defaults to `unstaged` if omitted. Accepts:
+- **scope** *(positional, optional, default: `unstaged`)*: Which code changes to review. Accepts:
   - `unstaged` — working tree changes
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3`)
   - `branch` — all changes since diverging from the base branch
   - *`<branch-name>`* — any other value is treated as a target branch to diff against (e.g., `develop`, `staging`). This is the "review before merging" mode.
+- **`--file`** *(optional flag)*: Write the review to a markdown file.
+
+## Examples
+
+    $code-review
+    $code-review commit
+    $code-review branch --file
+    $code-review commit-3
+    $code-review develop --file
 
 ---
 
@@ -60,4 +69,4 @@ Adapt depth to the size of the changes. A 10-line fix doesn't need the same trea
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
-- **File** (if `generate-file` was set): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Scope: <git scope used> | Branch: <current branch>*`. Write to `$AGENT_LOCAL_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Scope: <git scope used> | Branch: <current branch>*`. Write to `$AGENT_LOCAL_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.

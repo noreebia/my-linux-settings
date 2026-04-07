@@ -7,6 +7,7 @@ description: >
   feedback", "what do you think of this review", "respond to the feedback", "which of these points
   are valid", "do you agree with this critique", or any time feedback on a prior output needs to be
   evaluated and acted on.
+argument-hint: "<file-path> [--file] [--context=<text>]"
 ---
 
 # Review Feedback
@@ -17,9 +18,15 @@ Evaluate feedback on a document and produce a considered response — what's val
 
 ## Arguments
 
-- **file-path** *(required)*: Path to the feedback document.
-- **generate-file** *(optional)*: Any truthy value (`true`, `yes`, `file`) writes the response to a markdown file instead of outputting inline. The file is named with a `-response` suffix (e.g., `plan-review.md` → `plan-review-response.md`), saved in the same directory.
-- **context** *(optional)*: Additional context — the original document, constraints, priorities, or background the reviewer may not have had.
+- **file-path** *(positional, required)*: Path to the feedback document.
+- **`--file`** *(optional flag)*: Write the response to a markdown file instead of outputting inline. The file is named with a `-response` suffix (e.g., `plan-review.md` → `plan-review-response.md`), saved in the same directory.
+- **`--context=<text>`** *(optional)*: Additional context — the original document, constraints, priorities, or background the reviewer may not have had.
+
+## Examples
+
+    $review-feedback agents/claude/reviews/auth-plan-review.md
+    $review-feedback agents/claude/reviews/auth-plan-review.md --file
+    $review-feedback agents/claude/reviews/api-spec-review.md --context=reviewer didn't know about the legacy constraint
 
 ---
 
@@ -44,4 +51,4 @@ Structure the response however best fits the feedback — a 3-point review needs
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Responded: ... | Author: ...*`).
-- **File** (if `generate-file` was set): Include the metadata header: `*Responded: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Feedback: <path to feedback doc> | Original: <path to original doc if known>*`. Write to `$AGENT_LOCAL_DIR/reviews/<feedback-file-basename>-response.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Responded: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Feedback: <path to feedback doc> | Original: <path to original doc if known>*`. Write to `$AGENT_LOCAL_DIR/reviews/<feedback-file-basename>-response.md`. Tell the user where it was saved.

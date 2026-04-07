@@ -6,6 +6,7 @@ description: >
   "open a PR", "create a pull request", "submit this for review", "push a PR to develop", or
   "make a PR". Also trigger proactively when the user says they're done with a feature or fix and
   asks what to do next — they probably want a PR.
+argument-hint: "[target-branch] [--lang=<language>] [--ticket=<url>]"
 ---
 
 # Create Pull Request
@@ -16,9 +17,17 @@ Open a well-written pull request from the current branch using `gh pr create`. T
 
 ## Arguments
 
-- **target-branch** *(1st, optional)*: Base branch for the PR. Default: `develop`.
-- **language** *(2nd, optional)*: Language for the PR title and body. Default: `English`.
-- **ticket-url** *(3rd, optional)*: URL to a related ticket (Jira, Wrike, Linear, etc.). If provided, the skill will attempt to fetch and summarize the ticket for the **Context** section.
+- **target-branch** *(positional, optional, default: `develop`)*: Base branch for the PR.
+- **`--lang=<language>`** *(optional, default: `English`)*: Language for the PR title and body.
+- **`--ticket=<url>`** *(optional)*: URL to a related ticket (Jira, Wrike, Linear, etc.). If provided, the skill will attempt to fetch and summarize the ticket for the **Context** section.
+
+## Examples
+
+    $create-pr
+    $create-pr main
+    $create-pr develop --lang=Korean
+    $create-pr main --ticket=https://linear.app/team/issue/PROJ-123
+    $create-pr develop --lang=Korean --ticket=https://jira.example.com/browse/PROJ-456
 
 ---
 
