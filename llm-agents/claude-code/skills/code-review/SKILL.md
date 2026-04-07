@@ -8,7 +8,7 @@ description: >
   or any time the user wants feedback on code changes before committing, pushing, or opening a PR.
   Also trigger proactively when the user finishes a block of work and says things like
   "I think this is ready" or "take a look at this".
-argument-hint: "[scope] [--file]"
+argument-hint: "[--scope=<scope>] [--file]"
 ---
 
 # Code Review
@@ -19,7 +19,7 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 
 ## Arguments
 
-- **scope** *(positional, optional, default: `unstaged`)*: Which code changes to review. Accepts:
+- **`--scope=<scope>`** *(optional, default: `unstaged`)*: Which code changes to review. Accepts:
   - `unstaged` — working tree changes
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3`)
@@ -30,10 +30,10 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 ## Examples
 
     /code-review
-    /code-review commit
-    /code-review branch --file
-    /code-review commit-3
-    /code-review develop --file
+    /code-review --scope=commit
+    /code-review --scope=branch --file
+    /code-review --scope=commit-3
+    /code-review --scope=develop --file
 
 ---
 

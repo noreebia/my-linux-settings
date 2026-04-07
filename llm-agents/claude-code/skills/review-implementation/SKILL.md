@@ -8,7 +8,7 @@ description: >
   "compare my changes to the plan", or any time the user has both code changes and a plan document
   and wants to know if they align. Also trigger when the user finishes implementing a plan and wants
   a quality check before committing or opening a PR.
-argument-hint: "<scope> [--file] [--plan=<hint>]"
+argument-hint: "[--scope=<scope>] [--file] [--plan=<hint>]"
 ---
 
 # Review Implementation
@@ -19,7 +19,7 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ## Arguments
 
-- **scope** *(positional, required)*: Which code changes to review. Accepts:
+- **`--scope=<scope>`** *(required)*: Which code changes to review. Accepts:
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3` for the last 3 commits)
@@ -29,10 +29,10 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ## Examples
 
-    /review-implementation commit
-    /review-implementation branch --file
-    /review-implementation commit-3 --plan=auth-migration
-    /review-implementation unstaged --file --plan=agents/claude/plans/my-plan.md
+    /review-implementation --scope=commit
+    /review-implementation --scope=branch --file
+    /review-implementation --scope=commit-3 --plan=auth-migration
+    /review-implementation --scope=unstaged --file --plan=agents/claude/plans/my-plan.md
 
 ---
 
@@ -42,7 +42,7 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 Find the plan. If `--plan` was given, use its value as a hint — it might be a file path, directory, search keyword, or description. If not given, check the conversation context — the plan may have been discussed or generated earlier in this session. If you still can't identify the plan, ask the user. Once loaded, summarize the plan's key objectives so the user can confirm you've understood it.
 
-Collect the diff using the `scope` argument:
+Collect the diff using `--scope`:
 
 | Scope | Command |
 |-------|---------|

@@ -6,7 +6,7 @@ description: >
   "open a PR", "create a pull request", "submit this for review", "push a PR to develop", or
   "make a PR". Also trigger proactively when the user says they're done with a feature or fix and
   asks what to do next — they probably want a PR.
-argument-hint: "[target-branch] [--lang=<language>] [--ticket=<url>]"
+argument-hint: "[--target=<branch>] [--lang=<language>] [--ticket=<url>]"
 ---
 
 # Create Pull Request
@@ -17,17 +17,17 @@ Open a well-written pull request from the current branch using `gh pr create`. T
 
 ## Arguments
 
-- **target-branch** *(positional, optional, default: `develop`)*: Base branch for the PR.
+- **`--target=<branch>`** *(optional, default: `develop`)*: Base branch for the PR.
 - **`--lang=<language>`** *(optional, default: `English`)*: Language for the PR title and body.
 - **`--ticket=<url>`** *(optional)*: URL to a related ticket (Jira, Wrike, Linear, etc.). If provided, the skill will attempt to fetch and summarize the ticket for the **Context** section.
 
 ## Examples
 
     /create-pr
-    /create-pr main
-    /create-pr develop --lang=Korean
-    /create-pr main --ticket=https://linear.app/team/issue/PROJ-123
-    /create-pr develop --lang=Korean --ticket=https://jira.example.com/browse/PROJ-456
+    /create-pr --target=main
+    /create-pr --target=develop --lang=Korean
+    /create-pr --target=main --ticket=https://linear.app/team/issue/PROJ-123
+    /create-pr --target=develop --lang=Korean --ticket=https://jira.example.com/browse/PROJ-456
 
 ---
 
@@ -39,7 +39,7 @@ Check that `gh` is authenticated and the current branch isn't the target branch 
 
 Gather the diff, diff stat, and commit log against the target branch. The code diff is ground truth — commit messages are supplementary. If they conflict, trust the diff. Read key changed files when the diff alone doesn't make intent clear.
 
-If a **ticket-url** was provided, fetch it and extract relevant requirements for the Context section. Attempt to access the ticket URL using any available tool (MCP server, web fetch, etc.). If inaccessible, use the raw URL.
+If `--ticket` was provided, fetch it and extract relevant requirements for the Context section. Attempt to access the ticket URL using any available tool (MCP server, web fetch, etc.). If inaccessible, use the raw URL.
 
 ### 2. Draft the title and body
 
