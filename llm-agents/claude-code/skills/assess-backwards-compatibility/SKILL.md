@@ -61,21 +61,7 @@ Run `git diff --stat` for a file-level summary. Read key changed files in full �
 
 ### 2. Assess backwards compatibility
 
-Evaluate every change from the perspective of the existing codebase: would anything that previously worked stop working or behave differently? Think in terms of callers, imports, dependent modules, tests, configurations, and integrations.
-
-For each changed area, classify the change into one of these categories:
-
-- **Additive** — new functionality that doesn't touch existing behavior (new endpoints, new optional fields, new modules). Existing code paths are unaffected.
-- **Behavioral** — existing functionality now behaves differently under the same inputs or conditions (changed defaults, altered return values, modified side effects, different error handling). This is the highest-risk category.
-- **Contractual** — changes to interfaces, signatures, types, schemas, or protocols that other code depends on (renamed fields, removed parameters, changed types, altered API contracts).
-- **Structural** — internal reorganization that *should* be invisible externally but may leak (moved files, renamed internals that are imported elsewhere, changed module boundaries).
-
-For each finding, determine:
-
-1. **What changed** — the specific modification
-2. **What depends on it** — which callers, modules, tests, or integrations rely on the previous behavior
-3. **Is it opt-in?** — does the change only activate when explicitly enabled (feature flag, new parameter, configuration)? If opt-in, confirm that the system behaves identically when not opted in.
-4. **Impact if not addressed** — what breaks or degrades in the existing codebase
+For each changed area, trace what depends on it and determine what would break. Prioritize by real risk — behavioral changes and altered contracts matter most. For opt-in changes (feature flags, new parameters), verify the system behaves identically when not opted in. Adapt depth to the scope of the changes.
 
 ### 3. Produce the assessment
 
