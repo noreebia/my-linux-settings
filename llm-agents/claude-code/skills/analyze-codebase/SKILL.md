@@ -9,6 +9,7 @@ description: >
   codebase is structured — they probably need a full analysis, not just piecemeal answers. Scales output
   to project complexity: a small script gets a single clear file; a large system gets a structured docs
   folder with diagrams.
+argument-hint: "[focus]"
 ---
 
 # Analyze Codebase
@@ -21,7 +22,7 @@ Output lives in `$AGENT_LOCAL_DIR/system-analysis/`.
 
 ## Arguments
 
-- **focus** *(optional)*: Narrow the analysis to a specific area — e.g., `"auth"`, `"data pipeline"`, `"payments"`. When omitted, analyzes the full codebase.
+- **focus** *(optional)*: Narrow the analysis to a specific area — e.g., `auth`, `data pipeline`, `payments`. When omitted, analyzes the full codebase.
 
 ---
 

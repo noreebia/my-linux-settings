@@ -8,6 +8,7 @@ description: >
   what it does end-to-end. Even if the user just pastes a URL path like `/api/users/:id` or a method
   signature and asks "what does this do?" — use this skill. Also use it proactively when the user is
   debugging an endpoint and a clear flow description would help.
+argument-hint: "<endpoint>"
 ---
 
 # Describe Endpoint
