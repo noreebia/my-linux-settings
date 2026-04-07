@@ -28,7 +28,7 @@ Save to `$AGENT_LOCAL_DIR/` unless the user specifies otherwise or there's a mor
 Do a light editorial pass — don't just dump the raw response:
 
 - Add a title if the response didn't have one
-- Add a metadata header: `*Generated: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Source: <what was converted, e.g. "system analysis response" or "auth refactor plan">*`
+- Add a metadata header: `*Generated: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Source: <what was converted, e.g. "system analysis response" or "auth refactor plan">*`
 - Clean up conversational artifacts ("Sure!", "Great question", "As I mentioned")
 - Preserve all structure (headings, lists, code blocks, tables, diagrams)
 - Don't summarize or compress — keep the full content

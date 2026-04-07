@@ -69,4 +69,4 @@ Adapt depth to the size of the changes. A 10-line fix doesn't need the same trea
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Reviewed: ... | Author: ...*`).
-- **File** (if `--file` was given): Include the metadata header: `*Reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Scope: <git scope used> | Branch: <current branch>*`. Write to `$AGENT_LOCAL_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Reviewed: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Scope: <git scope used> | Branch: <current branch>*`. Write to `$AGENT_LOCAL_DIR/code-reviews/<descriptive-name>.md`. Tell the user where it was saved.

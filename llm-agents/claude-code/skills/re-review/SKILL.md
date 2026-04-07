@@ -67,4 +67,4 @@ The revision may have introduced new problems. Note any significant ones, but ke
 ### 4. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header.
-- **File** (if `--file` was given): Include the metadata header: `*Re-reviewed: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Target: <path to revised document> | Previous review: <path to previous review>*`. Write to `$AGENT_LOCAL_DIR/reviews/<basename>-re-review.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Re-reviewed: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Target: <path to revised document> | Previous review: <path to previous review>*`. Write to `$AGENT_LOCAL_DIR/reviews/<basename>-re-review.md`. Tell the user where it was saved.

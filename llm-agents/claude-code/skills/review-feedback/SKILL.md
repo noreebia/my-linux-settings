@@ -51,4 +51,4 @@ Structure the response however best fits the feedback — a 3-point review needs
 ### 3. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header (`*Responded: ... | Author: ...*`).
-- **File** (if `--file` was given): Include the metadata header: `*Responded: YYYY-MM-DD HH:MM | Author: $AGENT_NAME | Feedback: <path to feedback doc> | Original: <path to original doc if known>*`. Write to `$AGENT_LOCAL_DIR/reviews/<feedback-file-basename>-response.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Responded: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Feedback: <path to feedback doc> | Original: <path to original doc if known>*`. Write to `$AGENT_LOCAL_DIR/reviews/<feedback-file-basename>-response.md`. Tell the user where it was saved.
