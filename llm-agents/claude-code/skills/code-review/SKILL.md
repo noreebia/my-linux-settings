@@ -46,7 +46,7 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 | `unstaged` | `git diff` |
 | `commit` | `git log -1 -p` |
 | `commit-N` | `git log -N -p` |
-| `branch` | `git diff <base>...HEAD` (check `main`, `master`, `develop` for base; ask if ambiguous) |
+| `branch` | Auto-detect the parent branch (check upstream tracking branch, then fall back to finding the nearest common ancestor among remote branches), then `git diff <parent>...HEAD`. Ask the user if detection is ambiguous. |
 | `<branch-name>` | Verify branch exists (`git rev-parse --verify`), then `git diff <branch-name>...HEAD` |
 
 Also run `git diff --stat` for a file-level summary. If the diff is empty, tell the user and stop.

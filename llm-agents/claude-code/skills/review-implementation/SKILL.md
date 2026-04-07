@@ -49,7 +49,7 @@ Collect the diff using the `scope` argument:
 | `unstaged` | `git diff` |
 | `commit` | `git log -1 -p` |
 | `commit-N` | `git log -N -p` |
-| `branch` | `git diff <base>...HEAD` (check `main`, `master`, `develop` for base; ask if ambiguous) |
+| `branch` | Auto-detect the parent branch (check upstream tracking branch, then fall back to finding the nearest common ancestor among remote branches), then `git diff <parent>...HEAD`. Ask the user if detection is ambiguous. |
 
 Also run `git diff --stat` to get a file-level summary. For large diffs, read key changed files in full for context. If the plan references codebase areas not in the diff, read those too — you need the full picture.
 

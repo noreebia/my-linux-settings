@@ -50,7 +50,7 @@ Analyze code changes or a proposed plan and assess whether they preserve existin
 | `unstaged` | `git diff` |
 | `commit` | `git log -1 -p` |
 | `commit-N` | `git log -N -p` |
-| `branch` | `git diff <base>...HEAD` (check `main`, `master`, `develop` for base; ask if ambiguous) |
+| `branch` | Auto-detect the parent branch (check upstream tracking branch, then fall back to finding the nearest common ancestor among remote branches), then `git diff <parent>...HEAD`. Ask the user if detection is ambiguous. |
 | `<branch-name>` | Verify branch exists (`git rev-parse --verify`), then `git diff <branch-name>...HEAD` |
 
 Run `git diff --stat` for a file-level summary. Read key changed files in full — you need the before-and-after context, not just the diff lines, to assess behavioral impact.
