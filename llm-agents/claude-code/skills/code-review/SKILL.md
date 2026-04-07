@@ -29,11 +29,11 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 
 ## Examples
 
-    $code-review
-    $code-review commit
-    $code-review branch --file
-    $code-review commit-3
-    $code-review develop --file
+    /code-review
+    /code-review commit
+    /code-review branch --file
+    /code-review commit-3
+    /code-review develop --file
 
 ---
 

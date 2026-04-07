@@ -24,10 +24,10 @@ Verify a document's claims against reality and produce honest, actionable feedba
 
 ## Examples
 
-    $review-doc agents/claude/plans/auth-migration.md
-    $review-doc agents/claude/system-analysis/ --file
-    $review-doc docs/api-spec.md --context=focus on security assumptions
-    $review-doc agents/claude/plans/auth-migration.md --file --context=check feasibility of step 3
+    /review-doc agents/claude/plans/auth-migration.md
+    /review-doc agents/claude/system-analysis/ --file
+    /review-doc docs/api-spec.md --context=focus on security assumptions
+    /review-doc agents/claude/plans/auth-migration.md --file --context=check feasibility of step 3
 
 ---
 

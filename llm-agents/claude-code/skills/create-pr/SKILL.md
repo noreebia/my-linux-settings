@@ -23,11 +23,11 @@ Open a well-written pull request from the current branch using `gh pr create`. T
 
 ## Examples
 
-    $create-pr
-    $create-pr main
-    $create-pr develop --lang=Korean
-    $create-pr main --ticket=https://linear.app/team/issue/PROJ-123
-    $create-pr develop --lang=Korean --ticket=https://jira.example.com/browse/PROJ-456
+    /create-pr
+    /create-pr main
+    /create-pr develop --lang=Korean
+    /create-pr main --ticket=https://linear.app/team/issue/PROJ-123
+    /create-pr develop --lang=Korean --ticket=https://jira.example.com/browse/PROJ-456
 
 ---
 

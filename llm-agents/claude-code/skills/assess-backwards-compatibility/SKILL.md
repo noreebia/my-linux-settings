@@ -30,12 +30,12 @@ Analyze code changes or a proposed plan and assess whether they preserve existin
 
 ## Examples
 
-    $assess-backwards-compatibility --scope=commit
-    $assess-backwards-compatibility --scope=branch
-    $assess-backwards-compatibility --scope=commit-3
-    $assess-backwards-compatibility --scope=develop
-    $assess-backwards-compatibility --plan=agents/claude/plans/auth-migration.md
-    $assess-backwards-compatibility --scope=branch --plan=agents/claude/plans/auth-migration.md
+    /assess-backwards-compatibility --scope=commit
+    /assess-backwards-compatibility --scope=branch
+    /assess-backwards-compatibility --scope=commit-3
+    /assess-backwards-compatibility --scope=develop
+    /assess-backwards-compatibility --plan=agents/claude/plans/auth-migration.md
+    /assess-backwards-compatibility --scope=branch --plan=agents/claude/plans/auth-migration.md
 
 ---
 

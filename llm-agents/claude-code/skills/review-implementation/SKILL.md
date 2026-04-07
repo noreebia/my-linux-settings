@@ -29,10 +29,10 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ## Examples
 
-    $review-implementation commit
-    $review-implementation branch --file
-    $review-implementation commit-3 --plan=auth-migration
-    $review-implementation unstaged --file --plan=agents/claude/plans/my-plan.md
+    /review-implementation commit
+    /review-implementation branch --file
+    /review-implementation commit-3 --plan=auth-migration
+    /review-implementation unstaged --file --plan=agents/claude/plans/my-plan.md
 
 ---
 

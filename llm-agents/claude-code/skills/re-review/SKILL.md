@@ -26,12 +26,12 @@ Verify whether a revised document addresses the issues raised in a previous revi
 
 ## Examples
 
-    $re-review
-    $re-review --file
-    $re-review --original-file-path=agents/claude/plans/auth-migration.md
-    $re-review --original-file-path=agents/claude/plans/auth-migration.md --file
-    $re-review --original-file-path=agents/claude/plans/auth-migration.md --review-file-path=agents/codex/reviews/auth-migration-review.md
-    $re-review --review-file-path=agents/codex/reviews/auth-migration-review.md --file
+    /re-review
+    /re-review --file
+    /re-review --original-file-path=agents/claude/plans/auth-migration.md
+    /re-review --original-file-path=agents/claude/plans/auth-migration.md --file
+    /re-review --original-file-path=agents/claude/plans/auth-migration.md --review-file-path=agents/codex/reviews/auth-migration-review.md
+    /re-review --review-file-path=agents/codex/reviews/auth-migration-review.md --file
 
 ---
 
