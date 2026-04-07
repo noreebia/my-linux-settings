@@ -24,13 +24,12 @@ Evaluate feedback on a document and produce a considered response — what's val
 
 ## Examples
 
-Inline paste (most common — feedback is already in the conversation):
+Inline paste (most common — paste the feedback as the argument):
 
-    > Here's what Codex said about the plan: [pasted feedback]
-    > /review-feedback
+    /review-feedback The plan looks solid overall but there are gaps in the error handling
+    strategy. Specifically: 1) The retry logic doesn't account for...
 
-    > Codex flagged some issues: [pasted feedback]. What do you think?
-    > /review-feedback
+    /review-feedback ## Issues\n- Auth flow assumes single-tenant but we're multi-tenant\n- Missing rate limiting on the upload endpoint...
 
 From a file:
 
