@@ -23,7 +23,7 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
   - `unstaged` — working tree changes
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3`)
-  - `branch` — all changes since diverging from the base branch. **Do NOT assume the base branch is `main` or `master`** — you MUST detect it using the procedure in the Process section below before running any diff.
+  - `branch` — all changes since diverging from the parent branch. **Do NOT assume the parent branch is `main` or `master`** — you MUST detect it using the procedure in the Process section below before running any diff.
   - *`<branch-name>`* — any other value is treated as a target branch to diff against (e.g., `develop`, `staging`). This is the "review before merging" mode.
 - **`--file`** *(optional flag)*: Write the review to a markdown file.
 
