@@ -23,7 +23,7 @@ Compare code changes against a plan and assess both **completeness** (did you bu
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3` for the last 3 commits)
-  - `branch` — all commits on the current branch since it diverged from the base branch
+  - `branch` — all commits on the current branch since it diverged from the base branch. **Do NOT assume the base branch is `main` or `master`** — you MUST detect it using the procedure in the Process section below before running any diff.
 - **`--file`** *(optional flag)*: Write the review to a markdown file instead of outputting inline.
 - **`--plan=<hint>`** *(optional)*: A hint for locating the plan. This can be anything — a file path, a directory, a keyword to search for, a description of what to look for, or omitted entirely if the plan is already in the conversation context. Use your best judgment to find or identify the plan from whatever the user provides.
 

@@ -24,7 +24,7 @@ Analyze code changes or a proposed plan and assess whether they preserve existin
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3`)
-  - `branch` — all commits on the current branch since it diverged from the base branch
+  - `branch` — all commits on the current branch since it diverged from the base branch. **Do NOT assume the base branch is `main` or `master`** — you MUST detect it using the procedure in the Process section below before running any diff.
   - *`<branch-name>`* — any other value is treated as a target branch to diff against
 - **`--plan=<path>`** *(optional)*: Path to a plan, spec, or design document (or a directory containing multiple plan documents) to assess instead of (or in addition to) a code diff. When used without `--scope`, the assessment is based on the plan's proposed changes against the current codebase.
 
