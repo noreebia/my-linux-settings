@@ -19,7 +19,7 @@ Compare code changes against a plan and assess both **completeness** (did you bu
 
 ## Arguments
 
-- **`--scope=<scope>`** *(required)*: Which code changes to review. Accepts:
+- **`--scope=<scope>`** *(optional, default: `unstaged`)*: Which code changes to review. Accepts:
   - `unstaged` — unstaged changes in the working tree
   - `commit` — the last commit
   - `commit-N` — the last N commits (e.g., `commit-3` for the last 3 commits)

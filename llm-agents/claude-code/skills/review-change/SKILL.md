@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: review-change
 description: >
   Review code changes and produce actionable feedback on correctness, design, security, and
   maintainability. Use this skill whenever the user wants a code review — triggered by phrases
@@ -29,11 +29,11 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 
 ## Examples
 
-    /code-review
-    /code-review --scope=commit
-    /code-review --scope=branch --file
-    /code-review --scope=commit-3
-    /code-review --scope=develop --file
+    /review-change --scope=unstaged
+    /review-change --scope=commit
+    /review-change --scope=branch --file
+    /review-change --scope=commit-3
+    /review-change --scope=develop --file
 
 ---
 
