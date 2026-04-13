@@ -1,17 +1,11 @@
 ---
 name: peer-review
 description: >
-  Review LLM-generated content for factual accuracy, logical soundness, and completeness. The content
-  can be inlined (pasted from another AI session) or a document on disk. Use this skill when the user
-  pastes content from another LLM (ChatGPT, Gemini, Copilot, another Claude session, etc.) and wants
-  it fact-checked, verified, or critiqued, OR when the user wants a document reviewed — triggered by
-  phrases like "review this", "check this answer", "is this accurate", "verify this", "peer review",
-  "fact-check this", "second opinion on this", "review this doc", "give me feedback on this plan",
-  "check this analysis", "what's wrong with this", "poke holes in this", or any time the user pastes
-  a Q&A exchange, references a document, or wants an independent assessment. Also trigger when the
-  user says things like "I asked GPT this and got this answer", "another LLM told me X", "can you
-  verify what Gemini said", "does this answer look right to you", or wants to validate whether a
-  plan or analysis holds up before acting on it.
+  Review LLM-generated content — inlined or on disk — for factual accuracy, logical soundness, and
+  completeness. Triggered by phrases like "review this", "check this answer", "is this accurate",
+  "peer review", "fact-check this", "second opinion", "review this doc", "poke holes in this",
+  "I asked GPT this", "verify what Gemini said", or any time the user wants content independently
+  assessed before acting on it.
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 
@@ -30,8 +24,13 @@ Treat each factual claim as unverified and check it yourself. LLMs hallucinate c
 
 ## Examples
 
-    /peer-review
-    /peer-review --file
+Inline (the content pasted as the argument):
+
+    /peer-review Q: How does React's virtual DOM work? A: React's virtual DOM creates
+    a complete copy of the real DOM in memory...
+
+From file:
+
     /peer-review --file-path=agents/claude/plans/auth-migration.md
     /peer-review --file-path=agents/claude/system-analysis/ --file
     /peer-review --file-path=docs/api-spec.md --file
