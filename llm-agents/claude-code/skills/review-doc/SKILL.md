@@ -7,7 +7,7 @@ description: >
   this plan", "check this analysis", "what's wrong with this", "poke holes in this", or any time a
   previously generated document needs a critical second pass. Also trigger when the user wants to
   validate whether a plan or analysis holds up before acting on it.
-argument-hint: "[--file-path=<path>] [--file] [--context=<text>]"
+argument-hint: "[--file-path=<path>] [--file]"
 ---
 
 # Review Document
@@ -20,14 +20,13 @@ Verify a document's claims against reality and produce honest, actionable feedba
 
 - **`--file-path=<path>`** *(required)*: Path to the document or directory to review. If a directory, read all files within it.
 - **`--file`** *(optional flag)*: Write the review to a markdown file instead of outputting inline.
-- **`--context=<text>`** *(optional)*: Additional context — specific concerns, constraints, or areas to focus on.
 
 ## Examples
 
     /review-doc --file-path=agents/claude/plans/auth-migration.md
     /review-doc --file-path=agents/claude/system-analysis/ --file
-    /review-doc --file-path=docs/api-spec.md --context=focus on security assumptions
-    /review-doc --file-path=agents/claude/plans/auth-migration.md --file --context=check feasibility of step 3
+    /review-doc --file-path=docs/api-spec.md
+    /review-doc --file-path=agents/claude/plans/auth-migration.md --file
 
 ---
 
