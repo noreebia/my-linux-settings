@@ -3,7 +3,7 @@ name: re-review
 description: >
   Re-review a document after it has been revised in response to a previous review. This is NOT
   an open-ended critique — it's a targeted verification of whether the issues from the previous
-  review were addressed. Use this skill after the peer-review → review-feedback → revision cycle,
+  review were addressed. Use this skill after the peer-review → assess-feedback → revision cycle,
   when the user wants to check if the updated document resolves the earlier feedback. Triggered by
   phrases like "re-review this", "check if they addressed the feedback", "review this again",
   "did they fix the issues", "second pass on this doc", "follow-up review", or any time a document
