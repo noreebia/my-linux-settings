@@ -49,7 +49,7 @@ When reviewing a document on disk, also read the source files, configs, APIs, or
 
 ### 2. Extract and verify claims
 
-Read through the content and identify every substantive factual claim — things that are either true or false, not opinions or style choices. Then verify each one independently using whatever means are most appropriate — use your judgment, but be thorough. Flag your confidence level honestly when you can't fully verify something.
+Read through the content and identify every substantive factual claim — things that are either true or false, not opinions or style choices. Then verify each one independently — web search, codebase inspection, reasoning, etc . Flag your confidence level honestly when you can't fully verify something.
 
 Focus your effort on claims that matter — the ones the user would act on or that could cause harm if wrong. Don't spend time verifying trivially true filler.
 
