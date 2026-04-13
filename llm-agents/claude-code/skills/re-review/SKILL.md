@@ -3,7 +3,7 @@ name: re-review
 description: >
   Re-review a document after it has been revised in response to a previous review. This is NOT
   an open-ended critique — it's a targeted verification of whether the issues from the previous
-  review were addressed. Use this skill after the review-doc → review-feedback → revision cycle,
+  review were addressed. Use this skill after the peer-review → review-feedback → revision cycle,
   when the user wants to check if the updated document resolves the earlier feedback. Triggered by
   phrases like "re-review this", "check if they addressed the feedback", "review this again",
   "did they fix the issues", "second pass on this doc", "follow-up review", or any time a document
@@ -21,7 +21,7 @@ Verify whether a revised document addresses the issues raised in a previous revi
 ## Arguments
 
 - **`--original-file-path=<path>`** *(optional)*: Path to the previous review. When omitted, infer from conversation context or search `$AGENT_LOCAL_DIR/reviews/` for a matching review file.
-- **`--review-file-path=<path>`** *(optional)*: Path to the revised document (or directory) to re-review. When omitted, infer from the conversation context — the previous `/review-doc` invocation identifies which document was reviewed.
+- **`--review-file-path=<path>`** *(optional)*: Path to the revised document (or directory) to re-review. When omitted, infer from the conversation context — the previous `/peer-review` invocation identifies which document was reviewed.
 - **`--file`** *(optional flag)*: Write the re-review to a markdown file instead of outputting inline.
 
 ## Examples
@@ -39,11 +39,11 @@ Verify whether a revised document addresses the issues raised in a previous revi
 
 ### 1. Find the document and previous review
 
-**Document**: If `--review-file-path` was given, use it. Otherwise, infer from the conversation context — the previous `/review-doc` invocation identifies which document was reviewed. If still unclear, ask the user.
+**Document**: If `--review-file-path` was given, use it. Otherwise, infer from the conversation context — the previous `/peer-review` invocation identifies which document was reviewed. If still unclear, ask the user.
 
 **Previous review**: If `--original-file-path` was given, use it. Otherwise:
 
-1. Check the conversation context — this skill is almost always invoked in the same session as the original `/review-doc`, so the review content or path is likely already available
+1. Check the conversation context — this skill is almost always invoked in the same session as the original `/peer-review`, so the review content or path is likely already available
 2. Search `$AGENT_LOCAL_DIR/reviews/` for a file matching `<basename>-review.md`
 3. If none found, ask the user
 

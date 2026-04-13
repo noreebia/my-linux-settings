@@ -19,7 +19,7 @@ Evaluate feedback on a document and produce a considered response — what's val
 
 ## Arguments
 
-- **`--file-path=<path>`** *(optional)*: Path to the feedback document. When omitted, use the feedback from the conversation context — the user may have pasted it inline or it may be from a previous `/review-doc` in the same session.
+- **`--file-path=<path>`** *(optional)*: Path to the feedback document. When omitted, use the feedback from the conversation context — the user may have pasted it inline or it may be from a previous `/peer-review` in the same session.
 - **`--file`** *(optional flag)*: Write the response to a markdown file instead of outputting inline. The file is named with a `-response` suffix (e.g., `plan-review.md` → `plan-review-response.md`), saved in the same directory.
 
 ## Examples
