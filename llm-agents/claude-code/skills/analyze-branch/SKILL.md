@@ -29,11 +29,11 @@ Analyze the current branch and produce a briefing that gets someone productive f
 
 ### 1. Detect the parent branch
 
-Git doesn't record which branch a branch was created from, so you have to infer it by finding the nearest common ancestor. Do NOT assume the parent is `main` or `master`. Use this procedure:
+Never hardcode or assume `main`, `master`, or any default — always run the detection:
 
-1. List candidate base branches — at minimum check `develop`, `main`, `master`, but also include any other long-lived branches that exist locally (e.g., `staging`, `release`).
-2. For each candidate, count how many commits on HEAD are not on that branch: `git rev-list --count <candidate>..HEAD`. The candidate with the **fewest** commits ahead is the most likely parent — it's the branch HEAD diverged from most recently.
-3. If two candidates tie or the result is ambiguous, ask the user.
+1. List every candidate base branch that exists locally — at minimum `develop`, `main`, `master`, plus any others like `staging` or `release`.
+2. For each candidate, run `git rev-list --count <candidate>..HEAD`. The candidate with the **lowest count** is the parent — it's the branch HEAD diverged from most recently.
+3. If candidates tie or the result is ambiguous, ask the user. Do not fall back to a guess.
 
 Record the parent branch name — you'll need it for the diff and the briefing.
 

@@ -27,7 +27,7 @@ Assess the entire branch as a coherent unit of work and determine if it's ready 
 
 ### 1. Detect the parent branch
 
-Do NOT assume the parent is `main` or `master`. Check which of `develop`, `main`, `master` (and any other long-lived branches) exists locally and pick the one with the fewest commits from HEAD (`git rev-list --count <candidate>..HEAD`). Ask the user if ambiguous.
+Never hardcode or assume `main`, `master`, or any default — always run the detection. List every candidate that exists locally (`develop`, `main`, `master`, plus any like `staging`, `release`), run `git rev-list --count <candidate>..HEAD` for each, and pick the lowest. If candidates tie, ask the user — do not fall back to a guess.
 
 ### 2. Gather context and understand intent
 

@@ -41,7 +41,7 @@ Review code changes and produce honest, actionable feedback. Focus on real probl
 | `unstaged` | `git diff` |
 | `commit` | `git log -1 -p` |
 | `commit-N` | `git log -N -p` |
-| `branch` | Detect the parent branch — do NOT assume `master` or `main`. Check which of `develop`, `main`, `master` exists and pick the one with the fewest commits from HEAD (smallest `git rev-list --count <branch>..HEAD`). Ask the user if ambiguous. Then `git diff <parent>...HEAD`. |
+| `branch` | Detect the parent branch — never assume or default to any branch. List every candidate that exists locally (`develop`, `main`, `master`, plus any like `staging`, `release`), run `git rev-list --count <candidate>..HEAD` for each, and pick the lowest. If candidates tie, ask the user — do not fall back to a guess. Then `git diff <parent>...HEAD`. |
 | `<branch-name>` | Verify branch exists (`git rev-parse --verify`), then `git diff <branch-name>...HEAD` |
 
 Also run `git diff --stat` for a file-level summary. If the diff is empty, tell the user and stop.
