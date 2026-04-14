@@ -2,7 +2,7 @@
 name: create-pr
 description: >
   Opens a pull request from the current branch to a target branch using the gh CLI.
-argument-hint: "[--target-branch=<branch>] [--language=<language>] [--context=<url>]"
+argument-hint: "[--target-branch=<branch>] [--lang=<language>] [--context=<url>]"
 ---
 
 # Create Pull Request
@@ -14,16 +14,16 @@ Open a well-written pull request from the current branch using `gh pr create`. T
 ## Arguments
 
 - **`--target-branch=<branch>`** *(optional, default: `develop`)*: Base branch for the PR.
-- **`--language=<language>`** *(optional, default: `English`)*: Language for the PR title and body.
+- **`--lang=<language>`** *(optional, default: `English`)*: Language for the PR title and body.
 - **`--context=<url>`** *(optional)*: URL to a related ticket or context source (Jira, Wrike, Linear, etc.). If provided, the skill will attempt to fetch and summarize it for the **Context** section.
 
 ## Examples
 
     /create-pr
     /create-pr --target-branch=main
-    /create-pr --target-branch=develop --language=Korean
+    /create-pr --target-branch=develop --lang=Korean
     /create-pr --target-branch=main --context=https://linear.app/team/issue/PROJ-123
-    /create-pr --target-branch=develop --language=Korean --context=https://jira.example.com/browse/PROJ-456
+    /create-pr --target-branch=develop --lang=Korean --context=https://jira.example.com/browse/PROJ-456
 
 ---
 

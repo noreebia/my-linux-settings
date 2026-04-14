@@ -1,17 +1,17 @@
 ---
 name: produce-guide
 description: >
-  Produces a tech support guide from code changes — translating diffs into user-facing impact,
-  behavioral changes, and support-relevant information. Works with commits, branches, or the
+  Produces a tech support guide from code changes — translating diffs into deployment impact,
+  behavioral changes, and support-relevant details. Works with commits, branches, or the
   current branch diff.
 argument-hint: "[--commit=<hash>] [--branch=<branch>] [--lang=<language>]"
 ---
 
 # Produce Guide
 
-Analyze code changes and produce a guide for the tech support team. The audience is non-developer — they need to understand what changed from the user's perspective, not how the code works.
+Analyze code changes and produce a guide for the tech support team.
 
-The guide should answer the questions support will actually get: "What's new?", "What changed?", "Will this affect existing users?", "What should I tell a customer who notices X?"
+The audience is technical — they deploy and maintain systems on client premises. They understand code, configs, and infrastructure, but they aren't in the trenches of this codebase day-to-day. They need to know everything that could affect a deployment, a client's environment, or existing behavior. Be thorough and precise — vague summaries aren't useful to someone installing a system update.
 
 ---
 
@@ -47,33 +47,17 @@ The guide should answer the questions support will actually get: "What's new?", 
 
 Then diff: `git diff <parent>...<target>` and `git diff --stat <parent>...<target>`.
 
-Read key changed files in full to understand intent — the diff alone often doesn't reveal user-facing impact.
+Read key changed files in full to understand intent — the diff alone often doesn't reveal deployment or behavioral impact.
 
-### 2. Identify user-facing impact
+### 2. Analyze and write the guide
 
-Think from the end user's perspective. For each change, determine:
+If `--lang` was provided, write the entire guide in that language (headings included).
 
-- Is this visible to users? (UI changes, new features, changed behavior, error messages)
-- Is this invisible but operationally relevant? (performance improvements, security fixes, backend changes that alter timing or limits)
-- Is this purely internal? (refactors, dev tooling) — mention briefly or skip
+Focus on what this audience cares about: deployment impact, configuration changes, new or changed dependencies, database migrations, behavioral changes, new or removed API endpoints, changed defaults, altered permissions, and anything that could affect a client's existing environment.
 
-Pay special attention to: default value changes, renamed or moved UI elements, new validation rules, changed error messages, altered permissions or access controls, and anything that changes existing workflows.
+Structure and organize the guide however best fits the changes. Adapt depth and format to the scope — a single bug fix needs a different treatment than a multi-feature release. Include technical detail where it helps (config keys, environment variables, migration steps, API changes) — this audience can handle it.
 
-### 3. Write the guide
-
-Write in plain language for a non-technical audience. Avoid code references, function names, and implementation details — describe behavior and outcomes instead. If `--lang` was provided, write the entire guide in that language (section headings included).
-
-Structure the guide to include:
-
-- **Summary** — one paragraph overview of what changed and why
-- **What's new** — new features or capabilities, described from the user's perspective
-- **What changed** — existing behavior that now works differently, with before/after descriptions
-- **What to watch for** — potential customer questions, edge cases, or known limitations support should be aware of
-- **Not affected** — explicitly call out areas that might seem related but didn't change, to preempt incorrect assumptions
-
-Omit sections that don't apply. A small bug fix doesn't need a "What's new" section.
-
-### 4. Save the guide
+### 3. Save the guide
 
 Include the metadata header: `*Generated: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Source: <commit hash, branch name, or "current branch">*`
 
