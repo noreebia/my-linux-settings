@@ -1,12 +1,9 @@
 ---
 name: review-doc
 description: >
-  Review an LLM-generated document — such as a system analysis, situation analysis, or implementation
-  plan — and produce substantive feedback. Use this skill when the user wants a document critiqued,
-  fact-checked, or stress-tested — triggered by phrases like "review this doc", "give me feedback on
-  this plan", "check this analysis", "what's wrong with this", "poke holes in this", or any time a
-  previously generated document needs a critical second pass. Also trigger when the user wants to
-  validate whether a plan or analysis holds up before acting on it.
+  Reviews an LLM-generated document — such as a system analysis, situation analysis, or implementation
+  plan — and produces substantive
+  feedback by verifying claims against reality.
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 

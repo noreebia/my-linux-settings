@@ -1,13 +1,8 @@
 ---
 name: review-implementation
 description: >
-  Review whether code changes correctly and completely implement a plan, spec, or design document.
-  Use this skill when the user wants to verify that their implementation matches the original plan —
-  triggered by phrases like "review my implementation", "did I implement this correctly",
-  "check this against the plan", "does this match the spec", "review implementation of",
-  "compare my changes to the plan", or any time the user has both code changes and a plan document
-  and wants to know if they align. Also trigger when the user finishes implementing a plan and wants
-  a quality check before committing or opening a PR.
+  Reviews whether code changes correctly and completely implement a plan, spec, or design document.
+  Assesses both completeness and quality.
 argument-hint: "[--scope=<scope>] [--file] [--plan=<hint>]"
 ---
 

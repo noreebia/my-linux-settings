@@ -1,14 +1,8 @@
 ---
 name: analyze-codebase
 description: >
-  Analyze an unfamiliar codebase and generate developer documentation in $AGENT_LOCAL_DIR/system-analysis.
-  Use this skill whenever a developer needs to understand an existing project — triggered by phrases like
-  "analyze this codebase", "document this project", "help me understand this repo", "onboard me to this
-  code", "what does this system do", "explain the architecture", or any time someone is new to a project
-  and needs a map. Also trigger proactively when the user starts asking multiple questions about how a
-  codebase is structured — they probably need a full analysis, not just piecemeal answers. Scales output
-  to project complexity: a small script gets a single clear file; a large system gets a structured docs
-  folder with diagrams.
+  Analyzes an unfamiliar codebase and generates developer documentation in $AGENT_LOCAL_DIR/system-analysis.
+  Scales output to project complexity.
 argument-hint: "[focus]"
 ---
 

@@ -1,13 +1,8 @@
 ---
 name: describe-endpoint
 description: >
-  Use this skill whenever the user wants to understand, document, or explore how an API endpoint works
-  in a codebase. Trigger on phrases like "describe this endpoint", "how does this route work",
-  "trace this API call", "document this endpoint", "explain the flow of", "walk me through what happens
-  when X is called", or any time the user points at a route/controller/handler and wants to understand
-  what it does end-to-end. Even if the user just pastes a URL path like `/api/users/:id` or a method
-  signature and asks "what does this do?" — use this skill. Also use it proactively when the user is
-  debugging an endpoint and a clear flow description would help.
+  Traces an API endpoint end-to-end through the codebase — route, middleware, handler, services,
+  data access — and documents the full request/response flow.
 argument-hint: "<endpoint>"
 ---
 

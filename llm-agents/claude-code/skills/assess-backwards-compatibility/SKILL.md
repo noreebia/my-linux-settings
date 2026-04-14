@@ -1,14 +1,8 @@
 ---
 name: assess-backwards-compatibility
 description: >
-  Assess whether code changes or a proposed plan maintain backwards compatibility with existing
-  functionality. Use this skill whenever the user wants to understand the compatibility impact of
-  changes — triggered by phrases like "is this backwards compatible", "will this break anything",
-  "check backwards compatibility", "assess compatibility", "does this affect existing behavior",
-  "is this safe to ship", "will this affect existing code", "will this plan break anything",
-  or any time the user wants to understand whether changes (implemented or proposed) preserve
-  existing behavior. Also trigger when the user finishes a feature and wants to verify it won't
-  break existing code paths or dependent modules, or when reviewing a plan before implementation.
+  Assesses whether code changes or a proposed plan maintain backwards compatibility with existing
+  functionality.
 argument-hint: "[--scope=<scope>] [--plan=<path>]"
 ---
 

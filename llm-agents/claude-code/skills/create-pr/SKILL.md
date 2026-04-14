@@ -1,11 +1,7 @@
 ---
 name: create-pr
 description: >
-  Open a pull request from the current branch to a target branch using the gh CLI. Use this skill
-  whenever the user wants to open, create, or submit a PR or pull request — including phrases like
-  "open a PR", "create a pull request", "submit this for review", "push a PR to develop", or
-  "make a PR". Also trigger proactively when the user says they're done with a feature or fix and
-  asks what to do next — they probably want a PR.
+  Opens a pull request from the current branch to a target branch using the gh CLI.
 argument-hint: "[--target-branch=<branch>] [--language=<language>] [--context=<url>]"
 ---
 

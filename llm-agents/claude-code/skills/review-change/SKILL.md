@@ -1,13 +1,8 @@
 ---
 name: review-change
 description: >
-  Review code changes and produce actionable feedback on correctness, design, security, and
-  maintainability. Use this skill whenever the user wants a code review — triggered by phrases
-  like "review my code", "code review", "review these changes", "check my code before merging",
-  "review what I've done", "look over my changes", "review this diff", "review before I push",
-  or any time the user wants feedback on code changes before committing, pushing, or opening a PR.
-  Also trigger proactively when the user finishes a block of work and says things like
-  "I think this is ready" or "take a look at this".
+  Reviews code changes for correctness, design, security, and maintainability. Works with unstaged
+  changes, commits, or branch diffs.
 argument-hint: "[--scope=<scope>] [--file]"
 ---
 

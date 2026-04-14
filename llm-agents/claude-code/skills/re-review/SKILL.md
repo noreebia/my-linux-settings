@@ -1,14 +1,8 @@
 ---
 name: re-review
 description: >
-  Re-review a document after it has been revised in response to a previous review. This is NOT
-  an open-ended critique — it's a targeted verification of whether the issues from the previous
-  review were addressed. Use this skill after the peer-review → assess-feedback → revision cycle,
-  when the user wants to check if the updated document resolves the earlier feedback. Triggered by
-  phrases like "re-review this", "check if they addressed the feedback", "review this again",
-  "did they fix the issues", "second pass on this doc", "follow-up review", or any time a document
-  was previously reviewed and has since been updated. Also trigger when the user says things like
-  "I updated the plan, take another look" or "Codex reviewed this before, check again".
+  Re-reviews a revised document to verify whether issues from a previous review were addressed.
+  Targeted accountability check, not an open-ended critique.
 argument-hint: "[--original-file-path=<path>] [--review-file-path=<path>] [--file]"
 ---
 

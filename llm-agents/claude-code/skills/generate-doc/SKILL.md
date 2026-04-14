@@ -1,12 +1,7 @@
 ---
 name: generate-doc
 description: >
-  Convert the agent's last response into a saved markdown document for future reference, sharing,
-  or passing to another agent. Use this skill whenever the user wants to save, export, or persist
-  a response — triggered by phrases like "save that", "turn that into a doc", "generate a document
-  from your last response", "write that to a file", "export this", or any time the output of a
-  previous response should be preserved for reuse. Also trigger proactively after producing long
-  analyses, plans, or reports when the user will clearly want to keep the output.
+  Converts the agent's last meaningful response into a saved markdown document for future reference, sharing, or passing to another agent.
 ---
 
 # Generate Document

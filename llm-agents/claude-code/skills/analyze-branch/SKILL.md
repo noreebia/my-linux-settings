@@ -1,14 +1,8 @@
 ---
 name: analyze-branch
 description: >
-  Analyze the current branch to understand what it's about and get up to speed before making further
-  changes. Identifies the parent branch, diffs the changes, reads key modified files, and presents
-  a structured briefing of the branch's purpose and current state. Use this skill whenever someone
-  is picking up an existing branch — triggered by phrases like "analyze this branch", "what's on
-  this branch", "get me up to speed", "catch me up on this branch", "what's happening here",
-  "context on this branch", "brief me on this branch", "understand this branch", or any time a user
-  switches to a branch and wants to understand its changes before continuing work. Also trigger when
-  the user starts a new session on a non-default branch and asks for context or says "where was I".
+  Analyzes the current branch by detecting the parent branch, diffing changes, and reading key
+  modified files to produce a structured briefing of the branch's purpose and current state.
 argument-hint: "[--key-words=<word1,word2,...>]"
 ---
 

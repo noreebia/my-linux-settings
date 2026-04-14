@@ -1,11 +1,8 @@
 ---
 name: peer-review
 description: >
-  Review LLM-generated content — inlined or on disk — for factual accuracy, logical soundness, and
-  completeness. Triggered by phrases like "review this", "check this answer", "is this accurate",
-  "peer review", "fact-check this", "second opinion", "review this doc", "poke holes in this",
-  "I asked GPT this", "verify what Gemini said", or any time the user wants content independently
-  assessed before acting on it.
+  Reviews LLM-generated content — inlined or on disk — for factual accuracy, logical soundness,
+  and completeness.
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 

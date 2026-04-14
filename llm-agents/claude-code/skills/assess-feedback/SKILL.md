@@ -1,11 +1,8 @@
 ---
 name: assess-feedback
 description: >
-  Assess feedback on a document you produced — what to accept, what to push back on, and what to
-  do next. Triggered by phrases like "assess this feedback", "what do you think of this review",
-  "respond to the feedback", "which of these points are valid", "do you agree with this critique",
-  or any time feedback on a prior output needs to be evaluated and acted on. The feedback can be
-  a file on disk or pasted inline in the conversation.
+  Assesses feedback on a document — what to accept, push back on, and do next. Feedback can be a
+  file on disk or pasted inline.
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 
