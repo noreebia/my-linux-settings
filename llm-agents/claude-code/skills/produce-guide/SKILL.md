@@ -1,17 +1,14 @@
 ---
 name: produce-guide
 description: >
-  Produces a tech support guide from code changes — translating diffs into deployment impact,
-  behavioral changes, and support-relevant details. Works with commits, branches, or the
-  current branch diff.
+  Produces a guide for the tech support team outlining code changes. Works with commits, branches,
+  or the current branch diff.
 argument-hint: "[--commit=<hash>] [--branch=<branch>] [--lang=<language>]"
 ---
 
 # Produce Guide
 
-Analyze code changes and produce a guide for the tech support team.
-
-The audience is technical — they deploy and maintain systems on client premises. They understand code, configs, and infrastructure, but they aren't in the trenches of this codebase day-to-day. They need to know everything that could affect a deployment, a client's environment, or existing behavior. Be thorough and precise — vague summaries aren't useful to someone installing a system update.
+Analyze code changes and produce a guide for the tech support team outlining the changes.
 
 ---
 
@@ -19,7 +16,7 @@ The audience is technical — they deploy and maintain systems on client premise
 
 - **`--commit=<hash>`** *(optional)*: Analyze a specific commit.
 - **`--branch=<branch>`** *(optional)*: Analyze changes on a specific branch against its parent.
-- **`--lang=<language>`** *(optional, default: English)*: Language to write the guide in.
+- **`--lang=<language>`** *(optional, default: English)*: Language to write the guide in (headings included).
 - If neither `--commit` nor `--branch` is provided, analyze the current branch against its parent.
 
 ## Examples
@@ -47,15 +44,11 @@ The audience is technical — they deploy and maintain systems on client premise
 
 Then diff: `git diff <parent>...<target>` and `git diff --stat <parent>...<target>`.
 
-Read key changed files in full to understand intent — the diff alone often doesn't reveal deployment or behavioral impact.
+Read key changed files in full to understand the changes thoroughly.
 
-### 2. Analyze and write the guide
+### 2. Write the guide
 
-If `--lang` was provided, write the entire guide in that language (headings included).
-
-Focus on what this audience cares about: deployment impact, configuration changes, new or changed dependencies, database migrations, behavioral changes, new or removed API endpoints, changed defaults, altered permissions, and anything that could affect a client's existing environment.
-
-Structure and organize the guide however best fits the changes. Adapt depth and format to the scope — a single bug fix needs a different treatment than a multi-feature release. Include technical detail where it helps (config keys, environment variables, migration steps, API changes) — this audience can handle it.
+Produce a guide outlining the changes. Structure and organize it however best fits — adapt to the scope and nature of what changed.
 
 ### 3. Save the guide
 
