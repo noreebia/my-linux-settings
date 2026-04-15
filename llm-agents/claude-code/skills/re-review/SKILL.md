@@ -3,7 +3,7 @@ name: re-review
 description: >
   Re-reviews a revised document to verify whether issues from a previous review were addressed.
   Targeted accountability check, not an open-ended critique.
-argument-hint: "[--original-file-path=<path>] [--review-file-path=<path>] [--file]"
+argument-hint: "[--original-file-path=<path>] [--file-path=<path>] [--file]"
 ---
 
 # Re-review
@@ -15,7 +15,7 @@ Verify whether a revised document addresses the issues raised in a previous revi
 ## Arguments
 
 - **`--original-file-path=<path>`** *(optional)*: Path to the previous review. When omitted, infer from conversation context or search `$AGENT_LOCAL_DIR/reviews/` for a matching review file.
-- **`--review-file-path=<path>`** *(optional)*: Path to the revised document (or directory) to re-review. When omitted, infer from the conversation context — the previous `/peer-review` invocation identifies which document was reviewed.
+- **`--file-path=<path>`** *(optional)*: Path to the revised document (or directory) to re-review. When omitted, infer from the conversation context — the previous `/peer-review` invocation identifies which document was reviewed.
 - **`--file`** *(optional flag)*: Write the re-review to a markdown file instead of outputting inline.
 
 ## Examples
@@ -24,8 +24,8 @@ Verify whether a revised document addresses the issues raised in a previous revi
     /re-review --file
     /re-review --original-file-path=agents/claude/plans/auth-migration.md
     /re-review --original-file-path=agents/claude/plans/auth-migration.md --file
-    /re-review --original-file-path=agents/claude/plans/auth-migration.md --review-file-path=agents/codex/reviews/auth-migration-review.md
-    /re-review --review-file-path=agents/codex/reviews/auth-migration-review.md --file
+    /re-review --original-file-path=agents/claude/plans/auth-migration.md --file-path=agents/codex/reviews/auth-migration-review.md
+    /re-review --file-path=agents/codex/reviews/auth-migration-review.md --file
 
 ---
 
@@ -33,7 +33,7 @@ Verify whether a revised document addresses the issues raised in a previous revi
 
 ### 1. Find the document and previous review
 
-**Document**: If `--review-file-path` was given, use it. Otherwise, infer from the conversation context — the previous `/peer-review` invocation identifies which document was reviewed. If still unclear, ask the user.
+**Document**: If `--file-path` was given, use it. Otherwise, infer from the conversation context — the previous `/peer-review` invocation identifies which document was reviewed. If still unclear, ask the user.
 
 **Previous review**: If `--original-file-path` was given, use it. Otherwise:
 
