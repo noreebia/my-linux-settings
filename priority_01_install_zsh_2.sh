@@ -21,10 +21,6 @@ for plugin in zsh-autosuggestions zsh-syntax-highlighting you-should-use; do
     fi
 done
 
-# install aliases, functions, and shell options by sourcing aliases.sh
-cp ./zsh/aliases.sh ~/.zsh_aliases
-grep -q 'source ~/.zsh_aliases' ~/.zshrc || echo 'source ~/.zsh_aliases' >> ~/.zshrc
-
 cp -r ./zsh/.oh-my-zsh/* ~/.oh-my-zsh/
 
 echo ".zshrc configuration has been completed. Run 'source ~/.zshrc' or start a new terminal to apply changes."
