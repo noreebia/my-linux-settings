@@ -70,3 +70,5 @@ gh-publish() {
   git branch -M main && \
   gh repo create --source=. --"$visibility" --push
 }
+
+setopt NULL_GLOB

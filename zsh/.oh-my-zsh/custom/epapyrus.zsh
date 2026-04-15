@@ -32,3 +32,17 @@ alias sdhomecd="cd /ePapyrus/sd"
 alias sdhomels="ls -al /ePapyrus/sd"
 alias sdhomermh2="/bin/rm -rf /ePapyrus/sd/resources/h2/*"
 alias ccp-agents="cp -r ./agents/* ~/code_linux/agents/"
+
+# Release a new version from develop to master
+release-streamdocs-packager() {
+  if [ -z "$1" ]; then
+    echo "Usage: release-streamdocs-packager <tag_name>"
+    return 1
+  fi
+
+  git switch master && \
+  git merge develop && \
+  git tag "$1" && \
+  git push origin "$1" && \
+  git push origin master
+}
