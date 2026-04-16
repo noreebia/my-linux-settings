@@ -8,6 +8,10 @@ Default to high freedom: describe *what* the output should contain, not *how* to
 
 Use shared variables from `llm-agents/AGENTS_GLOBAL.md` rather than repeating definitions across skills.
 
+## Description conventions
+
+Keep the `description` field in frontmatter concise — 1–2 sentences in third person that say what the skill does. Do not include trigger phrases, example user prompts, or proactive-triggering language ("also trigger when..."). Skills are invoked manually, not auto-detected, so descriptions only need to be clear enough to distinguish skills from each other at a glance.
+
 ## Argument conventions
 
 Skills that accept arguments should follow these conventions for reliable LLM parsing:
