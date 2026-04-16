@@ -1,12 +1,12 @@
 ---
-name: augment-doc
+name: augment-output
 description: >
   Assesses another agent's version of a document against the original, then selectively augments
   the original with genuinely superior ideas — or concludes that no changes are warranted.
 argument-hint: "[--file-path=<path>] [--original-file-path=<path>]"
 ---
 
-# Augment Doc
+# Augment Output
 
 Assess another agent's take on the same topic as your document. Determine — honestly — whether any of their ideas, approaches, or coverage are genuinely better than yours. If so, fold those improvements into your original. If not, say so and move on.
 
@@ -23,15 +23,15 @@ The important thing: being asked to augment doesn't mean you must augment. The o
 
 Both documents on disk:
 
-    /augment-doc --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
+    /augment-output --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
 
 Source on disk, original from conversation context:
 
-    /augment-doc --file-path=agents/gemini/system-analysis/api-layer.md
+    /augment-output --file-path=agents/gemini/system-analysis/api-layer.md
 
 Everything in conversation context (after a prior /adjust-take in the same session):
 
-    /augment-doc
+    /augment-output
 
 ---
 
