@@ -57,14 +57,11 @@ It's entirely possible that nothing in the source warrants adoption. If your ass
 
 Present your assessment to the user — what you found worth adopting, what you'd leave as-is, and why. Be specific: name the sections, claims, or approaches from the source that are genuinely better and explain what makes them better.
 
-If the assessment concludes that no changes are warranted, say so and stop. No need to produce anything further.
+The assessment has three possible outcomes:
 
-If the original is a file on disk (via `--original-file-path` or a known path from context), ask the user how to proceed:
-
-- **Modify the original** — apply changes directly to the file
-- **Output a new version** — produce an augmented copy, leaving the original untouched
-
-If the original was inline (no file on disk), skip the ask and proceed directly.
+- **No changes warranted** — the original is already the stronger document. Say so and stop.
+- **Selective augmentation** — some ideas from the source are genuinely better. If the original is a file on disk, ask the user: modify the original in place, or output a new version? If the original was inline, skip the ask and proceed directly.
+- **Adopt the source** — the source is thoroughly better in every meaningful way. Recommend using the other agent's output instead of augmenting. Explain why.
 
 ### 4. Output or save
 
