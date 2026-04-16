@@ -4,10 +4,7 @@ description: >
   Produces an independent, complete document on a topic after reviewing another agent's output —
   a full adjusted version (plan, analysis, or guide), not just feedback. Designed to follow
   /peer-review in a multi-agent workflow, but works standalone when pointed at any agent-generated
-  content. Use whenever the user wants an adjusted take, a "second opinion as a deliverable",
-  an alternative version, or asks you to produce your own version of another agent's work. Also
-  use when the user says things like "now write your own", "what would you do differently",
-  "give me your take on this", "adjust this", or "build on this".
+  content.
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 
