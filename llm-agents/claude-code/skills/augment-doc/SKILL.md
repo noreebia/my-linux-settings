@@ -3,7 +3,7 @@ name: augment-doc
 description: >
   Assesses another agent's version of a document against the original, then selectively augments
   the original with genuinely superior ideas — or concludes that no changes are warranted.
-argument-hint: "[--file-path=<path>] [--target-file-path=<path>] [--file]"
+argument-hint: "[--file-path=<path>] [--original-file-path=<path>]"
 ---
 
 # Augment Doc
@@ -17,25 +17,21 @@ The important thing: being asked to augment doesn't mean you must augment. The o
 ## Arguments
 
 - **`--file-path=<path>`** *(optional)*: Path to the other agent's document — the source to assess. If a directory, read all files within it. When omitted, look for it in the conversation context (e.g., a prior `/adjust-take` output or pasted content).
-- **`--target-file-path=<path>`** *(optional)*: Path to the original document — the augmentation target. When omitted, the original should be identifiable from conversation context.
-- **`--file`** *(optional flag)*: Write the output to a markdown file instead of outputting inline.
+- **`--original-file-path=<path>`** *(optional)*: Path to the original document to potentially augment. When omitted, the original should be identifiable from conversation context.
 
 ## Examples
 
 Both documents on disk:
 
-    /augment-doc --file-path=agents/codex/plans/auth-migration.md --target-file-path=agents/claude/plans/auth-migration.md
-    /augment-doc --file-path=agents/codex/plans/auth-migration.md --target-file-path=agents/claude/plans/auth-migration.md --file
+    /augment-doc --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
 
-Source on disk, target from conversation context:
+Source on disk, original from conversation context:
 
     /augment-doc --file-path=agents/gemini/system-analysis/api-layer.md
-    /augment-doc --file-path=agents/codex/plans/auth-migration.md --file
 
 Everything in conversation context (after a prior /adjust-take in the same session):
 
     /augment-doc
-    /augment-doc --file
 
 ---
 
@@ -46,7 +42,7 @@ Everything in conversation context (after a prior /adjust-take in the same sessi
 You need two things: the **original** (your document) and the **source** (the other agent's version).
 
 - If `--file-path` was given, read the source document(s) at that path.
-- If `--target-file-path` was given, read the original document at that path.
+- If `--original-file-path` was given, read the original document at that path.
 - If either is missing, look in the conversation context. In the typical workflow, both are already visible from prior steps. If you can't identify one or both, ask.
 
 ### 2. Assess the source against the original
@@ -57,13 +53,23 @@ For each meaningful difference between the two documents, arrive at a verdict: i
 
 It's entirely possible that nothing in the source warrants adoption. If your assessment concludes that the original is already the stronger document, say so clearly and explain why. That's a valid and valuable outcome.
 
-### 3. Augment (if warranted)
+### 3. Present the assessment
 
-If your assessment identified genuine improvements worth adopting, produce an updated version of your original that incorporates them. Adapt what you adopt to fit naturally — the result should read as a cohesive document, not a patchwork of two voices.
+Present your assessment to the user — what you found worth adopting, what you'd leave as-is, and why. Be specific: name the sections, claims, or approaches from the source that are genuinely better and explain what makes them better.
 
-Close with a brief **Assessment and changes** section: what you assessed, what you adopted and why, and what you chose not to adopt and why. This gives the user visibility into your reasoning, whether the outcome was heavy augmentation or no changes at all.
+If the assessment concludes that no changes are warranted, say so and stop. No need to produce anything further.
+
+If the original is a file on disk (via `--original-file-path` or a known path from context), ask the user how to proceed:
+
+- **Modify the original** — apply changes directly to the file
+- **Output a new version** — produce an augmented copy, leaving the original untouched
+
+If the original was inline (no file on disk), skip the ask and proceed directly.
 
 ### 4. Output or save
 
-- **Inline** (default): Output directly in the conversation. Omit the metadata header.
-- **File** (if `--file` was given): Include the metadata header: `*Augmented: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Source: <path or description of source doc> | Target: <path or description of original doc>*`. Write to `$AGENT_LOCAL_DIR/augmented/$CURRENT_TIME("YYYYMMDDHHMM")-<descriptive-slug>.md`. Tell the user where it was saved.
+If proceeding, produce the augmented document. Adapt what you adopt to fit naturally — the result should read as a cohesive document, not a patchwork of two voices.
+
+- **Modify original** (if user chose this): Edit the file at `--original-file-path` directly.
+- **New version** (if user chose this): Write to `$AGENT_LOCAL_DIR/augmented/$CURRENT_TIME("YYYYMMDDHHMM")-<descriptive-slug>.md` with metadata header: `*Augmented: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Source: <path or description of source doc> | Original: <path or description of original doc>*`. Tell the user where it was saved.
+- **Inline** (original was inline): Output directly in the conversation. Omit the metadata header.
