@@ -1,72 +1,76 @@
 ---
-name: augment-output
+name: compare-approach
 description: >
-  Assesses another agent's version of a document against the original, then selectively augments
-  the original with genuinely superior ideas — or concludes that no changes are warranted.
-argument-hint: "[--file-path=<path>] [--original-file-path=<path>]"
+  Compares two approaches to the same problem — typically two documents from different agents or
+  drafts — and produces an honest, evidence-based assessment of where each is stronger, where
+  they diverge, and which (if either) should be preferred. Works with content inlined in the
+  conversation or read from disk.
+argument-hint: "[--file-path=<path>] [--original-file-path=<path>] [--file]"
 ---
 
-# Augment Output
+# Compare Approach
 
-Assess another agent's take on the same topic as your document. Determine — honestly — whether any of their ideas, approaches, or coverage are genuinely better than yours. If so, fold those improvements into your original. If not, say so and move on.
+Compare two approaches to the same problem and report on what's stronger about each, where they meaningfully diverge, and which is preferable overall. The deliverable is the comparison itself — the user decides what to do with it.
 
-The important thing: being asked to augment doesn't mean you must augment. The other agent may have taken a fundamentally different direction that doesn't apply, or your original may simply be stronger. The value of this skill is the honest assessment, not the act of changing things.
+Being asked to compare doesn't mean one must win. Two approaches can be roughly equivalent, complementary, or rooted in different premises that make a direct ranking meaningless. Say so when that's the case.
 
 ---
 
 ## Arguments
 
-- **`--file-path=<path>`** *(optional)*: Path to the other agent's document — the source to assess. If a directory, read all files within it. When omitted, look for it in the conversation context (e.g., a prior `/adjust-take` output or pasted content).
-- **`--original-file-path=<path>`** *(optional)*: Path to the original document to potentially augment. When omitted, the original should be identifiable from conversation context.
+- **`--file-path=<path>`** *(optional)*: Path to the alternate approach (e.g., another agent's version). If a directory, read all files within it. When omitted, look for inlined content in the conversation.
+- **`--original-file-path=<path>`** *(optional)*: Path to the original or baseline approach to compare against. When omitted, look for inlined content in the conversation.
+- **`--file`** *(optional flag)*: Write the comparison to a markdown file instead of outputting inline.
 
 ## Examples
 
 Both documents on disk:
 
-    /augment-output --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
+    /compare-approach --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
 
-Source on disk, original from conversation context:
+Alternate on disk, baseline from conversation:
 
-    /augment-output --file-path=agents/gemini/system-analysis/api-layer.md
+    /compare-approach --file-path=agents/gemini/system-analysis/api-layer.md
 
-Everything in conversation context (after a prior /adjust-take in the same session):
+Both inline (paste both into the conversation, then invoke):
 
-    /augment-output
+    /compare-approach
+
+Save the comparison to a file:
+
+    /compare-approach --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md --file
 
 ---
 
 ## Process
 
-### 1. Identify both documents
+### 1. Identify both approaches
 
-You need two things: the **original** (your document) and the **source** (the other agent's version).
+You need both: the **alternate** (e.g., the new or other agent's version) and the **original** (the baseline being compared against).
 
-- If `--file-path` was given, read the source document(s) at that path.
-- If `--original-file-path` was given, read the original document at that path.
-- If either is missing, look in the conversation context. In the typical workflow, both are already visible from prior steps. If you can't identify one or both, ask.
+- If a `--file-path` was given, read the document(s) at that path.
+- If a `--original-file-path` was given, read the document at that path.
+- For anything not provided as a path, look in the conversation for inlined content. If you can't tell which inlined block is which, ask.
 
-### 2. Assess the source against the original
+### 2. Assess
 
-Read both documents thoroughly, then go to the primary sources (codebase, configs, APIs, docs) to verify claims from both sides where it matters. Form your own judgment — don't assume the other agent's version is better just because it came later in the workflow.
+Read both thoroughly, then go to the primary sources (codebase, configs, APIs, docs, etc.) to verify substantive claims from both sides where it matters. Don't assume one version is better just because it's newer or came from a particular source.
 
-For each meaningful difference between the two documents, arrive at a verdict: is the source's approach genuinely better, roughly equivalent, or worse than yours? "Different" is not the same as "better." A valid alternative direction isn't necessarily an improvement worth adopting — especially if it would compromise the coherence of your original.
+For each meaningful difference, form a verdict: is the alternate genuinely better, roughly equivalent, or worse? "Different" is not the same as "better." A valid alternative direction isn't necessarily an improvement — especially if it would compromise the coherence of the original or rests on premises the original deliberately rejected.
 
-It's entirely possible that nothing in the source warrants adoption. If your assessment concludes that the original is already the stronger document, say so clearly and explain why. That's a valid and valuable outcome.
+### 3. Write the comparison
 
-### 3. Present the assessment
+Structure the comparison around what the user actually needs to decide. A useful comparison covers:
 
-Present your assessment to the user — what you found worth adopting, what you'd leave as-is, and why. Be specific: name the sections, claims, or approaches from the source that are genuinely better and explain what makes them better.
+- A short verdict up front — overall, is one approach preferable, are they equivalent, or is it situational?
+- The meaningful differences, each with: what differs, which side handles it better and why, and whether it's worth acting on
+- Strengths of each approach that the other lacks
+- Areas where both fall short or miss something important
+- A recommendation on how to proceed (adopt one, selectively combine, keep as-is, etc.) — framed as advice, not a prescription
 
-The assessment has three possible outcomes:
-
-- **No changes warranted** — the original is already the stronger document. Say so and stop.
-- **Selective augmentation** — some ideas from the source are genuinely better. If the original is a file on disk, ask the user: modify the original in place, or output a new version? If the original was inline, skip the ask and proceed directly.
-- **Adopt the source** — the source is thoroughly better in every meaningful way. Recommend using the other agent's output instead of augmenting. Explain why.
+Adapt depth to the size and nature of the differences. Two near-identical drafts need a focused comparison; two genuinely different approaches warrant a thorough one.
 
 ### 4. Output or save
 
-If proceeding, produce the augmented document. Adapt what you adopt to fit naturally — the result should read as a cohesive document, not a patchwork of two voices.
-
-- **Modify original** (if user chose this): Edit the file at `--original-file-path` directly.
-- **New version** (if user chose this): Write to `$AGENT_LOCAL_DIR/augmented/$CURRENT_TIME("YYYYMMDDHHMM")-<descriptive-slug>.md` with metadata header: `*Augmented: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Source: <path or description of source doc> | Original: <path or description of original doc>*`. Tell the user where it was saved.
-- **Inline** (original was inline): Output directly in the conversation. Omit the metadata header.
+- **Inline** (default): Output directly in the conversation. Omit the metadata header.
+- **File** (if `--file` was given): Include the metadata header: `*Compared: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Alternate: <path or "inlined"> | Original: <path or "inlined">*`. Write to `$AGENT_LOCAL_DIR/comparisons/$CURRENT_TIME("YYYYMMDDHHMM")-<descriptive-slug>.md`. Tell the user where it was saved.
