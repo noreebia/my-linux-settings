@@ -1,5 +1,5 @@
 ---
-name: compare-approach
+name: compare-approaches
 description: >
   Compares two approaches to the same problem — typically two documents from different agents or
   drafts — and produces an honest, evidence-based assessment of where each is stronger, where
@@ -8,7 +8,7 @@ description: >
 argument-hint: "[--file-path=<path>] [--original-file-path=<path>] [--file]"
 ---
 
-# Compare Approach
+# Compare Approaches
 
 Compare two approaches to the same problem and report on what's stronger about each, where they meaningfully diverge, and which is preferable overall. The deliverable is the comparison itself — the user decides what to do with it.
 
@@ -26,19 +26,19 @@ Being asked to compare doesn't mean one must win. Two approaches can be roughly 
 
 Both documents on disk:
 
-    /compare-approach --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
+    /compare-approaches --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md
 
 Alternate on disk, baseline from conversation:
 
-    /compare-approach --file-path=agents/gemini/system-analysis/api-layer.md
+    /compare-approaches --file-path=agents/gemini/system-analysis/api-layer.md
 
 Both inline (paste both into the conversation, then invoke):
 
-    /compare-approach
+    /compare-approaches
 
 Save the comparison to a file:
 
-    /compare-approach --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md --file
+    /compare-approaches --file-path=agents/codex/plans/auth-migration.md --original-file-path=agents/claude/plans/auth-migration.md --file
 
 ---
 
@@ -66,7 +66,7 @@ Structure the comparison around what the user actually needs to decide. A useful
 - The meaningful differences, each with: what differs, which side handles it better and why, and whether it's worth acting on
 - Strengths of each approach that the other lacks
 - Areas where both fall short or miss something important
-- A recommendation on how to proceed (adopt one, selectively combine, keep as-is, etc.) — framed as advice, not a prescription
+- A recommendation on how to proceed (adopt one, selectively combine, keep as-is, etc.)
 
 Adapt depth to the size and nature of the differences. Two near-identical drafts need a focused comparison; two genuinely different approaches warrant a thorough one.
 
