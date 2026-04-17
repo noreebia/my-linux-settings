@@ -1,5 +1,5 @@
 ---
-name: adjust-take
+name: second-take
 description: >
   Produces an independent, complete document on a topic after reviewing another agent's output —
   a full adjusted version (plan, analysis, or guide), not just feedback. Designed to follow
@@ -8,11 +8,11 @@ description: >
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 
-# Adjust-Take
+# Second-Take
 
 Produce your own complete take on the same topic as another agent's output. This isn't feedback on their work — it's your own work on the same problem, informed by having seen theirs.
 
-The typical workflow: another agent produces a document, someone runs `/peer-review` on it, then you run `/adjust-take` to deliver your own version — absorbing what worked, correcting what didn't, and reshaping the whole thing through your own lens. The skill also works when you're simply pointed at another agent's output without a prior review.
+The typical workflow: another agent produces a document, someone runs `/peer-review` on it, then you run `/second-take` to deliver your own version — absorbing what worked, correcting what didn't, and reshaping the whole thing through your own lens. The skill also works when you're simply pointed at another agent's output without a prior review.
 
 ---
 
@@ -25,14 +25,14 @@ The typical workflow: another agent produces a document, someone runs `/peer-rev
 
 After a peer review in the same conversation (no --file-path needed):
 
-    /adjust-take
-    /adjust-take --file
+    /second-take
+    /second-take --file
 
 Cold start — pointed directly at another agent's output:
 
-    /adjust-take --file-path=agents/codex/plans/auth-migration.md
-    /adjust-take --file-path=agents/codex/system-analysis/ --file
-    /adjust-take --file-path=agents/gemini/plans/api-redesign.md --file
+    /second-take --file-path=agents/codex/plans/auth-migration.md
+    /second-take --file-path=agents/codex/system-analysis/ --file
+    /second-take --file-path=agents/gemini/plans/api-redesign.md --file
 
 ---
 
@@ -72,4 +72,4 @@ At the end, include a short **Divergence notes** section that highlights where a
 ### 4. Output or save
 
 - **Inline** (default): Output directly in the conversation. Omit the metadata header.
-- **File** (if `--file` was given): Include the metadata header: `*Generated: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Adjusted take on: <title or path of original document>*`. Write to `$AGENT_LOCAL_DIR/adjust-takes/$CURRENT_TIME("YYYYMMDDHHMM")-<descriptive-slug>.md`. Tell the user where it was saved.
+- **File** (if `--file` was given): Include the metadata header: `*Generated: $CURRENT_TIME("YYYY-MM-DD HH:MM") | Author: $AGENT_NAME | Adjusted take on: <title or path of original document>*`. Write to `$AGENT_LOCAL_DIR/second-takes/$CURRENT_TIME("YYYYMMDDHHMM")-<descriptive-slug>.md`. Tell the user where it was saved.
