@@ -19,7 +19,7 @@ Being asked to compare doesn't mean one must win. Two approaches can be roughly 
 ## Arguments
 
 - **`--file-path=<path>`** *(optional)*: Path to the alternate approach (e.g., another agent's version). If a directory, read all files within it. When omitted, look for inlined content in the conversation.
-- **`--original-file-path=<path>`** *(optional)*: Path to the original or baseline approach to compare against. When omitted, look for inlined content in the conversation.
+- **`--original-file-path=<path>`** *(optional)*: Path to the original or baseline approach to compare against. When omitted, identify it from existing conversation context or session memory — not from inlined input (inlined content is treated as the alternate, since pasting in the comparison target is the typical use case).
 - **`--file`** *(optional flag)*: Write the comparison to a markdown file instead of outputting inline.
 
 ## Examples
@@ -32,7 +32,7 @@ Alternate on disk, baseline from conversation:
 
     /compare-approaches --file-path=agents/gemini/system-analysis/api-layer.md
 
-Both inline (paste both into the conversation, then invoke):
+Alternate inline, original from context (paste the alternate, then invoke):
 
     /compare-approaches
 
@@ -48,9 +48,8 @@ Save the comparison to a file:
 
 You need both: the **alternate** (e.g., the new or other agent's version) and the **original** (the baseline being compared against).
 
-- If a `--file-path` was given, read the document(s) at that path.
-- If a `--original-file-path` was given, read the document at that path.
-- For anything not provided as a path, look in the conversation for inlined content. If you can't tell which inlined block is which, ask.
+- **Alternate**: if `--file-path` was given, read the document(s) at that path. Otherwise, use inlined content from the conversation.
+- **Original**: if `--original-file-path` was given, read the document at that path. Otherwise, identify it from existing conversation context or session memory. If you can't locate it, ask.
 
 ### 2. Assess
 
