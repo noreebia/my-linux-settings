@@ -66,6 +66,24 @@ alias sdhomejdk8cd="cd /ePapyrus-jdk8/sd"
 alias sdhomejdk8ls="ls -al /ePapyrus-jdk8/sd"
 alias sdhomejdk8rmh2="/bin/rm -rf /ePapyrus-jdk8/sd/resources/h2/*"
 
+webrenderset() {
+    local target="/ePapyrus/sd/bin/webRender"
+    local link_path="./webRender"
+
+    # Only apply the safety guard when we'd actually be deleting something.
+    if [ -e "$link_path" ] || [ -L "$link_path" ]; then
+        if [[ "$PWD" == /ePapyrus/* ]]; then
+            echo "Error: $link_path already exists and \$PWD ($PWD) is under /ePapyrus/."
+            echo "Refusing to auto-delete inside the ePapyrus tree. Remove it manually if intended."
+            return 1
+        fi
+        echo "Removing existing $link_path..."
+        /bin/rm -rf "$link_path"
+    fi
+
+    ln -sv "$target" "$link_path"
+}
+
 alias ccp-agents="cp -r ./agents/* ~/code_linux/agents/"
 
 # Release a new version from develop to master
