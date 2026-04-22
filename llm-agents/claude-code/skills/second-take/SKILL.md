@@ -1,15 +1,15 @@
 ---
 name: second-take
 description: >
-  Produces an independent, complete document on the same topic as another agent's output —
-  a full second version (plan, analysis, or guide), not feedback. Works with content inlined in
-  the conversation or read from disk.
+  Evaluates another agent's output against independent research and responds in proportion —
+  endorsement, targeted improvements, or a full standalone alternative. Works with content
+  inlined in the conversation or read from disk.
 argument-hint: "[--file-path=<path>] [--file]"
 ---
 
 # Second-Take
 
-Produce your own complete take on the same topic as another agent's output. This isn't feedback on their work — it's your own work on the same problem, informed by having seen theirs.
+Form your own view of another agent's output and respond in proportion to what you find. The output is always grounded in your own independent research of the problem — but whether that yields an endorsement, a set of targeted improvements, or a full alternative depends on what the research actually shows.
 
 ---
 
@@ -53,16 +53,15 @@ You're not editing the original. You're writing your own version informed by hav
 
 ### 3. Produce your take
 
-Write a complete, standalone document on the same topic. Match the general category of the original (plan produces a plan, analysis produces an analysis, guide produces a guide) but don't feel bound to the same structure or scope.
+Lead with a short assessment — your verdict on the original, grounded in the research you just did: what it got right, what's weak or missing, and where you'd diverge and why. This up-front framing lets the reader see your reasoning before the output that follows.
 
-Your output should:
+Then shape the rest of the output to match what the assessment implies. Three modes:
 
-- Stand on its own — someone reading only your document should get a complete picture
-- Reflect your independent analysis, not a point-by-point response to the original
-- Incorporate what the original got right (no need to be contrarian for its own sake)
-- Diverge where your own research leads you to a different conclusion
+- **Endorse** — if the original holds up under your independent research, say so and explain why. Note minor caveats if any, but don't manufacture alternatives to appear substantive.
+- **Improve** — if the original is largely sound but has specific gaps, weaknesses, or errors, comment on those targeted improvements. Keep what works; sketch the deltas rather than rewriting the whole thing.
+- **Replace** — if your research points to a substantially different approach, write a complete, standalone alternative. Match the general category of the original (plan → plan, analysis → analysis, guide → guide) so someone reading only your document gets a complete picture.
 
-At the end, include a short **Divergence notes** section that highlights where and why your take differs from the original. Keep it factual — this helps the user compare the two takes and make a decision.
+Don't default to Replace. A second take exists to add signal, not volume — if the original is good, saying so plainly is more useful than producing a parallel document for its own sake. Pick the mode your research actually justifies, and be willing to land on Endorse when that's the honest answer.
 
 ### 4. Output or save
 

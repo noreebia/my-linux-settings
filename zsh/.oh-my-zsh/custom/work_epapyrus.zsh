@@ -99,3 +99,44 @@ release-streamdocs-packager() {
   git push origin "$1" && \
   git push origin master
 }
+
+# Usage: git-clone-branch <url> <branch> [directory]
+git-clone-branch() {
+  if [[ -z "$1" || -z "$2" ]]; then
+    echo "Usage: git-clone-branch <repo_url> <branch_name> [target_directory]"
+    return 1
+  fi
+
+  local url=$1
+  local branch=$2
+  local dir=$3
+
+  if [[ -n "$dir" ]]; then
+    # If a directory is provided, use it
+    echo "Cloning branch '$branch' into folder '$dir'..."
+    git clone --branch "$branch" --single-branch "$url" "$dir"
+  else
+    # Fallback to default Git behavior (uses repo name)
+    echo "Cloning branch '$branch' into default folder..."
+    git clone --branch "$branch" --single-branch "$url"
+  fi
+}
+
+# 2. Add a specific branch to an existing single-branch clone
+# Usage: git-add-branch <branch>
+git-add-branch() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: git-add-branch <branch_name>"
+    return 1
+  fi
+
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "Error: You are not inside a git repository."
+    return 1
+  fi
+
+  echo "Expanding local config to include: $1"
+  git remote set-branches --add origin "$1"
+  git fetch origin "$1"
+  git checkout "$1"
+}
