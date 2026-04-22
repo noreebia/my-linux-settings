@@ -49,7 +49,7 @@ This is what separates a second take from a revised draft. Go to the primary sou
 - Form your own mental model of the problem space
 - Identify things the original got right, got wrong, and missed entirely
 
-You're not editing the original. You're writing your own version informed by having seen theirs.
+You're not editing the original. You're forming your own view, informed by having seen theirs.
 
 ### 3. Produce your take
 
