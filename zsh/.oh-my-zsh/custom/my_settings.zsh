@@ -27,21 +27,21 @@ cdc() {
 }
 
 git_sync_all() {
-    # iterate over all items in the current directory
     for dir in */; do
-        # Clean up the directory name for display
         local dir_name="${dir%/}"
 
-        # Check if the directory contains a .git folder
         if [[ -d "${dir}.git" ]]; then
             echo "--- Syncing: $dir_name ---"
             (
-                # Move into directory; if it fails, skip to next
                 cd "$dir" || { echo "Error: Could not enter $dir_name"; return 1 }
-                
-                # Execute your git (hub) sync alias
-                # The '||' catch ensures the loop continues on error
-                git sync || echo "Error: 'git sync' failed in $dir_name"
+
+                git fetch --all --prune || { echo "Error: fetch failed in $dir_name"; return 1 }
+
+                if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
+                    git merge --ff-only @{u} || echo "Warning: cannot fast-forward $dir_name (diverged or has local commits)"
+                else
+                    echo "Skipping pull: no upstream for current branch in $dir_name"
+                fi
             )
         else
             echo "Skipping: $dir_name (Not a git repo)"
