@@ -48,7 +48,7 @@ If `--context` was provided, fetch it and extract relevant requirements for the 
 <2–4 sentences of prose. Lead with the user-facing or system-level impact, then the approach. Skip anything obvious from the title.>
 
 ## Context
-<Only if --context was provided. Tight summary of the requirements, or the raw URL if inaccessible.>
+<Only if --context was provided. If the context link is accessible, details about the context surrounding the changes - the issue that was raised initially in the ticket, as well as a tight summary of its history. If inaccessible, just display the raw URL in a best-effort manner.>
 
 ## Changes Made
 <Bulleted list, 4–10 items. Each bullet = one logical change. Name the file or component when it adds clarity.>
