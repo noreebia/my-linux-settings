@@ -51,7 +51,7 @@ If `--context` was provided, fetch it and extract relevant requirements for the 
 <Only if --context was provided. If the context link is accessible, details about the context surrounding the changes - the issue that was raised initially in the ticket, as well as a tight summary of its history. If inaccessible, just display the raw URL in a best-effort manner.>
 
 ## Changes Made
-<Bulleted list, 4–10 items. Each bullet = one logical change. Name the file or component when it adds clarity.>
+<What actually changed, in enough detail for a reviewer to orient themselves without diving into the diff. Group or split as clarity demands.>
 <Bad: "Updated user service" — Good: "Added `exportToCsv()` to `UserService` — streams rows to avoid memory issues on large datasets">
 ```
 
