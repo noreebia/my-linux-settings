@@ -59,8 +59,6 @@ Read each changed file **in full**. Don't rely on the diff alone. Both views mat
 
 For non-trivial changes, also pull in closely-related files the diff implies are affected — direct callers of a changed function, tests for modified logic, sibling modules in the same feature area. You're rebuilding a coherent picture, not skimming isolated files.
 
-**Opportunistically check for agent reports.** This repo's convention (see `llm-agents/CLAUDE.md`) is that agents write reports under `$AGENT_LOCAL_DIR/<category>/` (e.g., `agents/claude/code-reviews/`, `agents/claude/system-analysis/`). If recent files there appear to relate to the same change, read them too — they often explain the *why* behind edits the diff alone can't convey.
-
 ### 3. Reconcile and report
 
 This is the part that makes the skill worth running. Produce a brief reconciliation, focused on changes to *your own* understanding — not a recap of the diff:
