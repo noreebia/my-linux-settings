@@ -17,7 +17,8 @@
       "mcp__plugin_playwright_playwright",
       "mcp__claude_ai_Gmail",
       "mcp__claude_ai_Google_Calendar",
-      "mcp__ide"
+      "mcp__ide",
+      "mcp__excalidraw"
     ],
     "ask": [
       "Bash(rm -rf *)",

@@ -23,4 +23,9 @@ done
 
 cp -r ./zsh/.oh-my-zsh/* ~/.oh-my-zsh/
 
+# wsl.zsh holds WSL-only helpers (explorer.exe, wslpath); drop it on non-WSL systems.
+if ! grep -qiE "microsoft|wsl" /proc/version 2>/dev/null; then
+    rm -f ~/.oh-my-zsh/custom/wsl.zsh
+fi
+
 echo ".zshrc configuration has been completed. Run 'source ~/.zshrc' or start a new terminal to apply changes."
