@@ -5,6 +5,6 @@ if ! command -v tmux &> /dev/null; then
     sudo apt install tmux -y
 fi
 
-sudo cp ./tmux/tmux.conf /etc/tmux.conf
+cp ./tmux/tmux.conf ~/.tmux.conf
 
-echo "Tmux installed successfully by configuring /etc/tmux.conf. You can keep it there or copy it to ~/.tmux.conf for user-specific settings."
+echo "Tmux installed successfully by configuring ~/.tmux.conf. You can keep it there or modify it as needed."
