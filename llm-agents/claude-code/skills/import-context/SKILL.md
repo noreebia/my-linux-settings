@@ -1,14 +1,15 @@
 ---
 name: import-context
 description: >
-  Reads a handoff or context file in any format (session transcript, markdown notes, plain text,
-  etc.) and gets up to speed on the situation it describes, then reports what was absorbed.
-argument-hint: "<file>"
+  Reads a handoff or context source — a file in any format (session transcript, markdown notes,
+  plain text, etc.) or a whole directory — and gets up to speed on the situation it describes,
+  then reports what was absorbed.
+argument-hint: "<path>"
 ---
 
 # Import Context
 
-Get up to speed on a situation that's described in a file, so you can pick up work another agent (or an earlier session, or a human) left behind. The file is a **handoff**: someone captured the state of some effort and you're inheriting it cold.
+Get up to speed on a situation that's captured in a file — or a whole directory of files — so you can pick up work another agent (or an earlier session, or a human) left behind. The path you're given is a **handoff**: someone captured the state of some effort and you're inheriting it cold.
 
 The job is not to review, critique, or act on the file yet — it's to load its situation into your working memory accurately, then tell the user what you now understand. The next prompt should be able to proceed as if you'd been there the whole time.
 
@@ -17,13 +18,13 @@ Two things make this harder than "read a file":
 - **The format varies.** It might be a curated markdown handoff (already distilled — read it almost verbatim), a raw `.jsonl` session transcript (the signal is buried under tool-output noise), an exported chat log, a plan, a research dump, or loose notes. The reading strategy has to adapt to what you're actually holding.
 - **A handoff is a snapshot of the past.** It reflects what was true when it was written. Files, decisions, and plans it describes may have moved on since. Load-bearing claims worth acting on should be spot-checked against current reality before you build on them — see step 3.
 
-This is a **read-only** skill. It does not modify anything except by reading the file and, optionally, verifying its claims against the current state.
+This is a **read-only** skill. It does not modify anything except by reading the source and, optionally, verifying its claims against the current state.
 
 ---
 
 ## Arguments
 
-- **`<file>`** *(required)*: Path to the handoff/context file. Any format. If the path is omitted or doesn't resolve, ask the user for it rather than guessing.
+- **`<path>`** *(required)*: Path to the handoff/context source. Either a single file (any format) or a directory — if it's a directory, treat its entire contents as the context and read all of it (see step 2). If the path is omitted or doesn't resolve, ask the user for it rather than guessing.
 
 ## Examples
 
@@ -31,18 +32,24 @@ This is a **read-only** skill. It does not modify anything except by reading the
     /import-context ~/.claude/projects/my-proj/3f2a.jsonl
     /import-context notes/2026-05-30-debugging-session.txt
     /import-context session-export.md
+    /import-context handoff/
 
 ---
 
 ## Process
 
-### 1. Locate and size up the file
+### 1. Locate and size up the source
 
-Confirm the file exists and check its size and shape before reading blindly. A 200-line markdown doc and a 50,000-line `.jsonl` transcript demand completely different approaches. Glance at the first lines to identify the format — structured JSON-per-line, prose markdown, a chat export with role markers, etc.
+Confirm the path exists and check whether it's a file or a directory before reading blindly.
+
+- **A file** — check its size and shape. A 200-line markdown doc and a 50,000-line `.jsonl` transcript demand completely different approaches. Glance at the first lines to identify the format — structured JSON-per-line, prose markdown, a chat export with role markers, etc.
+- **A directory** — list its full contents (recurse into subdirectories) so you know what you're dealing with: how many files, their formats, and their sizes. The whole directory is the context, so plan to read all of it. Order your reading by signal — an obvious `README`, `SUMMARY`, `handoff`, or index file usually frames the rest, so start there, then work through the remaining files. Note the total volume; a directory of large transcripts may need the same skim-the-noise discipline as a single large file, applied across all of them.
 
 ### 2. Read adaptively by format
 
-The goal is the same regardless of format — extract the **situation**, not the bytes. What is being worked on, why, what's been decided, where it stands, what's next, what's unresolved. Match effort to signal density:
+The goal is the same regardless of format — extract the **situation**, not the bytes. What is being worked on, why, what's been decided, where it stands, what's next, what's unresolved. Match effort to signal density.
+
+If the source is a directory, apply the per-format guidance below to each file, and additionally synthesize *across* files — they're pieces of one situation, not independent documents. Watch for files that supersede or contradict each other (a later note overriding an earlier plan, a `SUMMARY` that consolidates scattered logs); reconcile them into a single coherent picture rather than reporting each in isolation.
 
 - **Curated handoff / markdown / plain notes** — Usually already distilled by whoever wrote it. Read it in full and closely; the author did the compression for you. Don't second-guess their framing, just absorb it.
 
@@ -74,4 +81,4 @@ Give the user a tight briefing that proves you're now up to speed and surfaces a
 - **What's next** — the open thread you'd be picking up, as the handoff frames it.
 - **Open questions / stale spots** — anything ambiguous, unfinished, or contradicted by your step-3 check. Flag divergence between the file and current reality explicitly, and note anything you couldn't verify.
 
-Keep it proportional to the file. A short handoff gets a short briefing. Don't pad it into a recap of everything in the file — the user has the file; what they want to know is that the situation is now in your head and what, if anything, looks off. End ready to take the next instruction.
+Keep it proportional to the source. A short handoff gets a short briefing; a sprawling directory still gets a briefing, not a file-by-file dump. Don't pad it into a recap of everything you read — the user has the source; what they want to know is that the situation is now in your head and what, if anything, looks off. End ready to take the next instruction.
