@@ -1,12 +1,12 @@
 ---
-name: load-context
+name: import-context
 description: >
   Reads a handoff or context file in any format (session transcript, markdown notes, plain text,
   etc.) and gets up to speed on the situation it describes, then reports what was absorbed.
-argument-hint: "<file> [--focus=<topic>]"
+argument-hint: "<file>"
 ---
 
-# Load Context
+# Import Context
 
 Get up to speed on a situation that's described in a file, so you can pick up work another agent (or an earlier session, or a human) left behind. The file is a **handoff**: someone captured the state of some effort and you're inheriting it cold.
 
@@ -24,15 +24,13 @@ This is a **read-only** skill. It does not modify anything except by reading the
 ## Arguments
 
 - **`<file>`** *(required)*: Path to the handoff/context file. Any format. If the path is omitted or doesn't resolve, ask the user for it rather than guessing.
-- **`--focus=<topic>`** *(optional)*: Bias the summary toward a particular thread (e.g., `--focus=auth-refactor`). Without it, cover the whole situation proportionally.
 
 ## Examples
 
-    /load-context handoff.md
-    /load-context ~/.claude/projects/my-proj/3f2a.jsonl
-    /load-context notes/2026-05-30-debugging-session.txt
-    /load-context session-export.md --focus=payment-flow
-    /load-context transcript.jsonl --focus="what's still broken"
+    /import-context handoff.md
+    /import-context ~/.claude/projects/my-proj/3f2a.jsonl
+    /import-context notes/2026-05-30-debugging-session.txt
+    /import-context session-export.md
 
 ---
 
@@ -56,8 +54,6 @@ The goal is the same regardless of format — extract the **situation**, not the
   Skim or skip bulk tool-result bodies; you rarely need a re-pasted file's full contents to understand what was happening. If the file is large, extract the high-signal turns first (e.g., filter for user/assistant message text) rather than reading every line top to bottom — but don't let extraction drop a decisive late message.
 
 - **Chat export / other** — Treat like a transcript: follow the human's intent thread and the conclusions, skip the filler.
-
-If `--focus` was given, still skim the whole file enough to place the focus in context, but spend your attention on the relevant thread.
 
 ### 3. Reconcile with current reality
 
