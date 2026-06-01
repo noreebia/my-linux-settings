@@ -2,26 +2,28 @@
 name: groom-sd-ticket
 description: >
   Grooms an ad-hoc Wrike SD:기술지원요청서 support task — pulls context from its source (parent task,
-  related tasks, or a Slack thread), then sets an accurate title, the 고객사/제품/날짜 fields, a
-  resolution body, and a completion comment crediting only the user's backend work.
+  related tasks, or a Slack thread), then sets an accurate title, the 고객사/제품/날짜 fields, an
+  assignee, a resolution body, and a completion comment that centres the invoker's own contribution
+  while still crediting the other actors.
 argument-hint: "[--task=<url>] [--parent=<url>] [--context=<url>] [--no-comment]"
 ---
 
 # Groom SD Ticket
 
-The user is a **backend engineer** on the 솔루션개발 team. After finishing a piece of support work, they
-retro-create a thin child task under the **SD:기술지원요청서** register so a manager has a clean, visible
-record of it. These children start as near-empty stubs — title copied from the parent, no fields. This
-skill turns one into a ticket that reads as if it were filed and worked organically.
+The invoker handles software support requests and, after finishing a piece of work, retro-creates a
+thin child task under the **SD:기술지원요청서** register so a manager has a clean, visible record of it.
+These children start as near-empty stubs — title copied from the parent, no fields. This skill turns
+one into a ticket that reads as if it were filed and worked organically.
 
-Resolve **the user's own Wrike contact id once at the start** with `wrike_get_my_contact_id`, and reuse
-it throughout (referred to below as `<me>`) — for the assignee, and for telling the user's comments
-apart from everyone else's. Don't hardcode an id; it's account-specific and would break this skill for
-anyone else or after a token change.
+**Resolve the invoker's identity once at the start** with `wrike_get_my_contact_id` (referred to below
+as `<me>`). Don't hardcode an id — it's account-specific and would break this skill for anyone else or
+after a token change. Their *role* is likewise not hardcoded: infer it from the source thread (see
+step 2). `<me>` is what lets the skill centre the right person no matter who runs it.
 
 The guiding constraint: **the work is real, only the ticket is late.** Groom truthfully. Don't invent
-work, don't inflate the user's role, and don't mark an unfinished task as done. A manager skimming
-these should come away with an accurate picture, not a flattering one.
+work, don't inflate the invoker's role, and don't mark an unfinished task as done. A manager skimming
+these should come away with an accurate picture of who did what — not one where the invoker appears to
+have done everything.
 
 ---
 
@@ -73,17 +75,34 @@ The child is a stub; the story lives in its source. Where to look, in rough orde
 Read until you can answer four things: what was requested, **what was actually done**, which version it
 shipped in, and when work started and finished.
 
-## 2. Attribute honestly — backend only
+## 2. Map who did what — then centre the invoker
 
-This is the part that's easy to get wrong and matters most to the user. Support threads involve many
-people: PS부 relays the request, FE/pdfio/스마트오피스 teams handle their layers, the customer does the
-rollout. Read the thread and separate the user's contribution from everyone else's.
+This is the part that's easy to get wrong and matters most. A support thread is a cast of people: the
+requester relays the issue, different teams (back-end, front-end, a conversion/module team, an external
+partner) handle their own layers, and the customer does the rollout. The ticket should foreground the
+**invoker's** contribution — it's their record — while still attributing the rest accurately, so it
+reads as a true account rather than the invoker claiming everyone's work.
 
-Credit the user (`<me>`) with **only their backend work** — analysis, DB/DDL, server-side API and logic
-changes, packaging. Do not phrase an FE patch, a pdfio interface, another team's diagnosis, or the
-customer's production rollout as theirs. Name collaborators explicitly in a `[비고]` line so the
-division of labour is visible. If the user's role was advisory or analysis only, say exactly that —
-an honest "1차 분석" reads better to a manager than a vague claim of completion.
+Two things to infer from the source, not assume:
+
+- **Which actor is the invoker.** Match `<me>` against the comment authors (`author.id` in
+  `wrike_get_task_comments`, or the display name in Slack). Their own messages are the ground truth for
+  what they personally did — the fix they describe, the version they say they shipped, the analysis
+  they walked through.
+- **What everyone else did.** The other participants' messages reveal their roles and contributions —
+  a module-team member describing their binary fix, a front-end engineer mentioning a client build, a
+  partner reporting the customer rollout.
+
+Then write the credit so the division of labour is honest:
+
+- Attribute to the invoker **only what their own messages show they did**, and describe the body from
+  that vantage point (e.g. `[역할]` reflects their actual part — backend, analysis, packaging,
+  advisory, whatever the thread shows).
+- Name the other actors and their contributions explicitly — a `[비고]` line, or inline ("…module-side
+  fix by the 스마트오피스팀"). The test: a reader should be able to tell the invoker's work from the
+  collaborators' at a glance.
+- If the invoker's part was analysis or advisory only, say exactly that. An honest "1차 분석" or
+  "사양 검토" reads better to a manager than a vague implication of a completed fix.
 
 ## 3. Set the fields and body (Wrike MCP)
 
@@ -99,8 +118,8 @@ right:
 Beyond these, make sure the stub has the basics a real ticket carries — don't leave a groomed task
 looking half-filled:
 
-- **assignee** — if unset, assign the user with `addResponsibles: ["<me>"]` (the id resolved up front).
-  It's their work and their record, so they should own it.
+- **assignee** — if unset, assign the invoker with `addResponsibles: ["<me>"]` (the id resolved up
+  front). It's their work and their record, so they should own it.
 - **the standard request fields** — these stubs descend from a 기술지원요청서 template that also has
   요청부서(팀) (`IEAAOKQMJUAHWAQY`, DropDown) and sometimes 납품 버전(SD) (`IEAAOKQMJUAA2SMX`). If the
   parent populated them and the child is blank, copy them across. Run `wrike_get_custom_fields` to
@@ -114,16 +133,17 @@ looking half-filled:
 - **고객사** — often only stated in the Slack thread or a comment, not a field. Pull it from there.
 - **dates** — set Planned with `start` = when work began and `due` = the completion date. For start,
   prefer a concrete signal: the request 접수 date, the first 회의, or — when those are murky — the
-  user's *own* first comment in the thread (filter to author `<me>`). Use a Milestone only if no
+  invoker's *own* first comment in the thread (filter to author `<me>`). Use a Milestone only if no
   start is recoverable.
 - **status** — `Completed` for finished work; leave `Active` or `Cancelled` if that's the truth.
 - **title** — rewrite to say what was done, with the shipped version, e.g.
   `강원특별자치도교육청 - SDVu so4sdv 비정상 종료코드 예외 세분화 (5.15.6.13)`. Caution: a literal `+`
   in a title gets form-decoded by the API into a stray double-space — write `및` or `and` instead.
 - **description** — a Korean HTML write-up (`<b>`, `<br/>`, `<ul><li>`) with sections roughly:
-  `[고객사]`, `[제품]`, `[역할] 백엔드`, `[요청]`, `[처리 내용 — 백엔드]`, `[반영 버전]`, `[완료일]`,
-  and `[비고]` for collaborators. If the task already holds real content (e.g. an API spec the user
-  wrote), **prepend** a summary block and keep the original below a divider — don't clobber it.
+  `[고객사]`, `[제품]`, `[역할]` (the invoker's actual part from step 2), `[요청]`, `[처리 내용]`,
+  `[반영 버전]`, `[완료일]`, and `[비고]` for collaborators. If the task already holds real content
+  (e.g. an API spec the invoker wrote), **prepend** a summary block and keep the original below a
+  divider — don't clobber it.
 
 ## 4. Post a completion comment (unless `--no-comment`)
 
@@ -156,15 +176,17 @@ or a start date based on your best guess.
 A representative run — stub in, groomed ticket out.
 
 **Input** — child stub `4467311854`, title `"SDVu SmartOffice converter 예외 처리되지 않는 현상"`, no
-fields. Its parent's comment thread shows: customer 강원특별자치도교육청; the user added error code
-`BSD110010` for abnormal so4sdv exit codes; shipped in StreamDocs 5.15.6.13 on 2026-03-25.
+fields. Matching `<me>` against the parent's comment authors shows the invoker is the back-end engineer
+on the thread: their messages describe adding error code `BSD110010` for abnormal so4sdv exit codes,
+shipped in StreamDocs 5.15.6.13 on 2026-03-25. A separate author from the 스마트오피스팀 describes the
+module-side fix to so4sdv itself.
 
 **Output:**
 - title → `강원특별자치도교육청 - SDVu SmartOffice(so4sdv) 비정상 종료코드 예외 세분화 (BSD110010, 5.15.6.13)`
 - 고객사 → `강원특별자치도교육청` · 제품 → `["StreamDocs","StreamDocs Vu!"]` · 작업 완료일 → `2026-03-25`
-- dates → Planned, start `2026-01-26` (request 접수) → due `2026-03-25` · status → Completed
-- body → `[처리 내용 — 백엔드]` describing the new exit-code handling, with a `[비고]` noting the
-  스마트오피스팀's module-side fix as theirs.
+- assignee → the invoker (`<me>`) · dates → Planned, start `2026-01-26` (request 접수) → due `2026-03-25` · status → Completed
+- body → `[역할] 백엔드`, `[처리 내용]` describing the new exit-code handling, with a `[비고]` crediting
+  the 스마트오피스팀's module-side fix to them — not folded into the invoker's work.
 - comment → `[처리 결과]` + bullets on cause, the BSD110010 addition, and the shipped version.
 
 ---
