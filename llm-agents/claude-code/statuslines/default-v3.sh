@@ -388,16 +388,15 @@ render_segment() {
       # with a warning glyph once we cross the 200k auto-compact danger zone.
       local pct="${CTX_PCT:-0}"
       [[ "$pct" =~ ^[0-9]+$ ]] || pct=0
-      local bar color warn=""
+      local bar color
       bar=$(make_bar "$pct" 10)
       color=$(pct_color "$pct")
-      [[ "$EXCEEDS_200K" == "true" ]] && warn=" ⚠"
       local detail=""
       if (( CTX_SIZE > 0 )); then
         local used=$(( CTX_IN + CTX_OUT ))
         detail=" ($(format_k "$used")/$(format_k "$CTX_SIZE"))"
       fi
-      format_with_info "${bar} ${pct}% ctx${detail}${warn}" "$color" "context"
+      format_with_info "${bar} ${pct}% ctx${detail}" "$color" "context"
       ;;
 
     cost)
