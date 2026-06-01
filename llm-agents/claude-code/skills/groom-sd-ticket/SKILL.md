@@ -137,8 +137,11 @@ looking half-filled:
   start is recoverable.
 - **status** — `Completed` for finished work; leave `Active` or `Cancelled` if that's the truth.
 - **title** — rewrite to say what was done, with the shipped version, e.g.
-  `강원특별자치도교육청 - SDVu so4sdv 비정상 종료코드 예외 세분화 (5.15.6.13)`. Caution: a literal `+`
-  in a title gets form-decoded by the API into a stray double-space — write `및` or `and` instead.
+  `SDVu so4sdv 비정상 종료코드 예외 세분화 (5.15.6.13)`. **Don't prefix the 고객사 name** — the manager
+  reads the customer from the 고객사 field, so repeating it in the title is just clutter. (A system name
+  like `홈택스` that *is* the work context is fine; the customer org name — `삼성증권`, `국세청` — is not.)
+  Caution: a literal `+` in a title gets form-decoded by the API into a stray double-space — write `및`
+  or `and` instead.
 - **description** — a Korean HTML write-up (`<b>`, `<br/>`, `<ul><li>`) with sections roughly:
   `[고객사]`, `[제품]`, `[역할]` (the invoker's actual part from step 2), `[요청]`, `[처리 내용]`,
   `[반영 버전]`, `[완료일]`, and `[비고]` for collaborators. If the task already holds real content
@@ -182,7 +185,7 @@ shipped in StreamDocs 5.15.6.13 on 2026-03-25. A separate author from the 스마
 module-side fix to so4sdv itself.
 
 **Output:**
-- title → `강원특별자치도교육청 - SDVu SmartOffice(so4sdv) 비정상 종료코드 예외 세분화 (BSD110010, 5.15.6.13)`
+- title → `SDVu SmartOffice(so4sdv) 비정상 종료코드 예외 세분화 (BSD110010, 5.15.6.13)` (no 고객사 prefix — it lives in the 고객사 field)
 - 고객사 → `강원특별자치도교육청` · 제품 → `["StreamDocs","StreamDocs Vu!"]` · 작업 완료일 → `2026-03-25`
 - assignee → the invoker (`<me>`) · dates → Planned, start `2026-01-26` (request 접수) → due `2026-03-25` · status → Completed
 - body → `[역할] 백엔드`, `[처리 내용]` describing the new exit-code handling, with a `[비고]` crediting
@@ -196,7 +199,10 @@ module-side fix to so4sdv itself.
 - Folders: **SD:기술지원요청서** = `MQAAAAEEuLo3` (where these children live); the original
   **SS:기술지원요청서** register = `IEAAOKQMI5PTT7DR`. `addParents` files a task into a folder, which
   also lifts it off the account root.
-- Linking a child *as a subtask* of a parent (`superTaskIds`) isn't exposed by the MCP `update_task` —
-  if a stub needs that relationship and doesn't have it, note it for the user to set in the web UI.
+- Linking a child *as a subtask* of a parent isn't exposed by `wrike_update_task` (no `superTaskIds`
+  param). But `wrike_create_task` **does** accept `parentTasks` — so when you create a fresh stub you can
+  link it as a subtask of the source request at creation time (and `folderId` files it into the SD
+  register in the same call). The limitation only bites when grooming a *pre-existing* stub that already
+  lacks the relationship: there, note it for the user to set in the web UI.
 - For file attachments (download/upload), which the MCP also can't do, see the `wrike-attachments`
   skill in the same scripts directory.

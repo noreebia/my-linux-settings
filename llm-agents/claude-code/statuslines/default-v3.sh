@@ -263,19 +263,20 @@ get_git_info() {
 calculate_usage() {
   local default_reset=$((SESSION_HOURS * 3600))
 
-  local project_subdir
-  if [[ -n "$CURRENT_DIR" ]]; then
-    project_subdir=$(echo "$CURRENT_DIR" | sed 's|[^a-zA-Z0-9-]|-|g')
-  fi
-
-  local project_path="$HOME/.claude/projects/${project_subdir}"
-  if [[ -z "$project_subdir" || ! -d "$project_path" ]]; then
+  # The 5-hour quota is ACCOUNT-WIDE, not per-project: it pools usage across every
+  # session in every working directory. So scan ALL project folders, not just the
+  # one matching $CURRENT_DIR. This also makes the number independent of where
+  # Claude was launched from — a home-dir launch previously keyed to an empty/
+  # different project slug and showed 0/0. Records are deduped by message-id below,
+  # which is globally unique, so cross-project merging is safe.
+  local projects_root="$HOME/.claude/projects"
+  if [[ ! -d "$projects_root" ]]; then
     echo "0 0 $default_reset"
     return
   fi
 
   local result
-  result=$(find "$project_path" -maxdepth 1 -name "*.jsonl" -type f -mtime -4 2>/dev/null \
+  result=$(find "$projects_root" -mindepth 2 -maxdepth 2 -name "*.jsonl" -type f -mtime -4 2>/dev/null \
     | while IFS= read -r f; do cat "$f"; done 2>/dev/null \
     | jq -R -c 'try (fromjson | select(.type == "assistant" and .message.usage != null))' 2>/dev/null \
     | jq -s --argjson sh "$SESSION_HOURS" --arg token_mode "$TOKEN_MODE" '
