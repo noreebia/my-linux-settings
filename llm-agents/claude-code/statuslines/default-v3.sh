@@ -23,7 +23,10 @@
 # payload, so it stays. Context % (this conversation) and the 5h window (your plan's
 # rolling quota) answer different questions; v3 shows both.
 #
-# Displays (default): dir · git · model · context · cost · tokens · msgs · reset
+# Displays (default): dir · git · model · context · tokens · msgs · reset
+# (the "cost" segment exists but is OFF by default — see CLAUDE_STATUS_SEGMENTS
+#  to re-enable it; intentionally hidden so a subscription user isn't nudged by a
+#  per-session dollar figure that doesn't reflect their actual billing.)
 #
 # Environment Variables:
 #   CLAUDE_STATUS_DISPLAY_MODE - colors (default), minimal, or background
@@ -34,7 +37,8 @@
 #                                split across lines. Available segments:
 #                                  dir git model context cost lines duration
 #                                  tokens msgs reset style version
-#                                Default: "dir,git,model,context,cost,tokens,msgs,reset"
+#                                Default: "dir,git,model,context,tokens,msgs,reset"
+#                                (add "cost" to this list to show $/session)
 #   CLAUDE_STATUS_GIT_CACHE_TTL- seconds to cache git state per session (default 2)
 
 command -v jq &>/dev/null || { echo "Please install jq dependency for correct statusline display"; exit 0; }
@@ -46,7 +50,7 @@ DISPLAY_MODE="${CLAUDE_STATUS_DISPLAY_MODE:-colors}"
 INFO_MODE="${CLAUDE_STATUS_INFO_MODE:-none}"
 PLAN="${CLAUDE_STATUS_PLAN:-${CLAUDE_PLAN:-${CLAUDE_CODE_PLAN:-max5}}}"
 TOKEN_MODE="${CLAUDE_STATUS_TOKEN_MODE:-output}"
-SEGMENTS="${CLAUDE_STATUS_SEGMENTS:-dir,git,model,context,cost,tokens,msgs,reset}"
+SEGMENTS="${CLAUDE_STATUS_SEGMENTS:-dir,git,model,context,tokens,msgs,reset}"
 GIT_CACHE_TTL="${CLAUDE_STATUS_GIT_CACHE_TTL:-2}"
 SESSION_HOURS=5
 
