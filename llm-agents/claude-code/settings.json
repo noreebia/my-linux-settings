@@ -23,6 +23,6 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statuslines/default-v2.sh"
+    "command": "~/.claude/statuslines/default-v3.sh"
   }
 }
