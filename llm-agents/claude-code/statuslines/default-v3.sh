@@ -125,7 +125,7 @@ case "$DISPLAY_MODE" in
     C_COST='\033[38;5;114m'; C_LINES='\033[38;5;245m'; C_DURATION='\033[38;5;180m'
     C_STYLE='\033[38;5;177m'; C_VERSION='\033[38;5;240m'
     C_GIT_OK='\033[38;5;154m'; C_GIT_DIRTY='\033[38;5;222m'
-    C_WARN='\033[38;5;203m'; C_OK='\033[38;5;154m'
+    C_WARN='\033[38;5;203m'; C_OK='\033[38;5;114m'
     C_GRAY='\033[90m'; C_RESET='\033[0m'
     ;;
 esac
