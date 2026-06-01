@@ -9,11 +9,15 @@ argument-hint: "[--task=<url>] [--parent=<url>] [--context=<url>] [--no-comment]
 
 # Groom SD Ticket
 
-The user (김수영B 책임, contact `KUAW2WF6`) is a **backend engineer** on the 솔루션개발 team. After
-finishing a piece of support work, they retro-create a thin child task under the **SD:기술지원요청서**
-register so a manager has a clean, visible record of it. These children start as near-empty stubs —
-title copied from the parent, no fields. This skill turns one into a ticket that reads as if it were
-filed and worked organically.
+The user is a **backend engineer** on the 솔루션개발 team. After finishing a piece of support work, they
+retro-create a thin child task under the **SD:기술지원요청서** register so a manager has a clean, visible
+record of it. These children start as near-empty stubs — title copied from the parent, no fields. This
+skill turns one into a ticket that reads as if it were filed and worked organically.
+
+Resolve **the user's own Wrike contact id once at the start** with `wrike_get_my_contact_id`, and reuse
+it throughout (referred to below as `<me>`) — for the assignee, and for telling the user's comments
+apart from everyone else's. Don't hardcode an id; it's account-specific and would break this skill for
+anyone else or after a token change.
 
 The guiding constraint: **the work is real, only the ticket is late.** Groom truthfully. Don't invent
 work, don't inflate the user's role, and don't mark an unfinished task as done. A manager skimming
@@ -75,7 +79,7 @@ This is the part that's easy to get wrong and matters most to the user. Support 
 people: PS부 relays the request, FE/pdfio/스마트오피스 teams handle their layers, the customer does the
 rollout. Read the thread and separate the user's contribution from everyone else's.
 
-Credit `KUAW2WF6` with **only their backend work** — analysis, DB/DDL, server-side API and logic
+Credit the user (`<me>`) with **only their backend work** — analysis, DB/DDL, server-side API and logic
 changes, packaging. Do not phrase an FE patch, a pdfio interface, another team's diagnosis, or the
 customer's production rollout as theirs. Name collaborators explicitly in a `[비고]` line so the
 division of labour is visible. If the user's role was advisory or analysis only, say exactly that —
@@ -95,8 +99,8 @@ right:
 Beyond these, make sure the stub has the basics a real ticket carries — don't leave a groomed task
 looking half-filled:
 
-- **assignee** — if unset, assign the user with `addResponsibles: ["KUAW2WF6"]`. (It's their work and
-  their record, so they should own it.)
+- **assignee** — if unset, assign the user with `addResponsibles: ["<me>"]` (the id resolved up front).
+  It's their work and their record, so they should own it.
 - **the standard request fields** — these stubs descend from a 기술지원요청서 template that also has
   요청부서(팀) (`IEAAOKQMJUAHWAQY`, DropDown) and sometimes 납품 버전(SD) (`IEAAOKQMJUAA2SMX`). If the
   parent populated them and the child is blank, copy them across. Run `wrike_get_custom_fields` to
@@ -110,7 +114,7 @@ looking half-filled:
 - **고객사** — often only stated in the Slack thread or a comment, not a field. Pull it from there.
 - **dates** — set Planned with `start` = when work began and `due` = the completion date. For start,
   prefer a concrete signal: the request 접수 date, the first 회의, or — when those are murky — the
-  user's *own* first comment in the thread (filter to author `KUAW2WF6`). Use a Milestone only if no
+  user's *own* first comment in the thread (filter to author `<me>`). Use a Milestone only if no
   start is recoverable.
 - **status** — `Completed` for finished work; leave `Active` or `Cancelled` if that's the truth.
 - **title** — rewrite to say what was done, with the shipped version, e.g.
