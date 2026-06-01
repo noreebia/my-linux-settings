@@ -136,6 +136,16 @@ looking half-filled:
   invoker's *own* first comment in the thread (filter to author `<me>`). Use a Milestone only if no
   start is recoverable.
 - **status** — `Completed` for finished work; leave `Active` or `Cancelled` if that's the truth.
+- **SD: Kanban board (the task's "location")** — the team tracks work by month, so each task should sit
+  in the monthly board that matches *when the work happened*. Pick the month from 작업 완료일 for finished
+  work (fall back to the due/completion month); for in-progress work use the Planned `start` month, else
+  the created month. File it with `addParents: ["<board id>"]` — additive, so it won't disturb the SS
+  register parent or the subtask link. Find the id with
+  `wrike_search_folder_project(title="Kanban", project=true)` and take the `SD: Kanban-{Month}` entry —
+  ignore the `CS:` / `SO:` / `kanban-HK-*` / `kanban-VI-*` boards (other teams and partners). Boards are
+  per-month and new ones appear each month, so look the id up rather than hardcoding. If the task already
+  sits in a *different* month's board with nothing supporting that month, move it (`removeParents` the
+  wrong one); flag genuine multi-month spans for the user instead of force-moving.
 - **title** — rewrite to say what was done, with the shipped version, e.g.
   `SDVu so4sdv 비정상 종료코드 예외 세분화 (5.15.6.13)`. **Don't prefix the 고객사 name** — the manager
   reads the customer from the 고객사 field, so repeating it in the title is just clutter. (A system name
@@ -188,6 +198,7 @@ module-side fix to so4sdv itself.
 - title → `SDVu SmartOffice(so4sdv) 비정상 종료코드 예외 세분화 (BSD110010, 5.15.6.13)` (no 고객사 prefix — it lives in the 고객사 field)
 - 고객사 → `강원특별자치도교육청` · 제품 → `["StreamDocs","StreamDocs Vu!"]` · 작업 완료일 → `2026-03-25`
 - assignee → the invoker (`<me>`) · dates → Planned, start `2026-01-26` (request 접수) → due `2026-03-25` · status → Completed
+- location → filed into the `SD: Kanban-March` board (work completed 2026-03-25) via `addParents`
 - body → `[역할] 백엔드`, `[처리 내용]` describing the new exit-code handling, with a `[비고]` crediting
   the 스마트오피스팀's module-side fix to them — not folded into the invoker's work.
 - comment → `[처리 결과]` + bullets on cause, the BSD110010 addition, and the shipped version.
