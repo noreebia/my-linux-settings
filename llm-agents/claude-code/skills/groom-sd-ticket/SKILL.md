@@ -23,23 +23,35 @@ these should come away with an accurate picture, not a flattering one.
 
 ## Arguments
 
-- **`--task=<url>`** *(optional)*: The child task to groom (Wrike permalink or numeric id). The skill
-  reads its current state and infers its own context source from the body/parent.
-- **`--parent=<url>`** *(optional)*: A source/parent task. Used as the explicit context source, and —
-  if no `--task` is given — to locate the child(ren) created under it.
+- **`--task=<url>[,<url>…]`** *(optional)*: One or more child tasks to groom (Wrike permalink or
+  numeric id, comma-separated for a batch). Each is groomed independently against its own source.
+- **`--parent=<url>[,<url>…]`** *(optional)*: One or more source/parent tasks. Used as the explicit
+  context source, and — if no `--task` is given — to locate the child(ren) created under each.
 - **`--context=<url>`** *(optional)*: Force a specific source — a Slack permalink or another Wrike task
-  — when the stub doesn't make the source obvious.
-- **`--no-comment`** *(optional)*: Update fields/body only; skip the completion comment.
+  — when the stub doesn't make the source obvious. Applies to a single `--task`; for a batch where each
+  task needs a different source, run them separately or let the skill infer each source from its stub.
+- **`--no-comment`** *(optional)*: Update fields/body only; skip the completion comment. Applies to the
+  whole batch.
 - At least one of `--task` or `--parent` is required.
 
 ## Examples
 
     /groom-sd-ticket --task=https://www.wrike.com/open.htm?id=4467337026
+    /groom-sd-ticket --task=https://www.wrike.com/open.htm?id=4467337026,https://www.wrike.com/open.htm?id=4467337225,4467337349
     /groom-sd-ticket --parent=https://www.wrike.com/open.htm?id=4344579136
     /groom-sd-ticket --task=https://www.wrike.com/open.htm?id=4467440625 --context=https://epapyrus.slack.com/archives/C06UYKENQ5D/p1775037066332159
     /groom-sd-ticket --task=https://www.wrike.com/open.htm?id=4467337349 --no-comment
 
 ---
+
+## Batches
+
+When `--task`/`--parent` carries several comma-separated links, groom each one independently — they
+rarely share a customer, product, or version. It's efficient to fetch all the stubs (and their parents)
+up front in one or two `wrike_get_tasks` calls to map the work, then go through them one at a time
+applying steps 1–4. A parent's full comment thread can be large, so reading parents one at a time (or
+via a subagent that returns just the distilled facts) keeps context manageable. End with a single
+combined report (step 5) covering every task and its judgment calls.
 
 ## 1. Find the real context
 
