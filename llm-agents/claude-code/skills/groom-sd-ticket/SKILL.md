@@ -92,6 +92,17 @@ right:
 | 제품 | `IEAAOKQMJUAHWAAT` | **Multiple** | a JSON-array **string** — `"[\"StreamDocs\",\"StreamDocs Vu!\"]"` |
 | 작업 완료일 | `IEAAOKQMJUAMOH6K` | Date | `"2026-04-13"` |
 
+Beyond these, make sure the stub has the basics a real ticket carries — don't leave a groomed task
+looking half-filled:
+
+- **assignee** — if unset, assign the user with `addResponsibles: ["KUAW2WF6"]`. (It's their work and
+  their record, so they should own it.)
+- **the standard request fields** — these stubs descend from a 기술지원요청서 template that also has
+  요청부서(팀) (`IEAAOKQMJUAHWAQY`, DropDown) and sometimes 납품 버전(SD) (`IEAAOKQMJUAA2SMX`). If the
+  parent populated them and the child is blank, copy them across. Run `wrike_get_custom_fields` to
+  confirm an id or its allowed options before setting a field you're unsure of — don't guess an
+  encoding. Skip fields that genuinely don't apply rather than inventing values.
+
 - **제품** — copy the source task's exact value. Product names must match the field's options verbatim,
   including the `!` in `StreamDocs Vu!`. If a parent is mis-tagged (one KC parent carried `LiJaMong`
   when the work was clearly StreamDocs Vu!), use what the work actually was, not the bad tag — and flag
