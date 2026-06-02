@@ -1,0 +1,16 @@
+[tui]
+# Compact, high-signal Codex footer inspired by the Claude statusline:
+# model/effort, live context, usage windows, tokens, repo identity, task/run state.
+status_line_use_colors = true
+status_line = [
+  "model-with-reasoning",
+  "fast-mode",
+  "context-remaining",
+  "five-hour-limit",
+  "weekly-limit",
+  "used-tokens",
+  "project-name",
+  "git-branch",
+  "task-progress",
+  "run-state",
+]
