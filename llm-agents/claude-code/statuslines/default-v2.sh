@@ -117,11 +117,17 @@ format_count() {
 
 # --- Git info ---
 get_git_info() {
-  [[ -z "$CURRENT_DIR" || ! -d "$CURRENT_DIR/.git" ]] && return 1
+  [[ -z "$CURRENT_DIR" ]] && return 1
 
+  # Let git be the source of truth, not a `-d .git` filesystem check: `.git` is
+  # only a directory at the repo ROOT with a standard layout. It's absent in
+  # subdirectories (the common case), and a FILE (not a dir) in worktrees and
+  # submodules — so the old check silently hid the branch in all of those.
   local branch indicators=""
   branch=$(git -C "$CURRENT_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null) || return 1
   [[ -z "$branch" ]] && return 1
+  # Detached HEAD reports the literal "HEAD"; show a short SHA instead.
+  [[ "$branch" == "HEAD" ]] && branch="@$(git -C "$CURRENT_DIR" rev-parse --short HEAD 2>/dev/null)"
 
   local status
   status=$(git -C "$CURRENT_DIR" status --porcelain 2>/dev/null) || true
