@@ -136,10 +136,15 @@ looking half-filled:
   invoker's *own* first comment in the thread (filter to author `<me>`). Use a Milestone only if no
   start is recoverable.
 - **status** — `Completed` for finished work; leave `Active` or `Cancelled` if that's the truth.
-- **SD: Kanban board (the task's "location")** — the team tracks work by month, so each task should sit
-  in the monthly board that matches *when the work happened*. Pick the month from 작업 완료일 for finished
-  work (fall back to the due/completion month); for in-progress work use the Planned `start` month, else
-  the created month. File it with `addParents: ["<board id>"]` — additive, so it won't disturb the SS
+- **SD: Kanban board (the task's "location")** — **only the child work-record gets a month board; the
+  parent 기술지원요청서 must not.** You can tell them apart by type: an intake request is a Wrike *custom
+  item type* (`customItemTypeId` set — "Request" `IEAAOKQMPIAIRTVP` or the legacy "Story"
+  `IEAAOKQMPIAD6P7D`), whereas a child work-record is a plain task with no `customItemTypeId`. So file a
+  groomed *child*; if you're pointed at a parent request, leave its location alone (and if a prior pass
+  wrongly added a board to a request, `removeParents` it). The team tracks work by month, so the child
+  should sit in the monthly board that matches *when the work happened*. Pick the month from 작업 완료일
+  for finished work (fall back to the due/completion month); for in-progress work use the Planned `start`
+  month, else the created month. File it with `addParents: ["<board id>"]` — additive, so it won't disturb the SS
   register parent or the subtask link. Find the id with
   `wrike_search_folder_project(title="Kanban", project=true)` and take the `SD: Kanban-{Month}` entry —
   ignore the `CS:` / `SO:` / `kanban-HK-*` / `kanban-VI-*` boards (other teams and partners). Boards are
