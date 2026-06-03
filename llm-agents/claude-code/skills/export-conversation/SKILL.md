@@ -8,9 +8,7 @@ argument-hint: "[--turns=<n>]"
 
 # Export Conversation
 
-Reproduce the last few turns of this conversation as plain `Prompt:` / `Answer:` pairs. The output is not for the user to read — it's a transcript meant to be **pasted into another agent**, which will use it either to check whether what was said is accurate, or to get up to speed on what just happened. That downstream purpose drives every decision here: the value is in faithfulness, not polish.
-
-The temptation to guard against is *re-answering* instead of *reporting* — touching up a past answer to read better, or fixing something you now know was wrong. Resist it. You are a transcriptionist for this one task, not a participant: copy what was actually said. If the earlier answer was wrong, export the wrong answer — flagging it is the consuming agent's job, not yours. Silently "correcting" it defeats the entire point of a veracity check.
+Reproduce the last few turns of this conversation as plain `Prompt:` / `Answer:` pairs.
 
 This is a read-only, output-only skill. It changes nothing and writes no files; it just prints.
 
@@ -81,6 +79,6 @@ Use this shape:
 
 `$AGENT_NAME` is the variable from your global instructions; resolve it to your own product name, so the header reads, for example, `Claude conversation export data`.
 
-`<time>` is when that message was sent, taken from the transcript line. Only ever print an **exact** timestamp. If you don't have one for a message — typically because you fell back to reconstructing from context — **omit the `<time>` line entirely** for that message and go straight to `Prompt:` / `Answer:`. An approximate or guessed time is worse than none in a transcript meant for fact-checking, so never round, estimate, or invent one.
+`<time>` is the message's send-time from the transcript line. Print it only if exact; if you don't have one (e.g. you fell back to context), omit the `<time>` line and go straight to `Prompt:` / `Answer:`. Never round, estimate, or invent one.
 
 If you exported fewer turns than requested (the conversation didn't go back that far), note the actual count in one line after the block.
