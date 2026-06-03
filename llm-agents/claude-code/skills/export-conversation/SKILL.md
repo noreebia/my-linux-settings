@@ -10,7 +10,7 @@ argument-hint: "[--turns=<n>]"
 
 Reproduce the last few turns of this conversation as plain `Prompt:` / `Answer:` pairs. The output is not for the user to read — it's a transcript meant to be **pasted into another agent**, which will use it either to check whether what was said is accurate, or to get up to speed on what just happened. That downstream purpose drives every decision here: the value is in faithfulness, not polish.
 
-The catch is that you are reconstructing this from your own context window, which makes it tempting to *re-answer* instead of *report*. Resist that. You are a transcriptionist for this one task, not a participant. If the earlier answer was wrong, export the wrong answer — flagging it is the consuming agent's job, not yours. Silently "correcting" it defeats the entire point of a veracity check.
+The temptation to guard against is *re-answering* instead of *reporting* — touching up a past answer to read better, or fixing something you now know was wrong. Resist it. You are a transcriptionist for this one task, not a participant: copy what was actually said. If the earlier answer was wrong, export the wrong answer — flagging it is the consuming agent's job, not yours. Silently "correcting" it defeats the entire point of a veracity check.
 
 This is a read-only, output-only skill. It changes nothing and writes no files; it just prints.
 
@@ -38,6 +38,15 @@ A **turn** is one user prompt plus the full response you gave to it. Count and r
 - **Ignore non-user noise.** System reminders, hook output, and injected context are not user prompts. The prompt is what the human actually typed (or the slash command they actually invoked).
 - **If the user typed a slash command**, the prompt is that command as they wrote it (e.g. `/some-skill --flag`), not the expanded skill instructions.
 
+## Where to read from
+
+Your most faithful source is the **session transcript on disk**, not your recollection of the conversation. This matters more than it first seems: in a long session your context may have been compacted — older turns replaced by a summary — so "what you remember" can already be lossy paraphrase, while the transcript holds the exact original text and the real per-message send-times. Reading it is what makes this export trustworthy enough to check facts against. Reconstructing from memory is the path that invites drift, so treat it as a fallback, not the default.
+
+- **Find your own session's transcript.** For Claude Code it's a `.jsonl` file (one JSON object per line) under `~/.claude/projects/<project-dir>/`; the current session is the most recently modified one — and it should end with this very `/export-conversation` call, which is a quick way to confirm you have the right file. Other agents keep an equivalent session log in their own config dir (Codex, for instance, under `~/.codex/sessions/`); locate yours the same way. Don't hard-code another agent's path.
+- **Pull prompt and answer text verbatim from it**, skipping the noise. Each line is a user message, an assistant message (possibly carrying tool calls), a tool result, or metadata. Take the user's text for `Prompt:` and your response text for `Answer:`, and ignore tool-call and tool-result bodies — same discipline as reading any transcript: follow the human turns and the assistant's stated responses, drop the bulk tool output.
+- **Take each `<time>` straight from the transcript line.** That send-time is the only trustworthy source for the timestamp.
+- **Fallback:** if you truly can't locate or read the transcript, reconstruct from context as a last resort — and say so in the output, so the consumer knows that block is memory-derived rather than verbatim.
+
 ## How to reproduce each turn
 
 **Prompt** — the user's input, verbatim. Don't summarize, clean up, or paraphrase it. Strip only harness-injected wrappers (system reminders, tags the user didn't type); keep the human's actual words intact.
@@ -54,7 +63,7 @@ Open with a header line naming yourself (the exporting agent), then emit each pr
 Use this shape:
 
     ```
-    <agent name> conversation export data
+    $AGENT_NAME conversation export data
 
     <time>
     Prompt: <verbatim user input>
@@ -70,8 +79,8 @@ Use this shape:
     Actions: <only when prose alone doesn't convey what was done>
     ```
 
-`<agent name>` is your own name (for example, `Claude conversation export data`).
+`$AGENT_NAME` is the variable from your global instructions; resolve it to your own product name, so the header reads, for example, `Claude conversation export data`.
 
-`<time>` is when that message was sent. Use a **real** timestamp only. Most agents don't carry per-message times in context — the timestamps live in the on-disk transcript, not in what you can see — so unless your environment actually surfaces them (a hook, visible stamps, the session's date/time signal), you usually cannot recover the exact time of a past turn. When you can't, write `<time unknown>` rather than guessing. A fabricated timestamp in a transcript built for fact-checking is worse than an honest gap. You may run `date` to get the genuine current time, which is appropriate for the most recent turn or to stamp the export itself.
+`<time>` is when that message was sent, taken from the transcript line. Only ever print an **exact** timestamp. If you don't have one for a message — typically because you fell back to reconstructing from context — **omit the `<time>` line entirely** for that message and go straight to `Prompt:` / `Answer:`. An approximate or guessed time is worse than none in a transcript meant for fact-checking, so never round, estimate, or invent one.
 
 If you exported fewer turns than requested (the conversation didn't go back that far), note the actual count in one line after the block.
