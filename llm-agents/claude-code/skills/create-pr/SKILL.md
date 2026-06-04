@@ -55,18 +55,18 @@ If `--context` was provided, fetch it and extract relevant requirements for the 
 <Bad: "Updated user service" — Good: "Added `exportToCsv()` to `UserService` — streams rows to avoid memory issues on large datasets">
 ```
 
+**Line wrapping (important):** Write each paragraph as a **single physical line** — do not hard-wrap prose at a column width. GitHub-flavored Markdown renders a single newline *inside* a paragraph as a soft/hard break, so editor-wrapped lines come out visually broken mid-sentence. Separate paragraphs with one blank line, and keep each list item on its own line. (Long single lines are fine — GitHub wraps them for display.)
+
 ### 3. Confirm and create
 
-Show the draft to the user and wait for approval. Then create the PR using a HEREDOC to preserve formatting:
+Show the draft to the user and wait for approval. Then write the approved body to a temp file and create the PR with `--body-file`. Prefer this over an inline `--body` HEREDOC: it preserves the content byte-for-byte and avoids shell quoting / `$`-interpolation surprises.
 
 ```bash
-gh pr create --base <target-branch> --title "<title>" --body "$(cat <<'PRBODY'
-<body content here>
-PRBODY
-)"
+# Write the approved body to /tmp/pr-body.md — single-line paragraphs, one blank line between them — then:
+gh pr create --base <target-branch> --title "<title>" --body-file /tmp/pr-body.md
 ```
 
-Print the PR URL. Done.
+After creating, print the PR URL. Optionally verify the rendered body with `gh pr view <n> --json body -q .body` to confirm no paragraphs were broken. Done.
 
 ---
 
