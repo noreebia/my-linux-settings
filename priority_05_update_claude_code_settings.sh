@@ -17,6 +17,11 @@ find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -name "CLAUDE.md"
   else
     mkdir -p "$(dirname "$dest")"
     cp "$src" "$dest"
+    # Statusline scripts are exec'd by path, so they must stay executable even if
+    # the source lost its +x bit (e.g. committed as mode 100644).
+    case "$rel" in
+      statuslines/*.sh) chmod +x "$dest" ;;
+    esac
   fi
 done
 
