@@ -114,6 +114,7 @@ right:
 | 고객사 | `IEAAOKQMJUAMOM6X` | Text | plain string — `"삼성증권"` |
 | 제품 | `IEAAOKQMJUAHWAAT` | **Multiple** | a JSON-array **string** — `"[\"StreamDocs\",\"StreamDocs Vu!\"]"` |
 | 작업 완료일 | `IEAAOKQMJUAMOH6K` | Date | `"2026-04-13"` |
+| 작업 유형 | `IEAAOKQMJUAMOI2V` | DropDown | one exact option — `"버그픽스"` (see *Work type & body template* below) |
 
 Beyond these, make sure the stub has the basics a real ticket carries — don't leave a groomed task
 looking half-filled:
@@ -157,11 +158,62 @@ looking half-filled:
   like `홈택스` that *is* the work context is fine; the customer org name — `삼성증권`, `국세청` — is not.)
   Caution: a literal `+` in a title gets form-decoded by the API into a stray double-space — write `및`
   or `and` instead.
-- **description** — a Korean HTML write-up (`<b>`, `<br/>`, `<ul><li>`) with sections roughly:
-  `[고객사]`, `[제품]`, `[역할]` (the invoker's actual part from step 2), `[요청]`, `[처리 내용]`,
-  `[반영 버전]`, `[완료일]`, and `[비고]` for collaborators. If the task already holds real content
-  (e.g. an API spec the invoker wrote), **prepend** a summary block and keep the original below a
-  divider — don't clobber it.
+- **작업 유형** (`IEAAOKQMJUAMOI2V`, DropDown) — set it, and let it drive the body template. See
+  *Work type & body template* below; the value must match one option **verbatim**.
+- **description** — a Korean HTML write-up that **leads with the manager's 📌 한눈에 보기 summary
+  table** (see *Work type & body template*), followed by the fuller detail sections (`<b>`, `<br/>`,
+  `<ul><li>`): `[역할]` (the invoker's actual part from step 2), `[요청]`, `[처리 내용]`, `[반영 버전]`,
+  and `[비고]` for collaborators. (고객사/제품/완료일 already live in their own fields — the table's the
+  place to restate them, the prose needn't repeat them.) If the task already holds real content (e.g. an
+  API spec the invoker wrote), keep the summary table on top and the original below a divider — don't
+  clobber it.
+
+### Work type & body template (the manager's standard)
+
+The team standardised Wrike task bodies. Two rules come out of it, and a groomed ticket should follow
+both so it reads like every other well-kept task.
+
+**1. Pick the 작업 유형, which also picks the body's summary table.** The nine DropDown options group into
+three template families (계열). Choose by the *primary deliverable* of the work — if a ticket both
+analysed and then fixed a bug, the fix is the deliverable, so 버그픽스 (A); if it only analysed and
+replied, 검토/문의 (B). This lines up with the step-2 honesty rule: an analysis-only ticket is genuinely
+a B, not an A with an implied fix.
+
+| 계열 | 작업 유형 options (exact field values) | summary-table columns |
+|---|---|---|
+| **A. 작업형** | `연구개발` · `기능개선` · `버그픽스` · `리팩토링` · `인프라` | 배경/문제 · 작업 내용 · 상태 · 결과 |
+| **B. 검토·문의형** | `검토/문의` | 문의/주제 · 검토 내용 · 상태 · 결론 |
+| **C. 활동·기록형** | `미팅/협업` · `문서화` · `세미나` | 목적/안건 · 핵심 내용 · 상태 · 산출물/후속 |
+
+(Most SD support tickets are 버그픽스 or 기능개선 → A. The field values carry slashes — `검토/문의`,
+`미팅/협업` — even though the prose names them without.)
+
+**2. Lead the body with the 📌 한눈에 보기 table** for that family, so the task reads at a glance:
+핵심 / 무엇을 / 상태 / 결론. The standard is authored in Markdown, but this skill writes HTML — render
+it as an HTML table (fall back to a `<ul>` of the same four labelled rows if the API rejects the table
+markup), then the detail sections below. The **상태** cell uses the shared emoji, and the **last row**
+(결과/결론/산출물) stays `_(완료 시 작성)_` until the work is actually done:
+
+| emoji | meaning |
+|---|---|
+| 🟡 | 검토 중 — 원인/범위 분석 또는 일정 협의 (C계열: "예정") |
+| 🔵 | 진행 중 — 실제 작업/구현/검증 |
+| 🟢 | 완료 — 작업 종료 (마지막 행 반드시 채울 것) |
+| 🔴 | 보류/블로커 — 외부 의존(고객·인프라 등)으로 진행 불가 |
+
+Keep the 상태 emoji consistent with the task's actual `status` field (🟢 ↔ Completed, 🔴 ↔ a held task,
+etc.) — a completed ticket showing 🟡 is the kind of mismatch a manager skims for.
+
+An A-family table for a finished bug-fix, rendered as HTML:
+
+```html
+<table><tbody>
+<tr><td><b>배경/문제</b></td><td>so4sdv 비정상 종료 시 예외가 BSD 공통코드로만 떨어져 원인 구분 불가</td></tr>
+<tr><td><b>작업 내용</b></td><td>종료코드별 예외 세분화 — 신규 에러코드 BSD110010 추가</td></tr>
+<tr><td><b>상태</b></td><td>🟢 완료</td></tr>
+<tr><td><b>결과</b></td><td>StreamDocs 5.15.6.13 반영 (2026-03-25)</td></tr>
+</tbody></table>
+```
 
 ## 4. Post a completion comment (unless `--no-comment`)
 
@@ -202,9 +254,11 @@ module-side fix to so4sdv itself.
 **Output:**
 - title → `SDVu SmartOffice(so4sdv) 비정상 종료코드 예외 세분화 (BSD110010, 5.15.6.13)` (no 고객사 prefix — it lives in the 고객사 field)
 - 고객사 → `강원특별자치도교육청` · 제품 → `["StreamDocs","StreamDocs Vu!"]` · 작업 완료일 → `2026-03-25`
+- 작업 유형 → `버그픽스` (A. 작업형 — the deliverable is the fix, not the analysis)
 - assignee → the invoker (`<me>`) · dates → Planned, start `2026-01-26` (request 접수) → due `2026-03-25` · status → Completed
 - location → filed into the `SD: Kanban-March` board (work completed 2026-03-25) via `addParents`
-- body → `[역할] 백엔드`, `[처리 내용]` describing the new exit-code handling, with a `[비고]` crediting
+- body → leads with the A-family 📌 한눈에 보기 table (상태 `🟢 완료`, 결과 = 5.15.6.13 반영), then
+  `[역할] 백엔드`, `[처리 내용]` describing the new exit-code handling, with a `[비고]` crediting
   the 스마트오피스팀's module-side fix to them — not folded into the invoker's work.
 - comment → `[처리 결과]` + bullets on cause, the BSD110010 addition, and the shipped version.
 
