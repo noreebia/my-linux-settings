@@ -18,7 +18,8 @@
       "mcp__claude_ai_Gmail",
       "mcp__claude_ai_Google_Calendar",
       "mcp__ide",
-      "mcp__excalidraw"
+      "mcp__excalidraw",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools"
     ],
     "ask": [
       "Bash(rm -rf *)",
