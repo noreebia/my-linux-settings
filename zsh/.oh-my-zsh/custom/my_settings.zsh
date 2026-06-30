@@ -1,6 +1,6 @@
 
-alias upd="sudo apt update && sudo apt upgrade -y"
-alias cleanup="sudo apt autoremove -y && sudo apt autoclean && sudo apt clean"
+alias upd="sudo apt update && sudo apt upgrade -y && { ! command -v flatpak >/dev/null || sudo flatpak update -y; }"
+alias cleanup="sudo apt autoremove -y && sudo apt autoclean && sudo apt clean && { ! command -v flatpak >/dev/null || sudo flatpak uninstall --unused -y; }"
 alias cue="cleanup && upd && exit"
 alias uc="upd && cleanup"
 alias uce="upd && cleanup && exit"
