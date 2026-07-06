@@ -19,7 +19,8 @@
       "mcp__claude_ai_Google_Calendar",
       "mcp__ide",
       "mcp__excalidraw",
-      "mcp__plugin_chrome-devtools-mcp_chrome-devtools"
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools",
+      "Skill"
     ],
     "ask": [
       "Bash(rm -rf *)",
