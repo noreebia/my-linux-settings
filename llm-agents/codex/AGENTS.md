@@ -4,8 +4,8 @@ This subtree is the source for Codex runtime config copied or merged into `~/.co
 
 ## Contents
 
-- `config.toml`: reusable Codex configuration. Currently it defines the TUI statusline only.
-- `scripts/merge_tui_config.py`: merges the statusline settings into a live `~/.codex/config.toml` without replacing project trust, auth, MCP, or other user-specific settings.
+- `config.toml`: reusable Codex configuration, including approval/sandbox defaults and the TUI statusline.
+- `scripts/merge_codex_config.py`: merges reusable settings into a live `~/.codex/config.toml` without replacing project trust, auth, MCP, or other user-specific settings.
 
 ## Editing Rules
 
@@ -13,5 +13,4 @@ This subtree is the source for Codex runtime config copied or merged into `~/.co
 - Keep `config.toml` focused on reusable settings that should be installed everywhere this repo is used.
 - If Codex adds first-class script-backed statuslines later, update the merge helper and config deliberately; current Codex uses built-in `tui.status_line` item identifiers.
 - Validate config changes with `codex --strict-config doctor --summary --ascii --no-color` when Codex is installed.
-- Validate helper changes with `python3 -m py_compile llm-agents/codex/scripts/merge_tui_config.py`.
-
+- Validate helper changes with `python3 -m py_compile llm-agents/codex/scripts/merge_codex_config.py`.

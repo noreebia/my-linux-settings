@@ -1,3 +1,6 @@
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
 [tui]
 # Compact, high-signal Codex footer inspired by the Claude statusline:
 # model/effort, live context, usage windows, tokens, repo identity, task/run state.

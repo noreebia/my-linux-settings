@@ -5,7 +5,7 @@ SOURCE_DIR="./llm-agents/codex"
 TARGET_DIR="$HOME/.codex"
 CONFIG_SOURCE="$SOURCE_DIR/config.toml"
 CONFIG_TARGET="$TARGET_DIR/config.toml"
-MERGE_CONFIG_SCRIPT="$SOURCE_DIR/scripts/merge_tui_config.py"
+MERGE_CONFIG_SCRIPT="$SOURCE_DIR/scripts/merge_codex_config.py"
 
 command -v python3 >/dev/null 2>&1 || sudo apt install python3 -y
 
