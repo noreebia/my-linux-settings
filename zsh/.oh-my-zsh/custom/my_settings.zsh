@@ -1,6 +1,25 @@
 
-alias upd="sudo apt update && sudo apt upgrade -y && { ! command -v flatpak >/dev/null || sudo flatpak update -y; }"
-alias cleanup="sudo apt autoremove -y && sudo apt autoclean && sudo apt clean && { ! command -v flatpak >/dev/null || sudo flatpak uninstall --unused -y; }"
+unalias upd cleanup 2>/dev/null
+
+upd() {
+  sudo apt update || return
+  sudo apt upgrade -y || return
+
+  if command -v flatpak >/dev/null; then
+    sudo flatpak update -y
+  fi
+}
+
+cleanup() {
+  sudo apt autoremove -y || return
+  sudo apt autoclean || return
+  sudo apt clean || return
+
+  if command -v flatpak >/dev/null; then
+    sudo flatpak uninstall --unused -y
+  fi
+}
+
 alias cue="cleanup && upd && exit"
 alias uc="upd && cleanup"
 alias uce="upd && cleanup && exit"
