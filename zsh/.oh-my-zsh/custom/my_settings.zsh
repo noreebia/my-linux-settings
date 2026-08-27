@@ -6,7 +6,12 @@ upd() {
   sudo apt upgrade -y || return
 
   if command -v flatpak >/dev/null; then
-    sudo flatpak update -y
+    sudo flatpak update -y || return
+  fi
+
+  local local_upd_hook="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/local/upd.zsh"
+  if [[ -r "$local_upd_hook" ]]; then
+    source "$local_upd_hook" || return
   fi
 }
 
