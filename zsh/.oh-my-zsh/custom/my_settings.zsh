@@ -1,6 +1,4 @@
 
-unalias upd cleanup 2>/dev/null
-
 upd() {
   sudo apt update || return
   sudo apt upgrade -y || return
