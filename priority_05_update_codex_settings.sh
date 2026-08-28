@@ -15,7 +15,8 @@ mkdir -p "$TARGET_DIR"
 cp ./llm-agents/AGENTS_GLOBAL.md "$TARGET_DIR/AGENTS.md"
 
 # Reuse Claude skills for Codex.
-rsync -a --exclude='CLAUDE.md' ./llm-agents/claude-code/skills/ "$TARGET_DIR/skills/"
+rsync -a --exclude='CLAUDE.md' --exclude='/AGENTS.md' ./llm-agents/claude-code/skills/ "$TARGET_DIR/skills/"
+rm -f "$TARGET_DIR/skills/AGENTS.md"
 
 python3 "$MERGE_CONFIG_SCRIPT" "$CONFIG_SOURCE" "$CONFIG_TARGET"
 

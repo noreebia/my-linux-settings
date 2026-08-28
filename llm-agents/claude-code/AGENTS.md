@@ -6,7 +6,7 @@ This subtree is the source for Claude Code runtime assets copied into `~/.claude
 
 - `settings.json`: merged into `~/.claude/settings.json`; source keys overwrite existing keys, while existing-only keys are preserved.
 - `statuslines/`: shell statusline implementations. `settings.json` currently points at `~/.claude/statuslines/default-v3.sh`.
-- `skills/`: reusable skill definitions. These are also synced into Codex by the Codex updater, excluding `CLAUDE.md`.
+- `skills/`: reusable skill definitions. These are also synced into Codex by the Codex updater, excluding Claude shims and the source tree's `AGENTS.md`.
 - `commands/`: Claude Code command snippets.
 
 ## Editing Rules

@@ -9,7 +9,7 @@ This directory contains shared configuration and per-agent settings for LLM codi
   - Codex: `~/.codex/AGENTS.md`
   - Gemini: `~/.gemini/GEMINI.md`
 - `CLAUDE.md` files in this repo should be thin Claude Code shims that import the matching `AGENTS.md` with `@AGENTS.md`.
-- `claude-code/skills/` is currently the shared skill source. Codex receives these skills through `priority_05_update_codex_settings.sh`, excluding `CLAUDE.md`.
+- `claude-code/skills/` is currently the shared skill source. Codex receives these skills through `priority_05_update_codex_settings.sh`, excluding Claude shims and the source tree's `AGENTS.md`.
 
 ## Structure
 
