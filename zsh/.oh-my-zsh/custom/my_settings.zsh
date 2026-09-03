@@ -29,6 +29,8 @@ alias uc="upd && cleanup"
 alias uce="upd && cleanup && exit"
 alias ll="ls -al"
 
+alias codex-resume="codex resume --last"
+
 alias git-prune-local="git fetch -p && git branch -vv | awk '/: gone] / {print \$1}' | xargs -r git branch -D"
 alias git-prune-local-dry="git branch -vv | awk '/: gone] / {print \$1}'"
 alias gpl="git-prune-local"
