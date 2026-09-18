@@ -1,12 +1,12 @@
 ---
-name: absorb-directory-context
+name: understand-directory-context
 description: >
-  Explores and absorbs a project directory to build a working mental model for the current
+  Explores and understands a project directory to build a working mental model for the current
   session. Use when broad project context is needed before subsequent work, without producing
   a formal codebase analysis or changing files.
 ---
 
-# Absorb Directory Context
+# Understand Directory Context
 
 Explore the target directory deeply enough to understand it as a working project and carry that
 understanding into the rest of the current session. The outcome is contextual readiness, not a
@@ -58,11 +58,11 @@ not exhaustive memorization.
 
 ## Completion
 
-Respond briefly. State that the directory context has been absorbed, summarize the project's spirit
+Respond briefly. State that the directory context has been understood, summarize the project's spirit
 and shape in one to three sentences, and say that you are ready for what comes next. Mention a
 material limitation only if it affects that readiness. Do not turn the completion message into a
 file-tree tour or full analysis unless the user asks for one.
 
 A natural closing is:
 
-> Directory context absorbed. <Succinct project summary>. Ready to work on whatever comes next.
+> Directory context understood. <Succinct project summary>. Ready to work on whatever comes next.
