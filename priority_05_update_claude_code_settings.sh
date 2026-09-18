@@ -4,6 +4,7 @@ set -e
 command -v jq >/dev/null 2>&1 || sudo apt install jq -y
 
 SOURCE_DIR="./llm-agents/claude-code"
+SHARED_SKILLS_SOURCE="./llm-agents/skills"
 TARGET_DIR="$HOME/.claude"
 SETTINGS_SOURCE="$SOURCE_DIR/settings.json"
 SETTINGS_TARGET="$TARGET_DIR/settings.json"
@@ -24,6 +25,10 @@ find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -name "CLAUDE.md"
     esac
   fi
 done
+
+# Deploy the shared skill source with Claude-specific frontmatter intact.
+mkdir -p "$TARGET_DIR/skills"
+rsync -a --exclude='CLAUDE.md' --exclude='/AGENTS.md' "$SHARED_SKILLS_SOURCE/" "$TARGET_DIR/skills/"
 
 # Deep-merge settings.json: source keys overwrite existing, but existing-only keys are preserved
 if [ -f "$SETTINGS_TARGET" ]; then

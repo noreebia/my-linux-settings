@@ -1,6 +1,6 @@
 # Skills Guide
 
-This directory contains reusable agent skills, mostly in `SKILL.md` files. The same skills are deployed to Claude Code and Codex, so write them to be useful across agents unless the skill explicitly depends on Claude-only behavior.
+This directory is the source of truth for reusable agent skills. The same skills are deployed to Claude Code and Codex, so write them to be useful across agents unless an agent-specific overlay is required.
 
 Skills should only contain context the base agent is unlikely to know: project-specific conventions, non-obvious operational details, and the reason behind constraints. Avoid spending skill tokens on generic coding advice that competes with conversation history.
 
@@ -24,6 +24,6 @@ Default to high freedom: describe what the output should contain, not how to str
 
 - Use `--flag` syntax for all arguments. Booleans are bare flags, and key-value pairs use `=`, such as `--scope=commit`.
 - Absence means off or default. Do not force users to pass `no` or `false`.
-- Add `argument-hint` to frontmatter for skills that accept arguments. It is shown during autocomplete. Use `<required>` and `[optional]` brackets, such as `argument-hint: "[--scope=<scope>] [--file] [--plan=<hint>]"`.
+- Add `argument-hint` to frontmatter for skills that accept arguments. Claude Code uses it during autocomplete; the Codex updater removes it from deployed copies for schema compatibility. Use `<required>` and `[optional]` brackets, such as `argument-hint: "[--scope=<scope>] [--file] [--plan=<hint>]"`.
 - Include three to five invocation examples after the Arguments section.
 - Be consistent across skills. Shared concepts such as `--scope` or `--file` should use the same name and semantics everywhere.

@@ -6,7 +6,7 @@ TARGET_DIR="$HOME/.codex"
 CONFIG_SOURCE="$SOURCE_DIR/config.toml"
 CONFIG_TARGET="$TARGET_DIR/config.toml"
 MERGE_CONFIG_SCRIPT="$SOURCE_DIR/scripts/merge_codex_config.py"
-SHARED_SKILLS_SOURCE="./llm-agents/claude-code/skills"
+SHARED_SKILLS_SOURCE="./llm-agents/skills"
 CODEX_SKILLS_SOURCE="$SOURCE_DIR/skills"
 
 command -v python3 >/dev/null 2>&1 || sudo apt install python3 -y

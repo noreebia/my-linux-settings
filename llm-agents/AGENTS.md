@@ -9,7 +9,7 @@ This directory contains shared configuration and per-agent settings for LLM codi
   - Codex: `~/.codex/AGENTS.md`
   - Gemini: `~/.gemini/GEMINI.md`
 - `CLAUDE.md` files in this repo should be thin Claude Code shims that import the matching `AGENTS.md` with `@AGENTS.md`.
-- `claude-code/skills/` is currently the shared skill source. Codex receives these skills through `priority_05_update_codex_settings.sh`, excluding Claude shims and the source tree's `AGENTS.md`.
+- `skills/` is the shared skill source for all supported agents. Agent update scripts adapt or filter shared files as needed before deployment.
 - `codex/skills/` contains Codex-only skills and deliberate Codex variants. The Codex updater overlays them after preparing the shared skills.
 
 ## Structure
@@ -17,7 +17,8 @@ This directory contains shared configuration and per-agent settings for LLM codi
 ```text
 llm-agents/
 |-- AGENTS_GLOBAL.md      # Shared instructions injected into every agent
-|-- claude-code/          # Claude assets; skills are also deployed to Codex
+|-- skills/               # Shared, agent-neutral skill source
+|-- claude-code/          # Claude-specific runtime assets
 `-- codex/                # Codex-specific runtime config, helpers, and skill overlays
 ```
 
