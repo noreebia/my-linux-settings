@@ -4,6 +4,7 @@ description: >
   Explores and understands a project directory to build a working mental model for the current
   session. Use when broad project context is needed before subsequent work, without producing
   a formal codebase analysis or changing files.
+argument-hint: "[--dir=<path>]"
 ---
 
 # Understand Directory Context
@@ -12,11 +13,25 @@ Explore the target directory deeply enough to understand it as a working project
 understanding into the rest of the current session. The outcome is contextual readiness, not a
 written report.
 
+## Arguments
+
+- **`--dir=<path>`** *(optional)*: Directory to understand. The path may be absolute or relative
+  to the current directory. When omitted, use the current directory.
+
+Examples:
+
+```text
+/understand-directory-context
+/understand-directory-context --dir=src
+$understand-directory-context
+$understand-directory-context --dir=/path/to/project
+```
+
 ## Scope
 
-Use the directory named by the user, or the current workspace when none is named. Treat the
-working tree as the source of truth, including relevant uncommitted changes. Follow all applicable
-repository and directory-local instructions.
+Use the directory supplied with `--dir`, or the current directory when the argument is omitted.
+Treat the working tree as the source of truth, including relevant uncommitted changes. Follow all
+applicable repository and directory-local instructions.
 
 Stay read-only. Do not edit files, generate documentation, install dependencies, or run commands
 that mutate project state.
