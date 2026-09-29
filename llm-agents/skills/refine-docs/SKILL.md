@@ -8,6 +8,11 @@ description: >
 
 Turn the project's documentation into a coherent, current body of knowledge. Improve the existing information architecture rather than imposing a generic folder template.
 
+This skill owns repository-wide documentation architecture. When the request instead centers on
+whether one document has the right scope, level of detail, and relationship to its surrounding
+sources, use `audit-document-architecture`. If that targeted audit reveals conflicting ownership or
+navigation problems across several peer documents, return here for the broader refinement.
+
 ## Audit
 
 Read the repository instructions, inventory the documentation, and inspect inbound links before editing. Read enough of the implementation and current configuration to verify load-bearing claims; filenames and old plans are not evidence that a document is still accurate.
