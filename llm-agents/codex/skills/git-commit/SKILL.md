@@ -8,9 +8,18 @@ description: Creates one commit from all current repository changes and pushes t
 Commit and push the current repository state. Invocation of this skill authorizes staging the
 current changes, creating one commit, and pushing the current branch to `origin`.
 
+## Arguments
+
+- `--skip-lookup`: Use the changes already established in the current conversation as the source
+  of truth for the commit scope and message. Skip preparatory repository inspection, including
+  status, diffs, untracked-file reads, recent commit subjects, changed-file rereads, and the staged
+  summary. Do not perform those lookups later to compensate. If the conversation does not contain
+  enough context for an accurate commit message, stop and ask the user to invoke the skill again
+  without this flag.
+
 ## Workflow
 
-Inspect the repository before acting:
+Unless `--skip-lookup` was supplied, inspect the repository before acting:
 
 - read the current branch, concise status, staged and unstaged diffs, untracked files, and recent
   commit subjects;
@@ -18,10 +27,10 @@ Inspect the repository before acting:
   repository's existing style;
 - stop and report briefly if there is nothing to commit or the directory is not a Git repository.
 
-Stage all current changes with `git add -A`, then review the staged summary before committing.
-Create a single commit with a concise subject and an explanatory body only when it adds useful
-context. Do not modify working files, rewrite history, amend an existing commit, or create multiple
-commits.
+Stage all current changes with `git add -A`. Unless `--skip-lookup` was supplied, review the staged
+summary before committing. Create a single commit with a concise subject and an explanatory body
+only when it adds useful context. Do not modify working files, rewrite history, amend an existing
+commit, or create multiple commits.
 
 Push with `git push -u origin HEAD`. Never force-push. If committing or pushing fails, preserve the
 resulting repository state and report the exact failure instead of applying unrelated fixes or
