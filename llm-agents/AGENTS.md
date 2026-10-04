@@ -5,10 +5,10 @@ This directory contains shared configuration and per-agent settings for LLM codi
 ## Runtime Deployment
 
 - `AGENTS_GLOBAL.md` is the shared instruction source. Update scripts copy it under each agent's expected runtime filename:
-  - Claude Code: `~/.claude/CLAUDE.md`
+  - Claude Code: `~/.claude/AGENTS.md`
   - Codex: `~/.codex/AGENTS.md`
   - Gemini: `~/.gemini/GEMINI.md`
-- `CLAUDE.md` files in this repo should be thin Claude Code shims that import the matching `AGENTS.md` with `@AGENTS.md`.
+- Claude Code 2.1.277 and newer load repository `AGENTS.md` files natively.
 - `skills/` is the shared skill source for all supported agents. Agent update scripts adapt or filter shared files as needed before deployment.
 - `codex/skills/` contains Codex-only skills and deliberate Codex variants. The Codex updater overlays them after preparing the shared skills.
 

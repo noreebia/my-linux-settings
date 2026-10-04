@@ -10,7 +10,7 @@ SETTINGS_SOURCE="$SOURCE_DIR/settings.json"
 SETTINGS_TARGET="$TARGET_DIR/settings.json"
 
 # Copy non-settings files (skills, statuslines, etc.)
-find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -name "CLAUDE.md" -not -path "$SOURCE_DIR" | while read -r src; do
+find "$SOURCE_DIR" -mindepth 1 -not -name "settings.json" -not -name "AGENTS.md" -not -path "$SOURCE_DIR" | while read -r src; do
   rel="${src#$SOURCE_DIR/}"
   dest="$TARGET_DIR/$rel"
   if [ -d "$src" ]; then
@@ -28,7 +28,7 @@ done
 
 # Deploy the shared skill source with Claude-specific frontmatter intact.
 mkdir -p "$TARGET_DIR/skills"
-rsync -a --exclude='CLAUDE.md' --exclude='/AGENTS.md' "$SHARED_SKILLS_SOURCE/" "$TARGET_DIR/skills/"
+rsync -a --exclude='/AGENTS.md' "$SHARED_SKILLS_SOURCE/" "$TARGET_DIR/skills/"
 
 # Deep-merge settings.json: source keys overwrite existing, but existing-only keys are preserved
 if [ -f "$SETTINGS_TARGET" ]; then
@@ -38,7 +38,8 @@ else
   cp "$SETTINGS_SOURCE" "$SETTINGS_TARGET"
 fi
 
-# Copy AGENTS.md as CLAUDE.md
-cp ./llm-agents/AGENTS_GLOBAL.md "$TARGET_DIR/CLAUDE.md"
+# Deploy global instructions under Claude Code's native AGENTS.md convention.
+rm -f -- "$TARGET_DIR/CLAUDE.md"
+cp ./llm-agents/AGENTS_GLOBAL.md "$TARGET_DIR/AGENTS.md"
 
 echo "Claude Code settings updated successfully."

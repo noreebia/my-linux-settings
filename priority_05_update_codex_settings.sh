@@ -20,7 +20,7 @@ cp ./llm-agents/AGENTS_GLOBAL.md "$TARGET_DIR/AGENTS.md"
 CODEX_SKILLS_STAGE="$(mktemp -d)"
 trap 'rm -rf -- "$CODEX_SKILLS_STAGE"' EXIT
 
-rsync -a --exclude='CLAUDE.md' --exclude='/AGENTS.md' "$SHARED_SKILLS_SOURCE/" "$CODEX_SKILLS_STAGE/"
+rsync -a --exclude='/AGENTS.md' "$SHARED_SKILLS_SOURCE/" "$CODEX_SKILLS_STAGE/"
 find "$CODEX_SKILLS_STAGE" -type f -name 'SKILL.md' -exec sed -i '/^argument-hint:/d' {} +
 
 mkdir -p "$TARGET_DIR/skills"
