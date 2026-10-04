@@ -2,8 +2,7 @@
 name: explore-codebase
 description: >
   Explores an unfamiliar codebase at repository scale to build the agent's working model of its
-  architecture, behavior, conventions, and workflows. The outcome is context for subsequent work,
-  not a developer-facing analysis or generated documentation.
+  architecture, behavior, conventions, and workflows. The outcome is context for subsequent work.
 argument-hint: "[--dir=<path>]"
 ---
 
@@ -62,14 +61,10 @@ Let each discovery determine the next useful read. Resolve important references 
 history only when it materially clarifies present intent or structure. Prefer a causal model of how
 the system behaves over exhaustive file coverage.
 
-Test the working model by checking
-whether you can locate where representative changes belong, anticipate their important downstream
-effects, explain the key execution paths to yourself, and distinguish established facts from material
-unknowns. Stop when another broad discovery pass would add little to future decision quality.
+Test the working model by checking whether you can locate where representative changes belong, anticipate their important downstream effects, explain the key execution paths to yourself, and distinguish established facts from material unknowns. Stop when another broad discovery pass would add little to future decision quality.
 
 ## Completion
 
 Respond briefly: confirm the scope explored, summarize the codebase's purpose and shape in one or two
 sentences, and state that you are ready for the next task. Mention only limitations that materially
-reduce that readiness. Do not provide a file-tree tour, architecture report, recommendations, or
-generated artifact unless the user separately asks for one.
+reduce that readiness.
