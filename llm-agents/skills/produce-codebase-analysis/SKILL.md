@@ -1,12 +1,12 @@
 ---
-name: analyze-codebase
+name: produce-codebase-analysis
 description: >
-  Analyzes an unfamiliar codebase and explains its architecture and developer workflows.
-  Optionally saves the analysis as developer documentation.
+  Produces an analysis of an unfamiliar codebase that explains its architecture and developer
+  workflows. Optionally saves the analysis as developer documentation.
 argument-hint: "[--file]"
 ---
 
-# Analyze Codebase
+# Produce Codebase Analysis
 
 Explore a codebase and produce an analysis that gives a new developer a genuine mental model — not just a file tree tour, but how the system works, why it's structured that way, and how to navigate it.
 
@@ -19,10 +19,10 @@ Explore a codebase and produce an analysis that gives a new developer a genuine 
 Examples:
 
 ```text
-/analyze-codebase
-/analyze-codebase --file
-$analyze-codebase
-$analyze-codebase --file
+/produce-codebase-analysis
+/produce-codebase-analysis --file
+$produce-codebase-analysis
+$produce-codebase-analysis --file
 ```
 
 ---
