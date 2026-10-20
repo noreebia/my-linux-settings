@@ -10,7 +10,9 @@ upd() {
   # Run optional machine-specific updates from ~/.oh-my-zsh/custom/local/upd.zsh when present.
   local local_upd_hook="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/local/upd.zsh"
   if [[ -r "$local_upd_hook" ]]; then
+    echo "Running local updates: $local_upd_hook"
     source "$local_upd_hook" || return
+    echo "Finished local updates: $local_upd_hook"
   fi
 }
 
