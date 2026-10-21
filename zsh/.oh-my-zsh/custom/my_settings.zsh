@@ -3,10 +3,6 @@ upd() {
   sudo apt update || return
   sudo apt upgrade -y || return
 
-  if command -v flatpak >/dev/null; then
-    sudo flatpak update -y || return
-  fi
-
   # Run optional machine-specific updates from ~/.oh-my-zsh/custom/local/upd.zsh when present.
   local local_upd_hook="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/local/upd.zsh"
   if [[ -r "$local_upd_hook" ]]; then
