@@ -26,6 +26,16 @@ Classify content by purpose:
 
 Identify conflicting claims, stale status statements, unclear ownership, duplicated explanations, broken links, opaque filenames, and documents that mix current truth with historical rationale.
 
+## Choose Documentation Homes
+
+Choose a canonical home by who maintains the subject and where readers need it. Consider documentation alongside the source as well as central documentation:
+
+- Project-wide product behavior, system architecture, and shared operating policies usually belong in central documentation.
+- Module-specific setup, behavior, and constraints can belong in the owning module's README or local documentation directory, close to the code that changes with them.
+- Subjects spanning several modules belong at their nearest meaningful shared ownership boundary; avoid placing a shared contract under one participant merely because it implements part of it.
+
+Follow the project's actual ownership and reader paths rather than imposing a directory layout or creating documentation in every module. Preserve discovery through central indexes and module entry points that link to the canonical home instead of duplicating its detail. Proximity to source is useful only when responsibility and navigation remain clear.
+
 ## Refine
 
 - Preserve one canonical home for each subject. Replace repeated implementation detail elsewhere with a concise summary and link.
