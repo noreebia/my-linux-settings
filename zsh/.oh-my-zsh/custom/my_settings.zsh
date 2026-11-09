@@ -49,6 +49,17 @@ cdc() {
   cd ~/code 2>/dev/null || cd ~/Code 2>/dev/null || echo "Neither directory exists!"
 }
 
+cdd() {
+    local dirs=(*/(N))
+
+    if (( ${#dirs[@]} > 0 )); then
+        cd -- "${dirs[1]}" || return
+        echo "Entered: $PWD"
+    else
+        echo "Error: No directories found."
+    fi
+}
+
 git_sync_all() {
     for dir in */; do
         local dir_name="${dir%/}"
