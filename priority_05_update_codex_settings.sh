@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+if ! command -v codex >/dev/null 2>&1; then
+    echo "Codex CLI not found; skipping settings update."
+    exit 0
+fi
+
 SOURCE_DIR="./llm-agents/codex"
 TARGET_DIR="$HOME/.codex"
 CONFIG_SOURCE="$SOURCE_DIR/config.toml"

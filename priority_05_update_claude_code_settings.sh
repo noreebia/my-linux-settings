@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if ! command -v claude >/dev/null 2>&1; then
+    echo "Claude Code CLI not found; skipping settings update."
+    exit 0
+fi
+
 command -v jq >/dev/null 2>&1 || sudo apt install jq -y
 
 SOURCE_DIR="./llm-agents/claude-code"
