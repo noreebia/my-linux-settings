@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if ! command -v zsh >/dev/null 2>&1; then
+    echo "Zsh not found; skipping configuration."
+    exit 0
+fi
+
 ZSH_PLUGIN_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
 
 if [ ! -d "$ZSH_PLUGIN_DIR/zsh-autosuggestions" ]; then
