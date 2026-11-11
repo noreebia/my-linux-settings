@@ -6,7 +6,6 @@ This is a personal Linux settings repository. It bootstraps and refreshes a work
 
 - The `priority_*.sh` files are setup/update entrypoints. They copy checked-in config into `$HOME`, install small dependencies, or update agent config.
 - `configure.sh` runs the main priority scripts in order. It assumes it is executed from this repository and changes into the repo directory before running scripts.
-- `update_repo_files.sh` is the reverse direction for selected files: it copies live user config from `$HOME` back into this repository.
 - `llm-agents/AGENTS_GLOBAL.md` is not this repository's instruction file. It is the shared runtime instruction source copied into Claude, Codex, and Gemini config directories.
 - Directory-local `AGENTS.md` files explain how to edit each subtree inside this repository.
 

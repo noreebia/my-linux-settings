@@ -13,5 +13,5 @@ This directory contains shell customization copied into `~/.oh-my-zsh/` by `prio
 - Write shell code for zsh, not Bash, unless the function deliberately shells out.
 - Keep helpers idempotent and guarded. Avoid aliases or functions that delete files without an explicit path and safety check.
 - If adding a dependency, update the relevant priority script so a fresh machine can use the helper.
-- Be careful with `update_repo_files.sh`: it may copy live `~/.zshrc` into `zsh/.zshrc` if that file exists in future. Do not accidentally commit private shell config.
+- Keep machine-specific settings and secrets from live `~/.zshrc` out of the repository.
 
