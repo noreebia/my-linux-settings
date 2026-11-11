@@ -2,29 +2,29 @@
 name: prune-zshrc
 description: >
   Removes redundant aliases, functions, and shell options from ~/.zshrc that are
-  already defined in zsh/.oh-my-zsh/custom/my_settings.zsh. Use this skill whenever
+  already defined in zsh/.oh-my-zsh/custom/main.zsh. Use this skill whenever
   the user mentions "prune zshrc", "clean up zshrc", "remove duplicate aliases",
   "zshrc has duplicates", "deduplicate zshrc", "zshrc cleanup", or asks to remove
-  things from .zshrc that are already in my_settings.zsh or the oh-my-zsh custom
+  things from .zshrc that are already in main.zsh or the oh-my-zsh custom
   directory. Also use when the user says their .zshrc is bloated, has old aliases,
   or needs trimming.
 ---
 
 # Prune ~/.zshrc
 
-Remove lines from `~/.zshrc` that are already covered by `zsh/.oh-my-zsh/custom/my_settings.zsh`. Since Oh My Zsh auto-sources all `*.zsh` files in its custom directory, anything defined in `my_settings.zsh` does not need to also live in `~/.zshrc`.
+Remove lines from `~/.zshrc` that are already covered by `zsh/.oh-my-zsh/custom/main.zsh`. Since Oh My Zsh auto-sources all `*.zsh` files in its custom directory, anything defined in `main.zsh` does not need to also live in `~/.zshrc`.
 
 ---
 
 ## Why this matters
 
-The install script deploys `my_settings.zsh` to `~/.oh-my-zsh/custom/` via `cp -r`. Oh My Zsh sources it automatically. Over time, the same aliases and functions accumulate in `~/.zshrc` from old install script runs or manual additions. These duplicates are harmless but confusing — the later definition silently wins, which can mask stale values.
+The install script deploys `main.zsh` to `~/.oh-my-zsh/custom/` via `cp -r`. Oh My Zsh sources it automatically. Over time, the same aliases and functions accumulate in `~/.zshrc` from old install script runs or manual additions. These duplicates are harmless but confusing — the later definition silently wins, which can mask stale values.
 
 ---
 
-## Step 1 — Parse my_settings.zsh
+## Step 1 — Parse main.zsh
 
-Read `zsh/.oh-my-zsh/custom/my_settings.zsh` (relative to the repo root) and extract:
+Read `zsh/.oh-my-zsh/custom/main.zsh` (relative to the repo root) and extract:
 
 - **Aliases**: every `alias <name>=` line. The key is the alias name (everything before `=`).
 - **Functions**: every function definition (`<name>() {`). The key is the function name.
@@ -47,11 +47,11 @@ Read `~/.zshrc` and identify every line or block that matches an item from Step 
 | Function | Function **name** (e.g., `cdc()` matches `cdc()`) | The entire block from the line containing `name()` through the matching closing `}` at the same indentation level |
 | Shell option | Exact option name (e.g., `setopt NULL_GLOB`) | The single line |
 
-Matching is by **name**, not value. If `~/.zshrc` has `alias upd="apt update"` and `my_settings.zsh` has `alias upd="sudo apt update && sudo apt upgrade -y"`, the one in `~/.zshrc` is still redundant — `my_settings.zsh` is the source of truth and its version will win at runtime anyway.
+Matching is by **name**, not value. If `~/.zshrc` has `alias upd="apt update"` and `main.zsh` has `alias upd="sudo apt update && sudo apt upgrade -y"`, the one in `~/.zshrc` is still redundant — `main.zsh` is the source of truth and its version will win at runtime anyway.
 
 ### Items to keep
 
-Everything in `~/.zshrc` that does **not** have a matching name in `my_settings.zsh` must be kept. This includes machine-specific config, PATH exports, eval statements, plugin config, theme settings, and any aliases/functions/options unique to this machine.
+Everything in `~/.zshrc` that does **not** have a matching name in `main.zsh` must be kept. This includes machine-specific config, PATH exports, eval statements, plugin config, theme settings, and any aliases/functions/options unique to this machine.
 
 ---
 

@@ -4,7 +4,7 @@ This directory contains shell customization copied into `~/.oh-my-zsh/` by `prio
 
 ## Contents
 
-- `.oh-my-zsh/custom/my_settings.zsh`: general aliases and helper functions.
+- `.oh-my-zsh/custom/main.zsh`: general aliases and helper functions.
 - `.oh-my-zsh/custom/work_epapyrus.zsh`: work-specific helpers and aliases.
 - `.oh-my-zsh/custom/wsl.zsh`: WSL-only helpers. The installer removes it from `~/.oh-my-zsh/custom/` on non-WSL systems.
 

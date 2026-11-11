@@ -1,15 +1,26 @@
 
 upd() {
+  print -r -- '------- System package updates -------'
   sudo apt update || return
   sudo apt upgrade -y || return
+  print -r -- '------- System package updates finished -------'
 
-  # Run optional machine-specific updates from ~/.oh-my-zsh/custom/local/upd.zsh when present.
-  local local_upd_hook="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/local/upd.zsh"
-  if [[ -r "$local_upd_hook" ]]; then
-    echo "Running local updates: $local_upd_hook"
-    source "$local_upd_hook" || return
-    echo "Finished local updates: $local_upd_hook"
-  fi
+  # Source optional machine-specific .zsh hooks in filename order.
+  local local_upd_hook_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/local/upd_hook"
+  local local_upd_hook
+  for local_upd_hook in "$local_upd_hook_dir"/*.zsh(N.); do
+    [[ -r "$local_upd_hook" ]] || continue
+    print -r -- "------- Starting update hook: ${local_upd_hook:t} -------"
+    print -r -- "File: $local_upd_hook"
+    source "$local_upd_hook" || {
+      local hook_status=$?
+      print -r -- "------- Update hook failed: ${local_upd_hook:t} (exit $hook_status) -------"
+      return "$hook_status"
+    }
+    print -r -- "------- Finished update hook: ${local_upd_hook:t} -------"
+  done
+
+  print -r -- '------- All updates completed -------'
 }
 
 cleanup() {
