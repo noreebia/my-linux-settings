@@ -1,9 +1,7 @@
 
 upd() {
-  print -r -- '------- System package updates -------'
   sudo apt update || return
   sudo apt upgrade -y || return
-  print -r -- '------- System package updates finished -------'
 
   # Source optional machine-specific .zsh hooks in filename order.
   local local_upd_hook_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/local/upd_hook"
@@ -20,7 +18,6 @@ upd() {
     print -r -- "------- Finished update hook: ${local_upd_hook:t} -------"
   done
 
-  print -r -- '------- All updates completed -------'
 }
 
 cleanup() {
@@ -65,7 +62,6 @@ cdd() {
 
     if (( ${#dirs[@]} > 0 )); then
         cd -- "${dirs[1]}" || return
-        echo "Entered: $PWD"
     else
         echo "Error: No directories found."
     fi
