@@ -72,7 +72,17 @@
     local npm_root
     if (( $+commands[npm] )) && npm_root=$(npm root -g) &&
        [[ "$codex_binary" -ef "$npm_root/@openai/codex/bin/codex.js" ]]; then
-      print -r -- 'Updating Codex CLI with npm...'
+      local installed_version latest_json latest_version
+      installed_version=$(jq -er '.version | strings | select(length > 0)' "$npm_root/@openai/codex/package.json") || return
+      latest_json=$(npm view @openai/codex@latest version --json) || return
+      latest_version=$(jq -er 'strings | select(length > 0)' <<< "$latest_json") || return
+
+      if [[ "$installed_version" == "$latest_version" ]]; then
+        print -r -- "Codex CLI $installed_version is already up to date; skipping npm installation."
+        return 0
+      fi
+
+      print -r -- "Updating Codex CLI from $installed_version to $latest_version with npm..."
       npm install -g @openai/codex || return
     else
       print -r -- "Unrecognized Codex installation: $codex_command; skipping update."
