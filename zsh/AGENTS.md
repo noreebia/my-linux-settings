@@ -1,6 +1,8 @@
 # zsh Guide
 
-This directory contains shell customization copied into `~/.oh-my-zsh/` by `scripts/zsh/install_zsh_2.sh`.
+This directory contains shell customization copied into `~/.oh-my-zsh/` by `scripts/zsh/2_configure_essential_plugins.sh`.
+
+`scripts/zsh/1_initialize_sh.sh` installs Zsh and Oh My Zsh. `scripts/zsh/3_configure_zioxide.sh` installs zoxide and fzf when missing and adds zoxide initialization to the user's `.zshrc`.
 
 ## Contents
 
