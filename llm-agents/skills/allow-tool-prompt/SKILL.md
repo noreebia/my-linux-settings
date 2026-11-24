@@ -10,7 +10,7 @@ description: >
 
 When Claude Code wants to invoke a tool that isn't on the allow-list, it prints a permission prompt and waits. The user is tired of approving these one at a time. This skill takes a pasted prompt and adds the **widest** matching rule to `permissions.allow` in the managed settings file — the goal is to stop being asked again, not to minimize blast radius. Pick the broadest rule that plausibly covers the source of the prompt.
 
-The target file is `llm-agents/claude-code/settings.json` in this repo. `priority_05_update_claude_code_settings.sh` deep-merges it into `~/.claude/settings.json` on the next install run. Editing `~/.claude/settings.json` directly would be lost on the next merge, so don't do that.
+The target file is `llm-agents/claude-code/settings.json` in this repo. `scripts/llm-agents/update_claude_code_settings.sh` deep-merges it into `~/.claude/settings.json` on the next install run. Editing `~/.claude/settings.json` directly would be lost on the next merge, so don't do that.
 
 ---
 
@@ -83,7 +83,7 @@ If the rule is already in `permissions.allow`, report "already allowed" and skip
 After writing, tell the user three things, briefly:
 
 1. The exact rule that was added (or that nothing changed, because it was already present).
-2. To run `./priority_05_update_claude_code_settings.sh` from the repo root to merge the change into `~/.claude/settings.json`.
+2. To run `./scripts/llm-agents/update_claude_code_settings.sh` from the repo root to merge the change into `~/.claude/settings.json`.
 3. That the current Claude Code session won't pick it up until restart — the next session will be prompt-free for this source.
 
 Keep this to a few lines. The user pasted a prompt to make it go away; that's the whole story.

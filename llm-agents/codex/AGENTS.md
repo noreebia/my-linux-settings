@@ -1,6 +1,6 @@
 # Codex Assets Guide
 
-This subtree is the source for Codex runtime config copied or merged into `~/.codex/` by `priority_05_update_codex_settings.sh`.
+This subtree is the source for Codex runtime config copied or merged into `~/.codex/` by `scripts/llm-agents/update_codex_settings.sh`.
 
 ## Contents
 

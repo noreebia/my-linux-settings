@@ -1,6 +1,6 @@
 # zsh Guide
 
-This directory contains shell customization copied into `~/.oh-my-zsh/` by `priority_01_install_zsh_2.sh`.
+This directory contains shell customization copied into `~/.oh-my-zsh/` by `scripts/zsh/install_zsh_2.sh`.
 
 ## Contents
 
@@ -12,6 +12,6 @@ This directory contains shell customization copied into `~/.oh-my-zsh/` by `prio
 
 - Write shell code for zsh, not Bash, unless the function deliberately shells out.
 - Keep helpers idempotent and guarded. Avoid aliases or functions that delete files without an explicit path and safety check.
-- If adding a dependency, update the relevant priority script so a fresh machine can use the helper.
+- If adding a dependency, update the relevant setup script under `scripts/zsh/` so a fresh machine can use the helper.
 - Keep machine-specific settings and secrets from live `~/.zshrc` out of the repository.
 

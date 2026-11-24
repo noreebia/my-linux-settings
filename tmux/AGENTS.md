@@ -1,6 +1,6 @@
 # tmux Guide
 
-This directory contains tmux configuration copied to `~/.tmux.conf` by `priority_02_setup_tmux.sh`.
+This directory contains tmux configuration copied to `~/.tmux.conf` by `scripts/tmux/setup_tmux.sh`.
 
 ## Editing Rules
 

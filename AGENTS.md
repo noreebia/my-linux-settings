@@ -4,19 +4,20 @@ This is a personal Linux settings repository. It bootstraps and refreshes a work
 
 ## Mental Model
 
-- The `priority_*.sh` files are setup/update entrypoints. They copy checked-in config into `$HOME`, install small dependencies, or update agent config.
-- `configure.sh` runs the main priority scripts in order. It assumes it is executed from this repository and changes into the repo directory before running scripts.
+- The setup/update entrypoints live under `scripts/`. They copy checked-in config into `$HOME`, install small dependencies, or update agent config. Run individual scripts from the repository root.
+- `configure.sh` runs the main setup scripts in order. It changes into the repository directory before running scripts.
 - `llm-agents/AGENTS_GLOBAL.md` is not this repository's instruction file. It is the shared runtime instruction source copied into Claude, Codex, and Gemini config directories.
 - Directory-local `AGENTS.md` files explain how to edit each subtree inside this repository.
 
 ## Layout
 
+- `scripts/` holds the general package installer and setup scripts grouped under `zsh/`, `tmux/`, `llm-agents/`, and `mise/`.
 - `zsh/` holds Oh My Zsh custom files copied into `~/.oh-my-zsh/`.
 - `tmux/` holds `tmux.conf`, copied to `~/.tmux.conf`.
 - `llm-agents/` holds shared agent instructions and per-agent configuration.
-- `priority_05_update_claude_code_settings.sh` deploys Claude Code settings, statuslines, and skills to `~/.claude/`.
-- `priority_05_update_codex_settings.sh` deploys Codex instructions, skills, and Codex TUI config to `~/.codex/`.
-- `priority_05_update_gemini_settings.sh` deploys shared instructions to `~/.gemini/`.
+- `scripts/llm-agents/update_claude_code_settings.sh` deploys Claude Code settings, statuslines, and skills to `~/.claude/`.
+- `scripts/llm-agents/update_codex_settings.sh` deploys Codex instructions, skills, and Codex TUI config to `~/.codex/`.
+- `scripts/llm-agents/update_gemini_settings.sh` deploys shared instructions to `~/.gemini/`.
 
 ## Editing Rules
 

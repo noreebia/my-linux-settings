@@ -1,6 +1,6 @@
 # Claude Code Assets Guide
 
-This subtree is the source for Claude Code runtime assets copied into `~/.claude/` by `priority_05_update_claude_code_settings.sh`.
+This subtree is the source for Claude Code runtime assets copied into `~/.claude/` by `scripts/llm-agents/update_claude_code_settings.sh`.
 
 ## Contents
 
