@@ -80,6 +80,58 @@
   fi
 } || return
 
+# Update zoxide installed by the upstream script used by our setup script.
+() {
+  local zoxide_command
+  zoxide_command=$(whence -p zoxide) || {
+    print -r -- 'zoxide not found; skipping update.'
+    return 0
+  }
+
+  if [[ "${zoxide_command:A}" != "$HOME/.local/bin/zoxide" ]]; then
+    print -r -- "Unrecognized zoxide installation: $zoxide_command; skipping update."
+    return 0
+  fi
+
+  print -r -- 'Updating zoxide with the upstream installer...'
+  local zoxide_installer
+  zoxide_installer=$(curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh) || return
+  sh -c "$zoxide_installer"
+} || return
+
+# Update only the active fzf installation, using mise or its Git checkout.
+() {
+  local fzf_command
+  fzf_command=$(whence -p fzf) || {
+    print -r -- 'fzf not found; skipping update.'
+    return 0
+  }
+
+  local fzf_binary="${fzf_command:A}"
+  local mise_fzf
+  local mise_data="${MISE_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/mise}"
+  if (( $+commands[mise] )) && mise_fzf=$(mise which fzf 2>/dev/null) &&
+     [[ "$fzf_binary" -ef "$mise_fzf" || "$fzf_command" -ef "$mise_data/shims/fzf" ]]; then
+    print -r -- 'Updating fzf with mise...'
+    mise upgrade fzf
+    return $?
+  fi
+
+  local fzf_root="${fzf_binary:h:h}"
+  local git_root
+  if [[ -x "$fzf_root/install" ]] && (( $+commands[git] )) &&
+     git_root=$(git -C "$fzf_root" rev-parse --show-toplevel 2>/dev/null) &&
+     [[ "${git_root:A}" == "$fzf_root" ]]; then
+    print -r -- "Updating fzf in its Git checkout: $fzf_root"
+    git -C "$fzf_root" pull --ff-only || return
+    # Refresh the binary without changing existing shell integration.
+    "$fzf_root/install" --bin
+    return $?
+  fi
+
+  print -r -- "Unrecognized fzf installation: $fzf_command; skipping update."
+} || return
+
 if command -v flatpak >/dev/null; then
   sudo flatpak update -y || return
 fi
