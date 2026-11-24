@@ -93,7 +93,19 @@
     return 0
   fi
 
-  print -r -- 'Updating zoxide with the upstream installer...'
+  local installed_version release_json latest_version
+  installed_version=$("$zoxide_command" --version) || return
+  installed_version="${installed_version#zoxide }"
+  release_json=$(curl -fsSL https://api.github.com/repos/ajeetdsouza/zoxide/releases/latest) || return
+  latest_version=$(jq -er '.tag_name | capture("^v?(?<version>[0-9]+\\.[0-9]+\\.[0-9]+)$") | .version' <<< "$release_json") || return
+
+  autoload -Uz is-at-least
+  if is-at-least "$latest_version" "$installed_version"; then
+    print -r -- "zoxide $installed_version is already at or above the latest release ($latest_version); skipping update."
+    return 0
+  fi
+
+  print -r -- "Updating zoxide from $installed_version to $latest_version with the upstream installer..."
   local zoxide_installer
   zoxide_installer=$(curl -fsSL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh) || return
   sh -c "$zoxide_installer"
