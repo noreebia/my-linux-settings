@@ -17,7 +17,7 @@ This is a personal Linux settings repository. It bootstraps and refreshes a work
 - `llm-agents/` holds shared agent instructions and per-agent configuration.
 - `scripts/llm-agents/update_claude_code_settings.sh` deploys Claude Code settings, statuslines, and skills to `~/.claude/`.
 - `scripts/llm-agents/update_codex_settings.sh` deploys Codex instructions, skills, and Codex TUI config to `~/.codex/`.
-- `scripts/llm-agents/update_gemini_settings.sh` deploys shared instructions to `~/.gemini/`.
+- `scripts/llm-agents/update_gemini_settings.sh` deploys shared instructions and skills to `~/.gemini/`.
 
 ## Editing Rules
 

@@ -6,8 +6,11 @@ if ! command -v gemini >/dev/null 2>&1; then
     exit 0
 fi
 
-# Copy AGENTS_GLOBAL.md as GEMINI.md to ~/.gemini
-mkdir -p ~/.gemini
-cp ./llm-agents/AGENTS_GLOBAL.md ~/.gemini/GEMINI.md
+command -v rsync >/dev/null 2>&1 || sudo apt install rsync -y
+source ./scripts/llm-agents/copy_shared_skills.sh
+
+TARGET_DIR="$HOME/.gemini"
+copy_shared_skills ./llm-agents/skills "$TARGET_DIR/skills"
+cp ./llm-agents/AGENTS_GLOBAL.md "$TARGET_DIR/GEMINI.md"
 
 echo "Gemini settings updated successfully."

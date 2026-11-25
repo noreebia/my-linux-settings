@@ -1,6 +1,8 @@
 # Skills Guide
 
-This directory is the source of truth for reusable agent skills. The same skills are deployed to Claude Code and Codex, so write them to be useful across agents unless an agent-specific overlay is required.
+This directory is the source of truth for reusable agent skills. The same skills are deployed to Claude Code, Codex, and Gemini CLI, so write them to be useful across agents unless an agent-specific overlay is required.
+
+Keep each skill in its own folder with `SKILL.md`. A skill can live directly here or one level down in a category such as `documentation/`. The update scripts copy each full skill folder directly into the agent's skills directory. Keep skill folder names unique across the shared source, including uncategorized skills.
 
 Skills should only contain context the base agent is unlikely to know: project-specific conventions, non-obvious operational details, and the reason behind constraints. Avoid spending skill tokens on generic coding advice that competes with conversation history.
 
@@ -11,7 +13,7 @@ Default to high freedom: describe what the output should contain, not how to str
 - Preserve the `SKILL.md` format. Keep descriptions concise and focused on what the skill does.
 - Put long implementation logic in `scripts/` when a skill needs repeatable tooling. Prefer maintaining a script over embedding large command blocks in prose.
 - Use relative paths inside a skill from that skill's own directory.
-- Avoid adding runtime-only or generated files here. This subtree is copied into agent home directories.
+- Avoid adding runtime-only or generated files to skill folders. Each skill folder is copied into agent home directories.
 - When using shared variables from `AGENTS_GLOBAL.md`, remember that the file is deployed under different names per agent. If a skill needs a convention at runtime, inline enough context for it to stand alone.
 
 ## Description Conventions
