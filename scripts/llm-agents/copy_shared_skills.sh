@@ -1,7 +1,8 @@
 # Sourced by the agent settings updaters.
 copy_shared_skills() {
     local source_dir="$1" target_dir="$2"
-    local entry skill_dir skill_name
+    local category_index entry skill_dir skill_name
+    local -a category_dirs=("$source_dir")
     local -a skill_dirs=()
     local -A skill_sources=()
 
@@ -10,17 +11,17 @@ copy_shared_skills() {
         return 1
     fi
 
-    for entry in "$source_dir"/*; do
-        [[ -d "$entry" ]] || continue
-        if [[ -f "$entry/SKILL.md" ]]; then
-            skill_dirs+=("$entry")
-        else
-            for skill_dir in "$entry"/*; do
-                if [[ -f "$skill_dir/SKILL.md" ]]; then
-                    skill_dirs+=("$skill_dir")
-                fi
-            done
-        fi
+    # A directory with SKILL.md is a complete skill, including its subdirectories.
+    for ((category_index = 0; category_index < ${#category_dirs[@]}; category_index++)); do
+        for entry in "${category_dirs[category_index]}"/*; do
+            [[ -d "$entry" ]] || continue
+            if [[ -f "$entry/SKILL.md" ]]; then
+                skill_dirs+=("$entry")
+            elif [[ ! -L "$entry" ]]; then
+                # Traverse real category directories to avoid symlink cycles.
+                category_dirs+=("$entry")
+            fi
+        done
     done
 
     # Validate before copying so a name collision cannot overwrite a skill.
